@@ -83,16 +83,6 @@ function SponsorsPage() {
               )}
             </li>
           ))}
-          <li className="reveal">
-            <Link
-              to="/contact"
-              search={{ topic: "sponsorship" }}
-              className="flex aspect-[940/788] h-full w-full flex-col items-center justify-center rounded-2xl border border-dashed border-line-strong p-6 text-center transition-colors hover:border-pike-bright"
-            >
-              <span className="display text-3xl">Your logo here</span>
-              <span className="mt-2 text-sm text-muted">Sponsor a player for the season</span>
-            </Link>
-          </li>
         </ul>
       </Container>
 
