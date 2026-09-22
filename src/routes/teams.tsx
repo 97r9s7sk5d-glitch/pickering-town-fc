@@ -85,7 +85,7 @@ function TeamsPage() {
 
       <Container className="mt-24">
         <SectionHeading eyebrow="2026–27" title="First-team squad" />
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
           {squad.map((p) => (
             <li key={p.image} className="reveal group relative overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-pike-deep/70 via-surface to-ink">
               <div aria-hidden="true" className="absolute inset-x-0 top-6 mx-auto h-32 w-32 rounded-full bg-pike/40 blur-2xl" />

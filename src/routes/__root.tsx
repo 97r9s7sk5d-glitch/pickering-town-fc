@@ -24,7 +24,7 @@ const structuredData = {
   sport: "Association football",
   foundingDate: String(club.founded),
   url: club.siteUrl,
-  logo: `${club.siteUrl}/favicon.svg`,
+  logo: `${club.siteUrl}/badge.png`,
   memberOf: { "@type": "SportsOrganization", name: club.league },
   location: {
     "@type": "StadiumOrArena",
@@ -51,7 +51,8 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData) }],
   }),

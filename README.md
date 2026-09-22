@@ -35,11 +35,11 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 - `sponsors.ts`: sponsorship packages, partners and player-sponsor graphics
 - `squad.ts`: first-team squad photos (add names and positions here) and the team photo
 
-The crest in `src/components/Crest.tsx` and `public/favicon.svg` is a **placeholder** in club colours. Replace it
-with the official badge (a PNG with a transparent background, or an SVG).
+The official club badge is `public/badge.webp` (with `badge.png`, `favicon.png` and `apple-touch-icon.png` made
+from it), cut out from the white background the club supplied.
 
-Photos live in `public/images/`: the team photo in front of the Tony Dunning Stand, six squad cut-outs and four
-player-sponsor graphics, all supplied by the club and compressed to WebP.
+Photos live in `public/images/`: an aerial view of Mill Lane, the team photo in front of the Tony Dunning Stand,
+seven squad cut-outs and nine player graphics, all supplied by the club and compressed to WebP.
 
 ## Facts to confirm before launch
 
@@ -50,7 +50,7 @@ be read directly. Each one is marked `CONFIRM` in the code:
 - [ ] Officials: Chairman Jamie Hopwood, manager Paul Marshall (after Tony Hackworth left in January 2026), kit managers
 - [ ] Club email/phone, Facebook and Instagram accounts (only X @PickeringTownFC is set)
 - [ ] Admission prices (currently "TBC")
-- [ ] Names and positions for the six squad photos in `squad.ts`
+- [ ] Names and positions for the seven squad photos in `squad.ts`
 - [ ] Partners in `sponsors.ts` (Flamingo Land shirt sponsor, and the player sponsors Harome Homes, Harton Works, Television House Pickering, Edge Clothing)
 - [ ] Photo credit for the team photo (watermarked bottom right)
 - [ ] Honours list and history dates in `history.ts`

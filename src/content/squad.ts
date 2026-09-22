@@ -12,7 +12,16 @@ export const squad: Player[] = [
   { image: "/images/squad/player-4.webp", name: "" },
   { image: "/images/squad/player-5.webp", name: "" },
   { image: "/images/squad/player-6.webp", name: "" },
+  { image: "/images/squad/player-7.webp", name: "" },
 ];
+
+/** Aerial photo of Mill Lane: pitch, Tony Dunning Stand, clubhouse and the town beyond. */
+export const groundPhoto = {
+  src: "/images/mill-lane-aerial.webp",
+  alt: "Aerial view of Mill Lane, home of Pickering Town, with the pitch, stand and clubhouse and the town behind",
+  width: 588,
+  height: 393,
+};
 
 /** Squad photo taken in front of the Tony Dunning Stand at Mill Lane. */
 export const teamPhoto = {

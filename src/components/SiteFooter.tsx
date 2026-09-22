@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <Crest className="h-14 w-12" />
+            <Crest className="h-16 w-auto" />
             <div>
               <p className="display text-3xl">{club.name}</p>
               <p className="eyebrow text-pike-bright">{club.nickname} · Est. {club.founded}</p>

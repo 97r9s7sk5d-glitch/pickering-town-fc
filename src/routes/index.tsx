@@ -7,7 +7,7 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { club, ground } from "@/content/club";
 import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
-import { squad } from "@/content/squad";
+import { groundPhoto, squad } from "@/content/squad";
 import { leagueTable, ownTeamName, tableTitle } from "@/content/fixtures";
 import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome } from "@/lib/matches";
 import { seo } from "@/lib/seo";
@@ -33,8 +33,11 @@ function HomePage() {
     <>
       {/* Hero */}
       <section className="pitch-backdrop relative overflow-hidden border-b border-line">
+        <img src={groundPhoto.src} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-luminosity" fetchPriority="high" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/30" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/60" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-pike-bright/60 to-transparent" />
-        <Container className="grid gap-10 pb-16 pt-12 sm:pt-20 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-14 lg:pb-24">
+        <Container className="relative grid gap-10 pb-16 pt-12 sm:pt-20 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-14 lg:pb-24">
           <div>
             <p className="eyebrow animate-rise text-pike-bright">
               {club.nickname} · {club.leagueShort} · Est. {club.founded}
@@ -145,7 +148,8 @@ function HomePage() {
           <LeagueTable compact />
         </Card>
         <div className="reveal relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-pike-deep to-night p-6 sm:p-8">
-          <div aria-hidden="true" className="absolute inset-0 opacity-30 [background:repeating-linear-gradient(90deg,oklch(1_0_0/0.06)_0_40px,transparent_40px_80px)]" />
+          <img src={groundPhoto.src} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-pike-deep/95 via-pike-deep/80 to-night/60" />
           <div className="relative">
             <p className="eyebrow text-pike-bright">Matchday</p>
             <h2 className="display mt-2 text-5xl">Come to {ground.name}</h2>

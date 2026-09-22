@@ -51,8 +51,9 @@ export const playerSponsorGraphics: { src: string; sponsor: string | null }[] = 
   { src: "/images/player-sponsors/harton-works.webp", sponsor: "Harton Works" },
   { src: "/images/player-sponsors/television-house.webp", sponsor: "Television House Pickering" },
   { src: "/images/player-sponsors/edge-clothing.webp", sponsor: "Edge Clothing" },
-  // CONFIRM: "Stuart Elvidge" appears in the sponsor box on this graphic.
+  // Individual sponsors appear by name in the sponsor box.
   { src: "/images/player-sponsors/stuart-elvidge.webp", sponsor: "Stuart Elvidge" },
+  { src: "/images/player-sponsors/mandy-paul-wattam.webp", sponsor: "Mandy & Paul Wattam" },
   { src: "/images/player-sponsors/available-1.webp", sponsor: null },
   { src: "/images/player-sponsors/available-2.webp", sponsor: null },
 ];
