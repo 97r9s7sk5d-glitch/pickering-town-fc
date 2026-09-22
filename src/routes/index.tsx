@@ -7,6 +7,7 @@ import { ArticleCard } from "@/components/ArticleCard";
 import { club, ground } from "@/content/club";
 import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
+import { squad } from "@/content/squad";
 import { leagueTable, ownTeamName, tableTitle } from "@/content/fixtures";
 import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome } from "@/lib/matches";
 import { seo } from "@/lib/seo";
@@ -44,7 +45,7 @@ function HomePage() {
               <span className="bg-gradient-to-r from-pike-bright to-pike bg-clip-text text-transparent">Town FC</span>
             </h1>
             <p className="animate-rise-late mt-6 max-w-lg text-lg leading-relaxed text-muted">
-              Non-league football in the heart of Ryedale. Blue and black, {ground.name}, and a club that has
+              Non-league football in the heart of Ryedale. Royal blue and white, {ground.name}, and a club that has
               been part of {club.town} for {new Date().getFullYear() - club.founded} years.
             </p>
             <div className="animate-rise-late mt-8 flex flex-wrap gap-3">
@@ -62,7 +63,14 @@ function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="animate-rise-late">{next ? <NextMatchPanel match={next} /> : <NoFixtures />}</div>
+          <div className="animate-rise-late relative lg:pt-56">
+            {/* Featured player rising behind the next-match panel. Desktop only: on phones the panel comes first. */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-6 hidden justify-center lg:flex">
+              <div className="absolute top-24 h-72 w-72 rounded-full bg-pike/40 blur-3xl" />
+              <img src={squad[2].image} alt="" width={558} height={900} className="relative h-[30rem] w-auto" fetchPriority="high" />
+            </div>
+            <div className="relative">{next ? <NextMatchPanel match={next} /> : <NoFixtures />}</div>
+          </div>
         </Container>
       </section>
 

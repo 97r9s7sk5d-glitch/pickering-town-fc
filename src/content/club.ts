@@ -5,7 +5,7 @@
  */
 export const club = {
   name: "Pickering Town FC",
-  fullName: "Pickering Town Football Club",
+  fullName: "Pickering Town Community Football Club",
   nickname: "The Pikes",
   founded: 1888,
   town: "Pickering",
@@ -13,7 +13,8 @@ export const club = {
   league: "Northern Counties East League Premier Division",
   leagueShort: "NCEL Premier",
   step: "Step 5 of the National League System",
-  colours: "Blue and black",
+  colours: "Royal blue and white",
+  shirtSponsor: "Flamingo Land Resort Yorkshire",
   siteUrl: "https://www.pickeringtownfc.co.uk",
   tagline: "Non-league football at Mill Lane since 1888.",
 };
@@ -25,6 +26,8 @@ export const ground = {
   capacity: "approx. 2,000", // CONFIRM
   seats: "approx. 200", // CONFIRM
   clubhouse: "Pickering Recreation Club",
+  stand: "The Tony Dunning Stand",
+  standOpened: 2010,
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Pickering+Town+FC+Mill+Lane+Pickering+YO18+7DB",
   what3words: "",
 };

@@ -8,7 +8,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 
-/* Club design tokens. Pickering Town play in blue and black: the site is built on a deep
+/* Club design tokens. Pickering Town play in royal blue and white: the site is built on a deep
    midnight-navy base with a bright "Pikes blue" accent. Change a colour here and it changes everywhere. */
 @theme inline {
   --color-ink: var(--ink);

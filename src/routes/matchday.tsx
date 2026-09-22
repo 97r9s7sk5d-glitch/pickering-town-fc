@@ -4,6 +4,7 @@ import { NextMatchPanel } from "@/components/matches";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
 import { admission, club, ground } from "@/content/club";
 import { fixtures } from "@/lib/matches";
+import { teamPhoto } from "@/content/squad";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/matchday")({
@@ -44,7 +45,9 @@ function MatchdayPage() {
       </PageHeader>
 
       <Container className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
-        <Card className="p-6 sm:p-8">
+        <Card className="overflow-hidden">
+          <img src={teamPhoto.src} alt={teamPhoto.alt} width={teamPhoto.width} height={teamPhoto.height} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+          <div className="p-6 sm:p-8">
           <p className="eyebrow text-pike-bright">The ground</p>
           <h2 className="display mt-2 text-5xl">{ground.name}</h2>
           <address className="mt-4 flex gap-2 not-italic leading-relaxed text-fg/90">
@@ -64,6 +67,12 @@ function MatchdayPage() {
               <dt className="eyebrow !text-[11px] text-muted">Seats</dt>
               <dd className="display mt-1 text-2xl">{ground.seats}</dd>
             </div>
+            <div className="col-span-2 rounded-xl border border-line bg-ink/40 p-4">
+              <dt className="eyebrow !text-[11px] text-muted">Main stand</dt>
+              <dd className="display mt-1 text-2xl">
+                {ground.stand} <span className="text-muted">({ground.standOpened})</span>
+              </dd>
+            </div>
           </dl>
           <a
             href={ground.mapsUrl}
@@ -73,6 +82,7 @@ function MatchdayPage() {
           >
             <MapPin className="h-4 w-4" aria-hidden="true" /> Open in Maps
           </a>
+          </div>
         </Card>
         {nextHome ? (
           <div>

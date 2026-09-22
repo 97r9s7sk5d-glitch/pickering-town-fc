@@ -29,6 +29,23 @@ export const packages: Package[] = [
   },
 ];
 
-/** Current partners. Add { name, url?, tier } entries here and they appear on the Sponsors page and footer. */
-export type Partner = { name: string; url?: string; tier: "Principal" | "Partner" };
-export const partners: Partner[] = [];
+/**
+ * Current partners, as seen on the kit, the stand and the club's player graphics.
+ * CONFIRM each one with the club before launch, and add { name, url?, tier } entries for any others.
+ */
+export type Partner = { name: string; url?: string; tier: "Shirt sponsor" | "Player sponsor" | "Partner" };
+export const partners: Partner[] = [
+  { name: "Flamingo Land Resort Yorkshire", tier: "Shirt sponsor" },
+  { name: "Harome Homes", tier: "Player sponsor" },
+  { name: "Harton Works", tier: "Player sponsor" },
+  { name: "Television House Pickering", tier: "Player sponsor" },
+  { name: "Edge Clothing", tier: "Player sponsor" },
+];
+
+/** Example player-sponsor graphics, shown with the Player sponsor package. */
+export const playerSponsorGraphics = [
+  { src: "/images/player-sponsors/harome-homes.webp", sponsor: "Harome Homes" },
+  { src: "/images/player-sponsors/harton-works.webp", sponsor: "Harton Works" },
+  { src: "/images/player-sponsors/television-house.webp", sponsor: "Television House Pickering" },
+  { src: "/images/player-sponsors/edge-clothing.webp", sponsor: "Edge Clothing" },
+];

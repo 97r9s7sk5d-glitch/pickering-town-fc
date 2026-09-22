@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
 import { club } from "@/content/club";
-import { packages, partners } from "@/content/sponsors";
+import { packages, partners, playerSponsorGraphics } from "@/content/sponsors";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/sponsors")({
@@ -56,23 +56,43 @@ function SponsorsPage() {
       </Container>
 
       <Container className="mt-24">
+        <SectionHeading eyebrow="Player sponsorship" title="Back a Pike" />
+        <p className="-mt-2 mb-8 max-w-2xl leading-relaxed text-muted">
+          Player sponsors get their logo on the player's profile graphic, used on the website and across the club's
+          social media all season.
+        </p>
+        <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {playerSponsorGraphics.map((g) => (
+            <li key={g.src} className="reveal overflow-hidden rounded-2xl border border-line bg-white">
+              <img src={g.src} alt={`Pickering Town player graphic sponsored by ${g.sponsor}`} width={940} height={788} className="w-full" loading="lazy" />
+            </li>
+          ))}
+        </ul>
+      </Container>
+
+      <Container className="mt-24">
         <SectionHeading eyebrow="Thank you" title="Our partners" />
         {partners.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-line-strong p-10 text-center">
             <p className="display text-3xl">Your business here</p>
-            <p className="mt-2 text-muted">Partner logos appear here. Be one of the first for the 2026–27 season.</p>
+            <p className="mt-2 text-muted">Partner logos appear here.</p>
           </div>
         ) : (
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {partners.map((p) => (
-              <li key={p.name} className="rounded-2xl border border-line bg-surface/70 p-6 text-center">
-                <p className="eyebrow !text-[11px] text-muted">{p.tier}</p>
+              <li
+                key={p.name}
+                className={`rounded-2xl border p-6 text-center ${
+                  p.tier === "Shirt sponsor" ? "border-pike-bright bg-gradient-to-b from-pike-deep/70 to-surface sm:col-span-2 lg:col-span-4" : "border-line bg-surface/70"
+                }`}
+              >
+                <p className="eyebrow !text-[11px] text-pike-bright">{p.tier}</p>
                 {p.url ? (
-                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="display mt-2 block text-2xl hover:text-pike-bright">
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" className="display mt-2 block text-3xl hover:text-pike-bright">
                     {p.name}
                   </a>
                 ) : (
-                  <p className="display mt-2 text-2xl">{p.name}</p>
+                  <p className={`display mt-2 ${p.tier === "Shirt sponsor" ? "text-4xl sm:text-5xl" : "text-2xl"}`}>{p.name}</p>
                 )}
               </li>
             ))}

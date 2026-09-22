@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
 import { club, officials } from "@/content/club";
+import { squad, teamPhoto } from "@/content/squad";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/teams")({
@@ -39,15 +40,22 @@ const teams = [
 function TeamsPage() {
   return (
     <>
-      <PageHeader eyebrow="Blue and black" title="Our teams">
+      <PageHeader eyebrow="Royal blue and white" title="Our teams">
         From Step 5 on a Saturday afternoon to a women's team in only its second season: there's a place for you at
         Pickering Town.
       </PageHeader>
       <Container className="mt-12 grid gap-6 lg:grid-cols-2">
         {teams.map((t) => (
           <section key={t.id} className="reveal overflow-hidden rounded-3xl border border-line bg-surface/70" aria-labelledby={`team-${t.id}`}>
-            <div className="relative h-44 bg-gradient-to-br from-pike-deep via-pike to-pike-bright">
-              <div aria-hidden="true" className="absolute inset-0 [background:repeating-linear-gradient(90deg,oklch(0.14_0.03_262)_0_36px,transparent_36px_72px)] opacity-70" />
+            <div className="relative h-56 bg-gradient-to-br from-pike-deep via-pike to-pike-bright">
+              {t.id === "first" ? (
+                <>
+                  <img src={teamPhoto.src} alt={teamPhoto.alt} width={teamPhoto.width} height={teamPhoto.height} className="absolute inset-0 h-full w-full object-cover object-[50%_80%]" loading="lazy" />
+                  <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
+                </>
+              ) : (
+                <div aria-hidden="true" className="absolute inset-0 [background:repeating-linear-gradient(90deg,oklch(1_0_0/0.18)_0_36px,transparent_36px_72px)]" />
+              )}
               <p className="display absolute bottom-4 left-6 text-6xl text-white drop-shadow" id={`team-${t.id}`}>
                 {t.name}
               </p>
@@ -73,6 +81,34 @@ function TeamsPage() {
             </div>
           </section>
         ))}
+      </Container>
+
+      <Container className="mt-24">
+        <SectionHeading eyebrow="2026–27" title="First-team squad" />
+        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {squad.map((p) => (
+            <li key={p.image} className="reveal group relative overflow-hidden rounded-2xl border border-line bg-gradient-to-b from-pike-deep/70 via-surface to-ink">
+              <div aria-hidden="true" className="absolute inset-x-0 top-6 mx-auto h-32 w-32 rounded-full bg-pike/40 blur-2xl" />
+              <img
+                src={p.image}
+                alt={p.name ? `${p.name}, Pickering Town` : "Pickering Town first-team player"}
+                className="relative mx-auto h-56 w-auto pt-4 transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              {p.name && (
+                <div className="relative border-t border-line bg-ink/80 px-3 py-2.5">
+                  <p className="display text-xl">{p.name}</p>
+                  {(p.position || p.number) && (
+                    <p className="eyebrow !text-[10px] text-muted">
+                      {p.number && `#${p.number} `}
+                      {p.position}
+                    </p>
+                  )}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       </Container>
 
       <Container className="mt-24">

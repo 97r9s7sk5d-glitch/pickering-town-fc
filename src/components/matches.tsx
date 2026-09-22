@@ -168,7 +168,7 @@ export function NextMatchPanel({ match }: { match: Match }) {
   ];
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-line-strong bg-gradient-to-br from-pike-deep/60 via-surface to-night p-6 sm:p-8">
+    <div className="relative overflow-hidden rounded-3xl border border-line-strong bg-night bg-gradient-to-br from-pike-deep/60 via-surface to-night p-6 shadow-2xl shadow-ink/60 sm:p-8">
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-pike/30 blur-3xl" />
       <div className="relative">
         <div className="flex flex-wrap items-center justify-between gap-2">

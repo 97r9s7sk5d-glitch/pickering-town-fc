@@ -15,7 +15,7 @@ export function Crest({ className = "h-10 w-10" }: { className?: string }) {
         </clipPath>
       </defs>
       <g clipPath="url(#crest-shield)">
-        <rect width="64" height="72" fill="oklch(0.14 0.03 262)" />
+        <rect width="64" height="72" fill="white" />
         <rect x="0" width="16" height="72" fill="url(#crest-blue)" />
         <rect x="32" width="16" height="72" fill="url(#crest-blue)" />
         <rect y="0" width="64" height="24" fill="oklch(0.14 0.03 262)" />
@@ -24,7 +24,7 @@ export function Crest({ className = "h-10 w-10" }: { className?: string }) {
       <text x="32" y="19" textAnchor="middle" fontFamily="Barlow Condensed, Arial Narrow, sans-serif" fontWeight="700" fontSize="13" fill="white" letterSpacing="1">
         PTFC
       </text>
-      <text x="32" y="52" textAnchor="middle" fontFamily="Barlow Condensed, Arial Narrow, sans-serif" fontWeight="700" fontSize="11" fill="white" letterSpacing="1">
+      <text x="32" y="52" textAnchor="middle" fontFamily="Barlow Condensed, Arial Narrow, sans-serif" fontWeight="700" fontSize="11" fill="oklch(0.14 0.03 262)" stroke="white" strokeWidth="3" paintOrder="stroke" letterSpacing="1">
         1888
       </text>
     </svg>
