@@ -79,7 +79,11 @@ npm run dev        # http://localhost:3000
 npm run typecheck
 npm run build      # static site in dist/client
 npm run preview
+npm run preview:file  # the whole site as one HTML file: dist-preview/index.html
 ```
+
+`npm run preview:file` makes a private draft you can send to people without publishing anything: it's the full
+site (menus, countdown, filters, images, fonts) in a single file that opens in any browser, even offline.
 
 To deploy, point any static host at `npm run build` with output directory `dist/client`. `vercel.json` already
 sets this up for Vercel: import the GitHub repo and it deploys on every push.
