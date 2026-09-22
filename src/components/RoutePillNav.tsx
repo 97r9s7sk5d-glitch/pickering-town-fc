@@ -4,7 +4,7 @@ import { Link, useMatchRoute, type LinkProps } from "@tanstack/react-router";
 export type NavItem = { to: LinkProps["to"]; label: string };
 
 /**
- * Segmented-control style nav (from The Chairman): a pill slides beneath whichever route is active,
+ * Segmented-control style nav: a pill slides beneath whichever route is active,
  * instead of a plain link row. Nested pages (e.g. a news article) keep their section highlighted.
  */
 export function RoutePillNav({ items }: { items: NavItem[] }) {

@@ -3,7 +3,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-// Same stack as The Chairman, but fully static: every page is prerendered to plain HTML at build
+// Fully static: every page is prerendered to plain HTML at build
 // time (crawling internal links from "/"), so the site can be hosted anywhere with no server.
 // Plugin order matters: tanstackStart() must come before viteReact().
 export default defineConfig({

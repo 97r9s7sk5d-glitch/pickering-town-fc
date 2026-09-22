@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 /**
- * Adapted from The Chairman's useRevealOnScroll: fades each `.reveal` element up once it scrolls into view.
+ * Fades each `.reveal` element up once it scrolls into view.
  * Marks <html> with .js-reveal first, so without JavaScript nothing is ever hidden.
  */
 export function useRevealOnScroll(deps: unknown[] = []) {

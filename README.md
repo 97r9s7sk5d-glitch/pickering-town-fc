@@ -1,7 +1,7 @@
 # Pickering Town FC website
 
 The new website for Pickering Town Football Club ("The Pikes", est. 1888), replacing the TeamExpert template site.
-It's built on the same stack as The Chairman (TanStack Start, React 19, Tailwind CSS v4). Every page is
+It's built with TanStack Start, React 19 and Tailwind CSS v4. Every page is
 prerendered to plain HTML at build time, so it's fast, search-engine friendly and can be hosted free on any static
 host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
 

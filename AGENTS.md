@@ -8,6 +8,5 @@ Static club website for Pickering Town FC. TanStack Start + React 19 + Tailwind 
   `pitch-backdrop`, `pike-rule`, `.reveal` (scroll-in, driven by `useRevealOnScroll` in `__root.tsx`).
 - Dates: never use `Intl` for anything rendered. Node and browsers disagree ("Sept" vs "Sep"), which breaks
   hydration. Use the helpers in `src/lib/matches.ts` and `src/lib/dates.ts`.
-- Reused from The Chairman: route pill nav, reveal-on-scroll hook, skip link and focus ring, content-file pattern.
 - `/404` is prerendered to `404.html` for static hosts. It logs a harmless hydration warning when served at another URL.
 - Verify with `npm run typecheck && npm run build`. The build fails if any crawled page errors.
