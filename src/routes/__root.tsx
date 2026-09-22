@@ -51,12 +51,6 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap",
-      },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData) }],
