@@ -1,0 +1,156 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+/* Club design tokens. Pickering Town play in blue and black: the site is built on a deep
+   midnight-navy base with a bright "Pikes blue" accent. Change a colour here and it changes everywhere. */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-night: var(--night);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-pike: var(--pike);
+  --color-pike-bright: var(--pike-bright);
+  --color-pike-deep: var(--pike-deep);
+  --color-win: var(--win);
+  --color-draw: var(--draw);
+  --color-loss: var(--loss);
+  --font-display: "Barlow Condensed", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --ink: oklch(0.12 0.03 262);
+  --night: oklch(0.16 0.045 262);
+  --surface: oklch(0.2 0.05 262);
+  --raised: oklch(0.25 0.06 262);
+  --line: oklch(0.85 0.03 262 / 14%);
+  --line-strong: oklch(0.85 0.03 262 / 30%);
+  --fg: oklch(0.97 0.005 262);
+  --muted: oklch(0.78 0.03 262);
+  --pike: oklch(0.6 0.19 258);
+  --pike-bright: oklch(0.74 0.15 245);
+  --pike-deep: oklch(0.42 0.17 262);
+  --win: oklch(0.72 0.17 150);
+  --draw: oklch(0.8 0.13 85);
+  --loss: oklch(0.66 0.2 25);
+}
+
+@layer base {
+  html {
+    background: var(--ink);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--ink);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--pike-bright);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--pike);
+    color: white;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Big condensed headings, as on a matchday programme cover. */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+}
+
+/* Small tracked capitals for eyebrows, labels and nav. */
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8125rem;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Floodlit pitch backdrop for the hero: glow from two floodlights, faint mowing stripes and halfway line. */
+@utility pitch-backdrop {
+  background:
+    radial-gradient(60% 55% at 12% -5%, oklch(0.75 0.12 245 / 0.35), transparent 70%),
+    radial-gradient(60% 55% at 88% -5%, oklch(0.75 0.12 245 / 0.28), transparent 70%),
+    repeating-linear-gradient(90deg, oklch(1 0 0 / 0.025) 0 80px, transparent 80px 160px),
+    linear-gradient(180deg, var(--night) 0%, var(--ink) 100%);
+}
+
+/* Blue-to-bright rule used under section headings. */
+@utility pike-rule {
+  background-image: linear-gradient(90deg, var(--pike), var(--pike-bright) 60%, transparent);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise {
+  animation: rise-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-rise-late {
+  animation: rise-in 600ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+
+/* Scroll reveal (see useRevealOnScroll): hidden until the hook adds .is-visible. Only applies once JS has
+   marked the page with .js-reveal, so content is never hidden if scripts fail to run. */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
