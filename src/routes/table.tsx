@@ -2,7 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LeagueTable, TableKey } from "@/components/LeagueTable";
 import { FormGuide } from "@/components/matches";
 import { Card, Container, PageHeader, SampleNotice } from "@/components/ui";
+import { FullTimeEmbed } from "@/components/FullTimeEmbed";
 import { club } from "@/content/club";
+import { fullTime } from "@/content/fulltime";
 import { isSampleData, tableTitle } from "@/content/fixtures";
 import { form } from "@/lib/matches";
 import { seo } from "@/lib/seo";
@@ -25,9 +27,15 @@ function TablePage() {
       </PageHeader>
       <Container className="mt-10 grid gap-6 lg:grid-cols-[1fr_18rem]">
         <div>
-          {isSampleData && <SampleNotice />}
-          <LeagueTable />
-          <TableKey />
+          {fullTime.table ? (
+            <FullTimeEmbed snippet={fullTime.table} title={tableTitle} />
+          ) : (
+            <>
+              {isSampleData && <SampleNotice />}
+              <LeagueTable />
+              <TableKey />
+            </>
+          )}
         </div>
         <aside className="space-y-4">
           <Card className="p-6">

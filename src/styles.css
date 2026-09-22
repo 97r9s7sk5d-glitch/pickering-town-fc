@@ -154,3 +154,34 @@
     transform: none;
   }
 }
+
+/* FA Full-Time feeds arrive as plain, fixed-width HTML tables: stretch them and restyle them in club colours. */
+.fulltime-embed table {
+  width: 100% !important;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  color: var(--fg);
+  background: transparent !important;
+}
+.fulltime-embed th,
+.fulltime-embed td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  background: transparent !important;
+  color: inherit !important;
+  text-align: left;
+}
+.fulltime-embed th {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--muted) !important;
+}
+.fulltime-embed a {
+  color: var(--pike-bright) !important;
+}
+.fulltime-embed div,
+.fulltime-embed iframe {
+  max-width: 100% !important;
+}

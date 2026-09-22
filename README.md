@@ -29,6 +29,7 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 
 - `club.ts`: club facts, ground, contact details, officials, admission prices
 - `fixtures.ts`: fixtures, results, league table (set `isSampleData = false` once it holds the real season)
+- `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
 - `news.ts`: news articles (newest first)
 - `history.ts`: timeline, honours, records
 - `sponsors.ts`: sponsorship packages and current partners
@@ -49,11 +50,19 @@ be read directly. Each one is marked `CONFIRM` in the code:
 - [ ] **Fixtures and table**: only the Golcar United (3–2) and Bottesford Town (0–3) results and Pickering's
       table row (10th, 13 pts) are real. Everything else is placeholder, and the site shows a notice saying so.
 
-## Keeping fixtures up to date
+## Keeping fixtures up to date (FA Full-Time)
 
-For now, edit `src/content/fixtures.ts` after each game. A good next step is to pull fixtures, results and the
-table automatically from the FA's Full-Time service (which the NCEL uses) at build time, and rebuild the site on a
-daily schedule.
+The NCEL and the North Riding leagues run on the FA's **Full-Time** service. The FA doesn't offer a public data
+feed. Its supported way to show fixtures, results and tables on a club site is **code snippets**, and the site
+is ready for them:
+
+1. A Full-Time team administrator for the club signs in at fulltime.thefa.com and goes to **Media → Code snippets**.
+2. Create a snippet for each of: league table, first-team fixtures, first-team results (and the ladies' too).
+3. From each embed code, copy the `div` id (`lrep…`) and the `lrcode` value into `src/content/fulltime.ts`.
+
+Each filled slot switches that page to the live Full-Time feed, styled in club colours, so there's no manual
+updating after games. Slots left empty keep using `src/content/fixtures.ts`. The home page's next match,
+countdown and form guide still read `fixtures.ts`, so keep the next few fixtures in there.
 
 ## Development
 
@@ -65,4 +74,5 @@ npm run build      # static site in dist/client
 npm run preview
 ```
 
-To deploy, point any static host at `npm run build` with output directory `dist/client`.
+To deploy, point any static host at `npm run build` with output directory `dist/client`. `vercel.json` already
+sets this up for Vercel: import the GitHub repo and it deploys on every push.
