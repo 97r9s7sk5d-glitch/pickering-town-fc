@@ -63,10 +63,36 @@ function SponsorsPage() {
         </p>
         <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {playerSponsorGraphics.map((g) => (
-            <li key={g.src} className="reveal overflow-hidden rounded-2xl border border-line bg-white">
-              <img src={g.src} alt={`Pickering Town player graphic sponsored by ${g.sponsor}`} width={940} height={788} className="w-full" loading="lazy" />
+            <li key={g.src} className="reveal relative overflow-hidden rounded-2xl border border-line bg-white">
+              <img
+                src={g.src}
+                alt={g.sponsor ? `Pickering Town player graphic sponsored by ${g.sponsor}` : "Pickering Town player graphic, sponsor available"}
+                width={940}
+                height={788}
+                className="w-full"
+                loading="lazy"
+              />
+              {!g.sponsor && (
+                <Link
+                  to="/contact"
+                  search={{ topic: "sponsorship" }}
+                  className="eyebrow absolute bottom-3 right-3 rounded-full bg-pike px-3 py-1.5 !text-[11px] text-white shadow-lg hover:bg-pike-bright hover:text-ink"
+                >
+                  Sponsor available
+                </Link>
+              )}
             </li>
           ))}
+          <li className="reveal">
+            <Link
+              to="/contact"
+              search={{ topic: "sponsorship" }}
+              className="flex aspect-[940/788] h-full w-full flex-col items-center justify-center rounded-2xl border border-dashed border-line-strong p-6 text-center transition-colors hover:border-pike-bright"
+            >
+              <span className="display text-3xl">Your logo here</span>
+              <span className="mt-2 text-sm text-muted">Sponsor a player for the season</span>
+            </Link>
+          </li>
         </ul>
       </Container>
 

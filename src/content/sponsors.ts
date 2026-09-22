@@ -42,10 +42,17 @@ export const partners: Partner[] = [
   { name: "Edge Clothing", tier: "Player sponsor" },
 ];
 
-/** Example player-sponsor graphics, shown with the Player sponsor package. */
-export const playerSponsorGraphics = [
+/**
+ * Player graphics shown with the Player sponsor package. `sponsor: null` marks a player still looking for a
+ * sponsor: the page tags it "Sponsor available". Fill in the sponsor's name once one signs up.
+ */
+export const playerSponsorGraphics: { src: string; sponsor: string | null }[] = [
   { src: "/images/player-sponsors/harome-homes.webp", sponsor: "Harome Homes" },
   { src: "/images/player-sponsors/harton-works.webp", sponsor: "Harton Works" },
   { src: "/images/player-sponsors/television-house.webp", sponsor: "Television House Pickering" },
   { src: "/images/player-sponsors/edge-clothing.webp", sponsor: "Edge Clothing" },
+  // CONFIRM: "Stuart Elvidge" appears in the sponsor box on this graphic.
+  { src: "/images/player-sponsors/stuart-elvidge.webp", sponsor: "Stuart Elvidge" },
+  { src: "/images/player-sponsors/available-1.webp", sponsor: null },
+  { src: "/images/player-sponsors/available-2.webp", sponsor: null },
 ];
