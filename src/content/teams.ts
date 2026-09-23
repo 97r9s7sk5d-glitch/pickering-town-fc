@@ -1,5 +1,6 @@
 import { club, officials } from "./club";
 import type { TeamId } from "./fixtures";
+import { ladiesTeamPhoto, teamPhoto } from "./squad";
 
 /**
  * The club's teams, shown on the Teams page. Add a fact (manager, training night, league) as { label, value }.
@@ -7,12 +8,16 @@ import type { TeamId } from "./fixtures";
  */
 export type TeamFact = { label: string; value: string };
 
+export type TeamPhoto = { src: string; alt: string; width: number; height: number };
+
 export type SeniorTeam = {
   id: TeamId;
   name: string;
   league: string;
   text: string;
   facts: TeamFact[];
+  /** Banner photo on the team's card; `focus` is the CSS object-position that keeps the players in frame. */
+  photo?: TeamPhoto & { focus: string };
 };
 
 const manager = officials.find((o) => o.role === "First-team manager");
@@ -24,6 +29,7 @@ export const seniorTeams: SeniorTeam[] = [
     league: club.league,
     text: `The Pikes compete at ${club.step.toLowerCase()}, with home games at Mill Lane.`,
     facts: [...(manager ? [{ label: "Manager", value: manager.name }] : []), { label: "Level", value: "Step 5" }],
+    photo: { ...teamPhoto, focus: "50% 80%" },
   },
   {
     id: "ladies",
@@ -31,6 +37,7 @@ export const seniorTeams: SeniorTeam[] = [
     league: "North Riding Women's League Division One",
     text: "Formed in 2025 and now in their second season. New players of every experience level are welcome.",
     facts: [{ label: "Formed", value: "2025" }],
+    photo: { ...ladiesTeamPhoto, focus: "50% 62%" },
   },
 ];
 

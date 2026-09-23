@@ -15,6 +15,11 @@ export const Route = createFileRoute("/sponsors")({
   component: SponsorsPage,
 });
 
+const graphicGroups = [
+  { team: "first", label: "First team" },
+  { team: "ladies", label: "Ladies first team" },
+] as const;
+
 function SponsorsPage() {
   return (
     <>
@@ -61,29 +66,38 @@ function SponsorsPage() {
           Player sponsors get their logo on the player's profile graphic, used on the website and across the club's
           social media all season.
         </p>
-        <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {playerSponsorGraphics.map((g) => (
-            <li key={g.src} className="reveal relative overflow-hidden rounded-2xl border border-line bg-white">
-              <img
-                src={g.src}
-                alt={g.sponsor ? `Pickering Town player graphic sponsored by ${g.sponsor}` : "Pickering Town player graphic, sponsor available"}
-                width={940}
-                height={788}
-                className="w-full"
-                loading="lazy"
-              />
-              {!g.sponsor && (
-                <Link
-                  to="/contact"
-                  search={{ topic: "sponsorship" }}
-                  className="eyebrow absolute bottom-3 right-3 rounded-full bg-pike px-3 py-1.5 !text-[11px] text-white shadow-lg hover:bg-pike-bright hover:text-ink"
-                >
-                  Sponsor available
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
+        {graphicGroups.map((group) => (
+          <section key={group.team} className="mt-10 first:mt-0" aria-label={`${group.label} player graphics`}>
+            <h3 className="eyebrow mb-4 text-pike-bright">{group.label}</h3>
+            <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+              {playerSponsorGraphics.filter((g) => g.team === group.team).map((g) => (
+                <li key={g.src} className="reveal flex flex-col overflow-hidden rounded-2xl border border-line bg-surface">
+                  <img
+                    src={g.src}
+                    alt={g.sponsor ? `${group.label} player graphic sponsored by ${g.sponsor}` : `${group.label} player graphic, sponsor available`}
+                    width={940}
+                    height={788}
+                    className="w-full bg-white"
+                    loading="lazy"
+                  />
+                  {g.sponsor ? (
+                    <p className="mt-auto px-3 py-2.5 text-xs text-muted">
+                      Sponsored by <span className="font-semibold text-fg">{g.sponsor}</span>
+                    </p>
+                  ) : (
+                    <Link
+                      to="/contact"
+                      search={{ topic: "sponsorship" }}
+                      className="eyebrow mt-auto flex items-center justify-between gap-2 bg-pike px-3 py-2.5 !text-[11px] text-white hover:bg-pike-bright hover:text-ink"
+                    >
+                      Sponsor this player <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
       </Container>
 
       <Container className="mt-24">
