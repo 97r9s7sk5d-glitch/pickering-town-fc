@@ -44,7 +44,7 @@ export type JuniorBand = {
  * Junior section, U8 up to U18. CONFIRM: remove any age group the club doesn't run this season,
  * and add coaches, leagues and training times as they're agreed.
  */
-export const juniorAgeGroups = ["U8", "U9", "U10", "U11", "U12", "U13", "U14", "U15", "U16", "U17", "U18"];
+export const juniorAgeGroups = ["U8", "U9", "U10", "U11", "U12", "U13", "U14", "U16", "U18"];
 
 /** Match formats follow the FA's youth football pathway. */
 export const juniorBands: JuniorBand[] = [
