@@ -32,8 +32,10 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 - `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
 - `news.ts`: news articles (newest first)
 - `history.ts`: timeline, honours, records
-- `sponsors.ts`: sponsorship packages, partners and player-sponsor graphics
-- `squad.ts`: first-team squad photos (add names and positions here) and the team photo
+- `legends.ts`: the Club legends page (copy an entry to add a person)
+- `sponsors.ts`: the main club ambassador (Flamingo Land), sponsorship packages, partners and player-sponsor graphics
+- `squad.ts`: first-team and ladies squad photos (add names and positions here) and the team photos
+- `teams.ts`: the teams, their banner photos, the U18s and the academy link (Hawkes 360)
 
 The official club badge is `public/badge.webp` (with `badge.png`, `favicon.png` and `apple-touch-icon.png` made
 from it), cut out from the white background the club supplied.

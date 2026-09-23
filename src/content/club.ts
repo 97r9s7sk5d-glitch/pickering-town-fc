@@ -15,7 +15,7 @@ export const club = {
   step: "Step 5 of the National League System",
   colours: "Royal blue and white",
   shirtSponsor: "Flamingo Land Resort Yorkshire",
-  siteUrl: "https://www.pickeringtownfc.co.uk",
+  siteUrl: "https://www.pickeringtownfc.com",
   tagline: "Non-league football at Mill Lane since 1888.",
 };
 

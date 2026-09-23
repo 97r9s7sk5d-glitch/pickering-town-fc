@@ -3,7 +3,7 @@
  * Add each player's name, position and shirt number; any left blank are simply not shown.
  * CONFIRM: names still to be added for every photo below.
  */
-export type Player = { image: string; name: string; position?: string; number?: number };
+export type Player = { image: string; name: string; position?: string; number?: number; sponsor?: string };
 
 export const squad: Player[] = [
   { image: "/images/squad/player-1.webp", name: "" },
@@ -17,28 +17,28 @@ export const squad: Player[] = [
 
 /**
  * Ladies first-team squad: portraits cropped from the club's player graphics (in /public/images/ladies).
- * Names are as on the graphics (first names). CONFIRM: surnames, positions and shirt numbers.
+ * Names and sponsors are as on the graphics (first names). CONFIRM: surnames, positions and shirt numbers.
  */
 export const ladiesSquad: Player[] = [
-  { image: "/images/ladies/vicki.webp", name: "Vicki" },
+  { image: "/images/ladies/vicki.webp", name: "Vicki", sponsor: "BodyFresh" },
   { image: "/images/ladies/sophie.webp", name: "Sophie" },
-  { image: "/images/ladies/sofia.webp", name: "Sofia", position: "Goalkeeper" },
-  { image: "/images/ladies/sarah.webp", name: "Sarah" },
-  { image: "/images/ladies/lottie.webp", name: "Lottie" },
-  { image: "/images/ladies/leila.webp", name: "Leila" },
-  { image: "/images/ladies/kira.webp", name: "Kira" },
-  { image: "/images/ladies/danielle.webp", name: "Danielle" },
-  { image: "/images/ladies/eden.webp", name: "Eden" },
-  { image: "/images/ladies/erin.webp", name: "Erin", position: "Goalkeeper" },
-  { image: "/images/ladies/evie.webp", name: "Evie" },
-  { image: "/images/ladies/chloe.webp", name: "Chloe" },
-  { image: "/images/ladies/brooke.webp", name: "Brooke" },
+  { image: "/images/ladies/sofia.webp", name: "Sofia", position: "Goalkeeper", sponsor: "LISAM" },
+  { image: "/images/ladies/sarah.webp", name: "Sarah", sponsor: "Typhon Martial Arts" },
+  { image: "/images/ladies/lottie.webp", name: "Lottie", sponsor: "Beauty by Milly Cuthbertson" },
+  { image: "/images/ladies/leila.webp", name: "Leila", sponsor: "Xtreme Roofing Ltd" },
+  { image: "/images/ladies/kira.webp", name: "Kira", sponsor: "M2 Masons Stonemasonry" },
+  { image: "/images/ladies/danielle.webp", name: "Danielle", sponsor: "Salon 16" },
+  { image: "/images/ladies/eden.webp", name: "Eden", sponsor: "Personal Promotions" },
+  { image: "/images/ladies/erin.webp", name: "Erin", position: "Goalkeeper", sponsor: "Young Lines Aesthetics & Skin" },
+  { image: "/images/ladies/evie.webp", name: "Evie", sponsor: "Hungate Cottages" },
+  { image: "/images/ladies/chloe.webp", name: "Chloe", sponsor: "Hungate Cottages" },
+  { image: "/images/ladies/brooke.webp", name: "Brooke", sponsor: "Calm & Glow Therapy Studio" },
   { image: "/images/ladies/belle.webp", name: "Belle" },
-  { image: "/images/ladies/lorna.webp", name: "Lorna" },
-  { image: "/images/ladies/millie.webp", name: "Millie" },
-  { image: "/images/ladies/kim.webp", name: "Kim" },
-  { image: "/images/ladies/aimee.webp", name: "Aimee" },
-  { image: "/images/ladies/alesha.webp", name: "Alesha" },
+  { image: "/images/ladies/lorna.webp", name: "Lorna", sponsor: "Evergreen Direct" },
+  { image: "/images/ladies/millie.webp", name: "Millie", sponsor: "Beneath the Weeds" },
+  { image: "/images/ladies/kim.webp", name: "Kim", sponsor: "Intelsius" },
+  { image: "/images/ladies/aimee.webp", name: "Aimee", sponsor: "Trequinho" },
+  { image: "/images/ladies/alesha.webp", name: "Alesha", sponsor: "Fabulously Glam Skin & Beyond" },
 ];
 
 /** Aerial photo of Mill Lane: pitch, Tony Dunning Stand, clubhouse and the town beyond. */

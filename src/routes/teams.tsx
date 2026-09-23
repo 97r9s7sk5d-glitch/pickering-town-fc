@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, GraduationCap } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
 import { club } from "@/content/club";
 import { ladiesSquad, squad } from "@/content/squad";
-import { juniorTeam, seniorTeams } from "@/content/teams";
+import { academy, juniorTeam, seniorTeams } from "@/content/teams";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/teams")({
@@ -122,6 +122,17 @@ function TeamsPage() {
                       {p.position}
                     </p>
                   )}
+                  <p className="mt-1 text-[11px] leading-snug text-muted">
+                    {p.sponsor ? (
+                      <>
+                        Sponsored by <span className="text-fg/90">{p.sponsor}</span>
+                      </>
+                    ) : (
+                      <Link to="/sponsors" className="text-pike-bright hover:text-fg">
+                        Sponsor this player
+                      </Link>
+                    )}
+                  </p>
                 </div>
               )}
             </li>
@@ -157,10 +168,30 @@ function TeamsPage() {
       </Container>
 
       <Container className="mt-24">
+        <div id="academy" className="scroll-mt-28" />
+        <SectionHeading eyebrow={`Academy · ${academy.partner}`} title={academy.title} />
+        <div className="reveal flex flex-col gap-6 rounded-3xl border border-line bg-surface/70 p-6 sm:flex-row sm:items-center sm:p-8">
+          <div className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-pike to-pike-deep">
+            <GraduationCap className="h-10 w-10 text-white" aria-hidden="true" />
+          </div>
+          <p className="flex-1 leading-relaxed text-muted">{academy.text}</p>
+          <a
+            href={academy.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="eyebrow inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-pike px-6 py-3 text-white transition-colors hover:bg-pike-bright hover:text-ink sm:self-center"
+          >
+            Visit {academy.partner} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        </div>
+      </Container>
+
+      <Container className="mt-24">
         <SectionHeading eyebrow="Get involved" title="Join the club" />
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { title: "Players", text: "Looking for a club? Senior, ladies and under-18 places are arranged through the club. Get in touch and we'll pass you to the right manager or coach." },
+            { title: "Players", text: "Looking for a club? Senior, ladies and under-18 places, and the academy, are arranged through the club. Get in touch and we'll pass you to the right manager or coach." },
             { title: "Coaches", text: "Qualified or keen to learn, we'd love to hear from coaches who want to help grow football in Pickering." },
             { title: "Volunteers", text: "Gate, bar, programme, pitch or social media: every non-league club runs on volunteers, and every hour helps." },
           ].map((c) => (

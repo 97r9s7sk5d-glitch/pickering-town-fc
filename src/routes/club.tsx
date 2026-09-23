@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Trophy } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Trophy } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
 import { club, officials } from "@/content/club";
 import { honours, records, timeline } from "@/content/history";
@@ -83,6 +83,25 @@ function ClubPage() {
             ))}
           </dl>
         </section>
+      </Container>
+
+      <Container className="mt-24">
+        <Link
+          to="/legends"
+          className="reveal group flex flex-col gap-4 rounded-3xl border border-line bg-gradient-to-br from-pike-deep/70 to-surface p-6 transition-colors hover:border-pike-bright sm:flex-row sm:items-center sm:justify-between sm:p-8"
+        >
+          <div>
+            <p className="eyebrow text-pike-bright">Hall of fame</p>
+            <p className="display mt-1 text-4xl">Club legends</p>
+            <p className="mt-2 max-w-xl text-muted">
+              The people behind {club.name}, from Tony Dunning, whose name is on the stand, to the players supporters
+              still talk about.
+            </p>
+          </div>
+          <span className="eyebrow inline-flex shrink-0 items-center gap-2 text-pike-bright group-hover:text-fg">
+            Meet the legends <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+          </span>
+        </Link>
       </Container>
     </>
   );

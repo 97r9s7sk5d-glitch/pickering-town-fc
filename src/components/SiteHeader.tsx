@@ -12,6 +12,7 @@ export const navItems: NavItem[] = [
   { to: "/news", label: "News" },
   { to: "/teams", label: "Teams" },
   { to: "/club", label: "Club" },
+  { to: "/legends", label: "Legends" },
   { to: "/matchday", label: "Matchday" },
   { to: "/sponsors", label: "Sponsors" },
 ];

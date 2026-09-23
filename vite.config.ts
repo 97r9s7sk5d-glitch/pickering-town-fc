@@ -20,7 +20,7 @@ export default defineConfig({
       },
       // A static 404 page for hosts that serve /404.html for unknown paths.
       pages: [{ path: "/404", prerender: { enabled: true, outputPath: "/404.html" }, sitemap: { exclude: true } }],
-      sitemap: { enabled: true, host: "https://www.pickeringtownfc.co.uk" },
+      sitemap: { enabled: true, host: "https://www.pickeringtownfc.com" },
     }),
     viteReact(),
     tailwindcss(),
