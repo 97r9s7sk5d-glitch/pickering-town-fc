@@ -51,6 +51,11 @@ export const partners: Partner[] = [
   { name: "Young Lines Aesthetics & Skin", tier: "Player sponsor" },
   { name: "Hungate Cottages", tier: "Player sponsor" },
   { name: "Calm & Glow Therapy Studio", tier: "Player sponsor" },
+  { name: "Evergreen Direct", tier: "Player sponsor" },
+  { name: "Beneath the Weeds", tier: "Player sponsor" },
+  { name: "Intelsius", tier: "Player sponsor" },
+  { name: "Trequinho", tier: "Player sponsor" },
+  { name: "Fabulously Glam Skin & Beyond", tier: "Player sponsor" },
 ];
 
 /**
@@ -82,6 +87,11 @@ export const playerSponsorGraphics: PlayerGraphic[] = [
   { src: "/images/player-sponsors/ladies-evie-hungate-cottages.webp", sponsor: "Hungate Cottages", team: "ladies" },
   { src: "/images/player-sponsors/ladies-chloe-hungate-cottages.webp", sponsor: "Hungate Cottages", team: "ladies" },
   { src: "/images/player-sponsors/ladies-brooke-calm-and-glow.webp", sponsor: "Calm & Glow Therapy Studio", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-lorna-evergreen-direct.webp", sponsor: "Evergreen Direct", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-millie-beneath-the-weeds.webp", sponsor: "Beneath the Weeds", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-kim-intelsius.webp", sponsor: "Intelsius", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-aimee-trequinho.webp", sponsor: "Trequinho", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-alesha-fabulously-glam.webp", sponsor: "Fabulously Glam Skin & Beyond", team: "ladies" },
   { src: "/images/player-sponsors/ladies-sophie-available.webp", sponsor: null, team: "ladies" },
   // CONFIRM: Belle's graphic says "Sponsored by" but has no logo, so she's shown as available for now.
   { src: "/images/player-sponsors/ladies-belle-available.webp", sponsor: null, team: "ladies" },
