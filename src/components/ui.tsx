@@ -31,12 +31,12 @@ export function Container({ children, className = "" }: { children: ReactNode; c
   return <div className={`mx-auto max-w-7xl px-4 sm:px-6 ${className}`}>{children}</div>;
 }
 
-/** Shown on pages that still use the placeholder fixtures/table data. */
-export function SampleNotice() {
+/** Shown on pages that still use placeholder fixtures/table data. */
+export function SampleNotice({ children }: { children: ReactNode }) {
   return (
     <p className="mb-8 flex items-start gap-2 rounded-xl border border-draw/40 bg-draw/10 px-4 py-3 text-sm text-fg">
       <Info className="mt-0.5 h-4 w-4 shrink-0 text-draw" aria-hidden="true" />
-      <span>Preview: most fixtures and table figures on this page are placeholders until the club adds the full season.</span>
+      <span>{children}</span>
     </p>
   );
 }

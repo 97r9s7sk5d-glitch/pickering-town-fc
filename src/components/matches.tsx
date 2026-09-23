@@ -11,6 +11,8 @@ import {
   icsFor,
   kickoffDate,
   outcome,
+  scoreline,
+  venueLabel,
   type Outcome,
 } from "@/lib/matches";
 
@@ -80,15 +82,16 @@ export function AddToCalendar({ match, compact = false, className = "" }: { matc
 export function MatchRow({ match }: { match: Match }) {
   const { home, away } = homeAway(match);
   const result = outcome(match);
-  const homeGoals = match.score && (match.venue === "H" ? match.score[0] : match.score[1]);
-  const awayGoals = match.score && (match.venue === "H" ? match.score[1] : match.score[0]);
+  const goals = scoreline(match);
+  const homeGoals = goals?.home;
+  const awayGoals = goals?.away;
   const nameClass = (name: string) => (name.startsWith("Pickering") ? "text-fg" : "text-fg/75");
 
   return (
     <li className="grid grid-cols-[4rem_1fr_auto] items-center gap-x-3 gap-y-2 border-b border-line py-4 sm:grid-cols-[6rem_1fr_auto] sm:gap-x-4">
       <div className="text-sm leading-tight">
         <p className="font-semibold text-fg">{formatDay(kickoffDate(match))}</p>
-        <p className="tabular text-muted">{formatTime(match)}</p>
+        {!match.score && <p className="tabular text-muted">{formatTime(match)}</p>}
       </div>
       <div className="min-w-0">
         <p className="eyebrow truncate !text-[11px] text-muted">
@@ -126,8 +129,8 @@ export function MatchRow({ match }: { match: Match }) {
           <OutcomeBadge result={result} />
         ) : (
           <>
-            <span className={`eyebrow !text-[11px] ${match.venue === "H" ? "text-pike-bright" : "text-muted"}`}>
-              {match.venue === "H" ? "Home" : "Away"}
+            <span className={`eyebrow whitespace-nowrap !text-[11px] ${match.venue === "H" ? "text-pike-bright" : "text-muted"}`}>
+              {venueLabel(match)}
             </span>
             <AddToCalendar match={match} compact />
           </>
@@ -174,7 +177,7 @@ export function NextMatchPanel({ match }: { match: Match }) {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="eyebrow text-pike-bright">Next match · {match.competition}</p>
           <p className={`eyebrow rounded-full px-3 py-1 !text-[11px] ${match.venue === "H" ? "bg-pike text-white" : "bg-raised text-muted"}`}>
-            {match.venue === "H" ? "Home" : "Away"}
+            {venueLabel(match)}
           </p>
         </div>
         <p className="display mt-5 text-4xl sm:text-5xl">
