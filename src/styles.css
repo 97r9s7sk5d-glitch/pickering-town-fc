@@ -318,3 +318,41 @@
     animation-delay: 2.85s;
   }
 }
+
+/* Matchday ground tour (GroundFlyover): each photo drifts between its --from and --to camera positions
+   while it's on screen, and cross-fades with the next. */
+.flyover__shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: var(--from);
+  transition: opacity 1200ms ease;
+  will-change: transform, opacity;
+}
+.flyover__shot.is-active,
+.flyover__shot.is-leaving {
+  animation: flyover-move var(--shot-ms) linear forwards;
+}
+.flyover__shot.is-active {
+  opacity: 1;
+}
+.flyover.is-paused .flyover__shot {
+  animation-play-state: paused;
+}
+@keyframes flyover-move {
+  from {
+    transform: var(--from);
+  }
+  to {
+    transform: var(--to);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flyover__shot.is-active,
+  .flyover__shot.is-leaving {
+    animation: none;
+  }
+}

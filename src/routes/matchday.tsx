@@ -4,7 +4,8 @@ import { NextMatchPanel } from "@/components/matches";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
 import { admission, club, ground } from "@/content/club";
 import { fixtures } from "@/lib/matches";
-import { groundPhoto } from "@/content/squad";
+import { groundTour } from "@/content/squad";
+import { GroundFlyover } from "@/components/GroundFlyover";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/matchday")({
@@ -46,7 +47,7 @@ function MatchdayPage() {
 
       <Container className="mt-12 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
         <Card className="overflow-hidden">
-          <img src={groundPhoto.src} alt={groundPhoto.alt} width={groundPhoto.width} height={groundPhoto.height} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+          <GroundFlyover shots={groundTour} />
           <div className="p-6 sm:p-8">
           <p className="eyebrow text-pike-bright">The ground</p>
           <h2 className="display mt-2 text-5xl">{ground.name}</h2>
