@@ -23,7 +23,12 @@ export const ladiesSquad: Player[] = [
   { image: "/images/ladies/vicki.webp", name: "Vicki" },
   { image: "/images/ladies/sophie.webp", name: "Sophie" },
   { image: "/images/ladies/sofia.webp", name: "Sofia", position: "Goalkeeper" },
-  { image: "/images/ladies/sarah.webp", name: "Sarah", number: 15 },
+  { image: "/images/ladies/sarah.webp", name: "Sarah" },
+  { image: "/images/ladies/lottie.webp", name: "Lottie" },
+  { image: "/images/ladies/leila.webp", name: "Leila" },
+  { image: "/images/ladies/kira.webp", name: "Kira" },
+  { image: "/images/ladies/danielle.webp", name: "Danielle" },
+  { image: "/images/ladies/eden.webp", name: "Eden" },
 ];
 
 /** Aerial photo of Mill Lane: pitch, Tony Dunning Stand, clubhouse and the town beyond. */

@@ -43,6 +43,11 @@ export const partners: Partner[] = [
   { name: "BodyFresh", tier: "Player sponsor" },
   { name: "LISAM", tier: "Player sponsor" },
   { name: "Typhon Martial Arts", tier: "Player sponsor" },
+  { name: "Beauty by Milly Cuthbertson", tier: "Player sponsor" },
+  { name: "Xtreme Roofing Ltd", tier: "Player sponsor" },
+  { name: "M2 Masons Stonemasonry", tier: "Player sponsor" },
+  { name: "Salon 16", tier: "Player sponsor" },
+  { name: "Personal Promotions", tier: "Player sponsor" },
 ];
 
 /**
@@ -65,5 +70,10 @@ export const playerSponsorGraphics: PlayerGraphic[] = [
   { src: "/images/player-sponsors/ladies-vicki-bodyfresh.webp", sponsor: "BodyFresh", team: "ladies" },
   { src: "/images/player-sponsors/ladies-sofia-lisam.webp", sponsor: "LISAM", team: "ladies" },
   { src: "/images/player-sponsors/ladies-sarah-typhon.webp", sponsor: "Typhon Martial Arts", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-lottie-milly-cuthbertson.webp", sponsor: "Beauty by Milly Cuthbertson", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-leila-xtreme-roofing.webp", sponsor: "Xtreme Roofing Ltd", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-kira-m2-masons.webp", sponsor: "M2 Masons Stonemasonry", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-danielle-salon-16.webp", sponsor: "Salon 16", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-eden-personal-promotions.webp", sponsor: "Personal Promotions", team: "ladies" },
   { src: "/images/player-sponsors/ladies-sophie-available.webp", sponsor: null, team: "ladies" },
 ];
