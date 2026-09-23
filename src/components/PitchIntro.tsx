@@ -86,8 +86,8 @@ const droplets = Array.from({ length: 24 }, (_, i) => {
 });
 
 /**
- * The video, plus the splash layered over the goal. When the pikes reach the net (just before the end) the splash
- * starts from the net's position on screen; the root then fades out and PitchIntro unmounts on `animationend`.
+ * The video, plus the splash layered over the goal. When the pikes reach the net (`splash.at`) the splash starts
+ * from the net's position on screen; the root then fades out and PitchIntro unmounts on `animationend`.
  */
 function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObject<HTMLDivElement | null>; onFail: () => void }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -111,21 +111,24 @@ function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObjec
       overlay.style.setProperty("--sy", `${r.top + (r.height - vh * k) / 2 + video.splash.y * vh * k}px`);
       overlay.classList.add("is-splashing");
     };
-    const onTime = () => {
-      if (el.duration && el.currentTime >= el.duration - 0.3) splash();
+    // Check every frame while playing, so the splash lands on the moment the pikes hit the net
+    // (timeupdate alone can be a quarter of a second late).
+    let raf = 0;
+    const watch = () => {
+      if (el.currentTime >= video.splash.at) splash();
+      else raf = requestAnimationFrame(watch);
     };
     // Don't keep visitors on a still frame if the video is slow to arrive.
     const slow = window.setTimeout(() => el.paused && onFail(), 4000);
     const onPlaying = () => window.clearTimeout(slow);
 
-    el.addEventListener("timeupdate", onTime);
     el.addEventListener("ended", splash);
     el.addEventListener("playing", onPlaying);
     el.addEventListener("error", onFail);
-    el.play().catch(onFail);
+    el.play().then(() => (raf = requestAnimationFrame(watch)), onFail);
     return () => {
       window.clearTimeout(slow);
-      el.removeEventListener("timeupdate", onTime);
+      cancelAnimationFrame(raf);
       el.removeEventListener("ended", splash);
       el.removeEventListener("playing", onPlaying);
       el.removeEventListener("error", onFail);
