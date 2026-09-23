@@ -4,7 +4,6 @@ import {
   HeadContent,
   Scripts,
   useRouter,
-  useRouterState,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
@@ -77,9 +76,7 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  // Re-scan for `.reveal` elements on every page change.
-  useRevealOnScroll([pathname]);
+  useRevealOnScroll();
   return (
     <>
       <a
