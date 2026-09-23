@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
-import { club, officials } from "@/content/club";
+import { club } from "@/content/club";
 import { squad, teamPhoto } from "@/content/squad";
+import { juniorAgeGroups, juniorBands, juniorsIntro, seniorTeams } from "@/content/teams";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/teams")({
@@ -10,42 +11,20 @@ export const Route = createFileRoute("/teams")({
     seo({
       title: "Teams",
       path: "/teams",
-      description: `${club.name} first team in the ${club.leagueShort}, Pickering Town Ladies, and how to get involved as a player, coach or volunteer.`,
+      description: `${club.name} first team in the ${club.leagueShort}, the ladies first team, juniors from U8 to U18, and how to get involved as a player, coach or volunteer.`,
     }),
   component: TeamsPage,
 });
-
-const manager = officials.find((o) => o.role === "First-team manager");
-
-const teams = [
-  {
-    id: "first",
-    name: "First Team",
-    league: club.league,
-    text: `The Pikes compete at ${club.step.toLowerCase()}, with home games at Mill Lane.`,
-    facts: [manager && { label: "Manager", value: manager.name }, { label: "Level", value: "Step 5" }].filter(Boolean) as {
-      label: string;
-      value: string;
-    }[],
-  },
-  {
-    id: "ladies",
-    name: "Ladies",
-    league: "North Riding Women's League Division One",
-    text: "Formed in 2025 and now in their second season. New players of every experience level are welcome.",
-    facts: [{ label: "Formed", value: "2025" }],
-  },
-] as const;
 
 function TeamsPage() {
   return (
     <>
       <PageHeader eyebrow="Royal blue and white" title="Our teams">
-        From Step 5 on a Saturday afternoon to a women's team in only its second season: there's a place for you at
-        Pickering Town.
+        From Step 5 on a Saturday afternoon to a ladies first team in only its second season and juniors from U8 to
+        U18: there's a place for you at Pickering Town.
       </PageHeader>
       <Container className="mt-12 grid gap-6 lg:grid-cols-2">
-        {teams.map((t) => (
+        {seniorTeams.map((t) => (
           <section key={t.id} className="reveal overflow-hidden rounded-3xl border border-line bg-surface/70" aria-labelledby={`team-${t.id}`}>
             <div className="relative h-56 bg-gradient-to-br from-pike-deep via-pike to-pike-bright">
               {t.id === "first" ? (
@@ -112,10 +91,37 @@ function TeamsPage() {
       </Container>
 
       <Container className="mt-24">
+        <div id="juniors" className="scroll-mt-28" />
+        <SectionHeading eyebrow={`Juniors · ${juniorAgeGroups[0]} to ${juniorAgeGroups.at(-1)}`} title="Junior section" />
+        <div className="reveal overflow-hidden rounded-3xl border border-line bg-surface/70">
+          <div className="relative bg-gradient-to-br from-pike-deep via-pike to-pike-bright px-6 py-8 sm:px-8">
+            <div aria-hidden="true" className="absolute inset-0 [background:repeating-linear-gradient(90deg,oklch(1_0_0/0.14)_0_36px,transparent_36px_72px)]" />
+            <p className="relative max-w-2xl text-lg leading-relaxed text-white">{juniorsIntro}</p>
+            <ul className="relative mt-6 flex flex-wrap gap-2" aria-label="Age groups">
+              {juniorAgeGroups.map((age) => (
+                <li key={age} className="display rounded-full bg-ink/70 px-4 py-1.5 text-xl text-white">
+                  {age}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {juniorBands.map((b) => (
+              <div key={b.ages} className="bg-surface p-6">
+                <p className="display text-4xl">{b.ages}</p>
+                <p className="eyebrow mt-1 text-pike-bright">{b.format}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{b.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+
+      <Container className="mt-24">
         <SectionHeading eyebrow="Get involved" title="Join the club" />
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { title: "Players", text: "Looking for a club? Senior and ladies trials are arranged through the club. Get in touch and we'll pass you to the right manager." },
+            { title: "Players", text: "Looking for a club? Senior, ladies and junior places (U8 to U18) are arranged through the club. Get in touch and we'll pass you to the right manager or coach." },
             { title: "Coaches", text: "Qualified or keen to learn, we'd love to hear from coaches who want to help grow football in Pickering." },
             { title: "Volunteers", text: "Gate, bar, programme, pitch or social media: every non-league club runs on volunteers, and every hour helps." },
           ].map((c) => (

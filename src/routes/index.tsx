@@ -193,7 +193,7 @@ function HomePage() {
           <Users className="h-8 w-8 text-pike-bright" aria-hidden="true" />
           <h2 className="display mt-4 text-4xl">Play for the Pikes</h2>
           <p className="mt-3 text-muted">
-            A first team at Step 5, a ladies team formed in 2025, and room for players, coaches and volunteers.
+            A first team at Step 5, a ladies first team formed in 2025, juniors from U8 to U18, and room for players, coaches and volunteers.
           </p>
           <span className={`${arrowLink} mt-5`}>
             Our teams <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
