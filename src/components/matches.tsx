@@ -122,7 +122,13 @@ export function MatchRow({ match }: { match: Match }) {
           )}
           <span className={`truncate ${nameClass(away)}`}>{away}</span>
         </p>
-        {match.scorers && <p className="mt-1 text-xs text-muted sm:text-center">Pikes scorers: {match.scorers.join(", ")}</p>}
+        {(match.scorers || match.attendance) && (
+          <p className="mt-1 text-xs text-muted sm:text-center">
+            {[match.scorers && `Pikes scorers: ${match.scorers.join(", ")}`, match.attendance && `Att ${match.attendance}`]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+        )}
       </div>
       <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-3">
         {result ? (

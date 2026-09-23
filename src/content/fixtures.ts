@@ -43,23 +43,23 @@ export type Match = {
 };
 
 export const matches: Match[] = [
-  // FIRST TEAM results (club's list). Times on played games are the usual kick-offs and aren't shown.
-  { id: "f01", kickoff: "2026-07-25T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "A", score: [0, 3] },
-  { id: "f02", kickoff: "2026-07-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Retford United", venue: "A", score: [0, 2] },
-  { id: "f03", kickoff: "2026-08-04T19:45", team: "first", competition: "NCEL Premier", opponent: "Worsbrough Bridge Athletic", venue: "H", score: [2, 3] },
-  { id: "f04", kickoff: "2026-08-08T15:00", team: "first", competition: "Cup", opponent: "Crook Town", score: [0, 4] },
-  { id: "f05", kickoff: "2026-08-11T19:45", team: "first", competition: "NCEL Premier", opponent: "Rossington Main", venue: "A", score: [1, 4] },
-  { id: "f06", kickoff: "2026-08-15T15:00", team: "first", competition: "Cup", opponent: "Alnwick Town", score: [3, 1] },
-  { id: "f07", kickoff: "2026-08-21T19:45", team: "first", competition: "NCEL Premier", opponent: "Golcar United", venue: "H", score: [3, 1] },
-  { id: "f08", kickoff: "2026-08-25T19:45", team: "first", competition: "NCEL Premier", opponent: "Albion Sports", venue: "A", score: [0, 2] },
-  { id: "f09", kickoff: "2026-08-28T19:45", team: "first", competition: "NCEL Premier", opponent: "Keighley Town", venue: "H", score: [4, 0] },
-  { id: "f10", kickoff: "2026-09-08T19:45", team: "first", competition: "NCEL Premier", opponent: "Horbury Town", venue: "H", score: [3, 2] },
-  { id: "f11", kickoff: "2026-09-11T19:45", team: "first", competition: "FA Vase", opponent: "Grangetown Boys Club", venue: "H", score: [3, 2] },
-  { id: "f12", kickoff: "2026-09-15T19:45", team: "first", competition: "NCEL Premier", opponent: "Tadcaster Albion", venue: "A", score: [3, 0] },
-  { id: "f13", kickoff: "2026-09-19T15:00", team: "first", competition: "NCEL Premier", opponent: "Penistone Church", venue: "A", score: [2, 2] },
+  // FIRST TEAM results, from the NCEL's Pickering Town page (venue, competition, attendance, Pikes scorers).
+  // Times on played games are the usual kick-offs and aren't shown.
+  { id: "f01", kickoff: "2026-07-25T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "A", score: [0, 3], attendance: 180 },
+  { id: "f02", kickoff: "2026-07-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Retford United", venue: "A", score: [0, 2], attendance: 183 },
+  { id: "f03", kickoff: "2026-08-04T19:45", team: "first", competition: "NCEL Premier", opponent: "Worsbrough Bridge Athletic", venue: "H", score: [2, 3], attendance: 254, scorers: ["Nathan Dyer (9)", "Charlie Thompson (38)"] },
+  { id: "f04", kickoff: "2026-08-08T15:00", team: "first", competition: "FA Cup", opponent: "Crook Town", venue: "A", score: [0, 4], attendance: 226 },
+  { id: "f05", kickoff: "2026-08-11T19:45", team: "first", competition: "NCEL Premier", opponent: "Rossington Main", venue: "A", score: [1, 4], attendance: 131, scorers: ["Michael Coulson (69)"] },
+  { id: "f06", kickoff: "2026-08-15T15:00", team: "first", competition: "FA Vase", opponent: "Alnwick Town", venue: "H", score: [3, 1], attendance: 248, scorers: ["Souleymane Coulibaly (36, 88 pen)", "Wayne Brooksby (75)"] },
+  { id: "f07", kickoff: "2026-08-21T19:45", team: "first", competition: "NCEL Premier", opponent: "Golcar United", venue: "H", score: [3, 1], attendance: 182, scorers: ["Nathan Dyer (34)", "Marshall Nock (42)", "Wayne Brooksby (86)"] },
+  { id: "f08", kickoff: "2026-08-25T19:45", team: "first", competition: "NCEL Premier", opponent: "Albion Sports", venue: "A", score: [0, 2], attendance: 105 },
+  { id: "f09", kickoff: "2026-08-28T19:45", team: "first", competition: "NCEL Premier", opponent: "Keighley Town", venue: "H", score: [4, 0], attendance: 174, scorers: ["Souleymane Coulibaly (19 pen, 28, 32 pen)", "George Thewlis (90)"] },
+  { id: "f10", kickoff: "2026-09-08T19:45", team: "first", competition: "NCEL Premier", opponent: "Horbury Town", venue: "H", score: [3, 2], attendance: 123, scorers: ["Souleymane Coulibaly (5, 83)", "Michael Coulson (77)"] },
+  { id: "f11", kickoff: "2026-09-11T19:45", team: "first", competition: "FA Vase", opponent: "Grangetown Boys Club", venue: "H", score: [3, 2], attendance: 252, scorers: ["Souleymane Coulibaly (4, 85)", "Marshall Nock (29)"] },
+  { id: "f12", kickoff: "2026-09-15T19:45", team: "first", competition: "NCEL Premier", opponent: "Tadcaster Albion", venue: "A", score: [3, 0], attendance: 175, scorers: ["Cameron Blackburn (79)", "Souleymane Coulibaly (87)", "George Thewlis (89)"] },
+  { id: "f13", kickoff: "2026-09-19T15:00", team: "first", competition: "NCEL Premier", opponent: "Penistone Church", venue: "A", score: [2, 2], attendance: 286, scorers: ["Joseph Bhaskaran (17)", "George Thewlis (19)"] },
 
-  // FIRST TEAM fixtures (club's list; venues and competitions from the NCEL fixture list where shown).
-  // CONFIRM: home or away where `venue` is missing, and the competition for the games marked "Cup".
+  // FIRST TEAM fixtures, from the NCEL's Pickering Town page.
   { id: "f14", kickoff: "2026-09-26T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford FC", venue: "H" },
   { id: "f15", kickoff: "2026-09-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Barton Town", venue: "A" },
   { id: "f16", kickoff: "2026-10-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth", venue: "H" },
