@@ -52,3 +52,14 @@ export const juniorTeam = {
     { label: "Format", value: "11 v 11" },
   ] as TeamFact[],
 };
+
+/**
+ * Academy pathway. CONFIRM the partnership wording and link with the club (the link is the Hawkes
+ * "360 Centre of Development" page, found online in September 2026).
+ */
+export const academy = {
+  partner: "Hawkes 360",
+  title: "Academy",
+  text: "Young players in and around Pickering can develop their game with Hawkes 360, the 360 Centre of Development run by Hawkes Football Sessions. It offers professional coaching and a player pathway, with sessions in Pickering, Malton and Scarborough.",
+  url: "https://www.hawkeshealth.org/360-centre-of-development",
+};

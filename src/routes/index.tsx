@@ -4,6 +4,8 @@ import { FormGuide, NextMatchPanel, OutcomeBadge } from "@/components/matches";
 import { LeagueTable } from "@/components/LeagueTable";
 import { Card, Container, SectionHeading } from "@/components/ui";
 import { ArticleCard } from "@/components/ArticleCard";
+import { AmbassadorBanner } from "@/components/AmbassadorBanner";
+import { TeamCards } from "@/components/TeamCards";
 import { PitchIntro } from "@/components/PitchIntro";
 import { club, ground } from "@/content/club";
 import { honours, records } from "@/content/history";
@@ -116,6 +118,17 @@ function HomePage() {
         </Card>
       </Container>
 
+      {/* Teams: next game for each side */}
+      <Container className="mt-24">
+        <SectionHeading eyebrow="Three teams, one club" title="Our teams" />
+        <TeamCards />
+      </Container>
+
+      {/* Main club ambassador */}
+      <Container className="mt-12">
+        <AmbassadorBanner compact />
+      </Container>
+
       {/* News */}
       <Container className="mt-24">
         <SectionHeading
@@ -192,7 +205,7 @@ function HomePage() {
           <Users className="h-8 w-8 text-pike-bright" aria-hidden="true" />
           <h2 className="display mt-4 text-4xl">Play for the Pikes</h2>
           <p className="mt-3 text-muted">
-            A first team at Step 5, a ladies first team formed in 2025, an under-18s side, and room for players, coaches and volunteers.
+            A first team at Step 5, a ladies first team, an under-18s side and an academy pathway with Hawkes 360, with room for players, coaches and volunteers.
           </p>
           <span className={`${arrowLink} mt-5`}>
             Our teams <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />

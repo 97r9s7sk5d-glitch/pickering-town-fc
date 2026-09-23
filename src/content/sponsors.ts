@@ -29,13 +29,21 @@ export const packages: Package[] = [
   },
 ];
 
+/** The club's principal partner, shown at the top of the Sponsors page and on the home page. */
+export const clubAmbassador = {
+  name: "Flamingo Land Resort Yorkshire",
+  role: "Main club ambassador",
+  text: "Flamingo Land is the club's principal partner and shirt sponsor, on the front of the first-team and ladies kits. Thank you for backing the Pikes.",
+  url: "https://www.flamingoland.co.uk",
+  logo: "/images/flamingo-land.webp",
+};
+
 /**
  * Current partners, as seen on the kit, the stand and the club's player graphics.
  * CONFIRM each one with the club before launch, and add { name, url?, tier } entries for any others.
  */
 export type Partner = { name: string; url?: string; tier: "Shirt sponsor" | "Player sponsor" | "Partner" };
 export const partners: Partner[] = [
-  { name: "Flamingo Land Resort Yorkshire", tier: "Shirt sponsor" },
   { name: "Harome Homes", tier: "Player sponsor" },
   { name: "Harton Works", tier: "Player sponsor" },
   { name: "Television House Pickering", tier: "Player sponsor" },

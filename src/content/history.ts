@@ -1,6 +1,6 @@
 /**
- * Club history, honours and records. Sourced from the NCEL statistics pages and the club's Wikipedia
- * entry (September 2026). CONFIRM against the club's own records before launch.
+ * Club history, honours and records. Sourced from the club's current website, the NCEL statistics pages and
+ * newsletters, and the club's Wikipedia entry (September 2026). CONFIRM against the club's own records.
  */
 export type Era = { years: string; title: string; text: string };
 
@@ -11,9 +11,9 @@ export const timeline: Era[] = [
     text: "Pickering Town Football Club is formed in the market town on the edge of the North York Moors.",
   },
   {
-    years: "1955–1972",
+    years: "1953–1972",
     title: "York League",
-    text: "Pickering win the York League First Division three times: 1955–56, 1966–67 and 1969–70.",
+    text: "Pickering join Division Two of the York League in 1953–54 and are promoted at the first attempt, then win the First Division three times: 1955–56, 1966–67 and 1969–70.",
   },
   {
     years: "1972–1982",
@@ -34,6 +34,11 @@ export const timeline: Era[] = [
     years: "2006",
     title: "FA Vase quarter-finals",
     text: "The club's best national cup run ends in the last eight of the FA Vase, against Nantwich Town.",
+  },
+  {
+    years: "2010",
+    title: "The Tony Dunning Stand",
+    text: "The stand at Mill Lane is dedicated to former chairman Tony Dunning, with a memorial match against Whitby Town.",
   },
   {
     years: "2018",

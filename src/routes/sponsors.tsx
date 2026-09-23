@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
+import { AmbassadorBanner } from "@/components/AmbassadorBanner";
 import { club } from "@/content/club";
 import { packages, partners, playerSponsorGraphics } from "@/content/sponsors";
 import { seo } from "@/lib/seo";
@@ -27,6 +28,10 @@ function SponsorsPage() {
         Local businesses keep non-league football alive. Put your name in front of supporters at Mill Lane and across
         the club's channels, at every budget.
       </PageHeader>
+
+      <Container className="mt-12">
+        <AmbassadorBanner />
+      </Container>
 
       <Container className="mt-12">
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">

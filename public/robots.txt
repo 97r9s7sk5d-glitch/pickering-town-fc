@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.pickeringtownfc.co.uk/sitemap.xml
+Sitemap: https://www.pickeringtownfc.com/sitemap.xml

@@ -1,9 +1,10 @@
 import { useLayoutEffect, useRef, useState } from "react";
-import { club } from "@/content/club";
+import { club, ground } from "@/content/club";
+import { groundPhoto } from "@/content/squad";
 
 /**
- * Opening sequence on the home page: an aerial view of the pitch with the badge sitting in the centre circle,
- * then the camera dives into the badge and lands on the home page.
+ * Opening sequence on the home page: the aerial photo of Mill Lane dissolves into a drawn pitch with the badge
+ * sitting in the centre circle, then the camera dives into the badge and lands on the home page.
  *
  * The animation itself is pure CSS (see `.pitch-intro` in styles.css), so it also finishes without JavaScript.
  * It plays once per visit: only when the home page is the first page opened, and not for reduced-motion users.
@@ -49,9 +50,16 @@ export function PitchIntro() {
   return (
     <div ref={ref} className="pitch-intro" suppressHydrationWarning onClick={() => setShow(false)}>
       <div className="pitch-intro__scene">
+        <img className="pitch-intro__photo" src={groundPhoto.src} alt="" aria-hidden="true" fetchPriority="high" />
         <Pitch orientation="landscape" />
         <Pitch orientation="portrait" />
       </div>
+      <p className="pitch-intro__place">
+        <span className="display block text-6xl sm:text-8xl">{ground.name}</span>
+        <span className="eyebrow mt-2 block">
+          {club.town} · Home of {club.nickname}
+        </span>
+      </p>
       <p className="pitch-intro__caption eyebrow">
         {club.name} · Est. {club.founded}
       </p>
