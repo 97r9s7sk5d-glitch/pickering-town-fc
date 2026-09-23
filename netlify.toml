@@ -1,0 +1,10 @@
+# Netlify build for the draft site.
+[build]
+  command = "npm run build"
+  publish = "dist/client"
+
+# Draft only: keep every page out of search engines. Delete this block when the site goes live.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

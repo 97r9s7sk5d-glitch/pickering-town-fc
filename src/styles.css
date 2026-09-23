@@ -1,0 +1,320 @@
+/* Fonts are bundled with the site (no Google Fonts request): faster, and no visitor data sent to Google. */
+@import "@fontsource/barlow-condensed/latin-600.css";
+@import "@fontsource/barlow-condensed/latin-700.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-700.css";
+@import "tailwindcss" source(none);
+@source "../src";
+
+/* Club design tokens. Pickering Town play in royal blue and white: the site is built on a deep
+   midnight-navy base with a bright "Pikes blue" accent. Change a colour here and it changes everywhere. */
+@theme inline {
+  --color-ink: var(--ink);
+  --color-night: var(--night);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-pike: var(--pike);
+  --color-pike-bright: var(--pike-bright);
+  --color-pike-deep: var(--pike-deep);
+  --color-win: var(--win);
+  --color-draw: var(--draw);
+  --color-loss: var(--loss);
+  --font-display: "Barlow Condensed", "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --ink: oklch(0.12 0.03 262);
+  --night: oklch(0.16 0.045 262);
+  --surface: oklch(0.2 0.05 262);
+  --raised: oklch(0.25 0.06 262);
+  --line: oklch(0.85 0.03 262 / 14%);
+  --line-strong: oklch(0.85 0.03 262 / 30%);
+  --fg: oklch(0.97 0.005 262);
+  --muted: oklch(0.78 0.03 262);
+  --pike: oklch(0.6 0.19 258);
+  --pike-bright: oklch(0.74 0.15 245);
+  --pike-deep: oklch(0.42 0.17 262);
+  --win: oklch(0.72 0.17 150);
+  --draw: oklch(0.8 0.13 85);
+  --loss: oklch(0.66 0.2 25);
+}
+
+@layer base {
+  html {
+    background: var(--ink);
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--ink);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--pike-bright);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--pike);
+    color: white;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Big condensed headings, as on a matchday programme cover. */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+}
+
+/* Small tracked capitals for eyebrows, labels and nav. */
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8125rem;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Floodlit pitch backdrop for the hero: glow from two floodlights, faint mowing stripes and halfway line. */
+@utility pitch-backdrop {
+  background:
+    radial-gradient(60% 55% at 12% -5%, oklch(0.75 0.12 245 / 0.35), transparent 70%),
+    radial-gradient(60% 55% at 88% -5%, oklch(0.75 0.12 245 / 0.28), transparent 70%),
+    repeating-linear-gradient(90deg, oklch(1 0 0 / 0.025) 0 80px, transparent 80px 160px),
+    linear-gradient(180deg, var(--night) 0%, var(--ink) 100%);
+}
+
+/* Blue-to-bright rule used under section headings. */
+@utility pike-rule {
+  background-image: linear-gradient(90deg, var(--pike), var(--pike-bright) 60%, transparent);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise {
+  animation: rise-in 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-rise-late {
+  animation: rise-in 600ms cubic-bezier(0.16, 1, 0.3, 1) 140ms both;
+}
+
+/* Scroll reveal (see useRevealOnScroll): hidden until the hook adds .is-visible. Only applies once JS has
+   marked the page with .js-reveal, so content is never hidden if scripts fail to run. */
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* FA Full-Time feeds arrive as plain, fixed-width HTML tables: stretch them and restyle them in club colours. */
+.fulltime-embed table {
+  width: 100% !important;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  color: var(--fg);
+  background: transparent !important;
+}
+.fulltime-embed th,
+.fulltime-embed td {
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+  background: transparent !important;
+  color: inherit !important;
+  text-align: left;
+}
+.fulltime-embed th {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--muted) !important;
+}
+.fulltime-embed a {
+  color: var(--pike-bright) !important;
+}
+.fulltime-embed div,
+.fulltime-embed iframe {
+  max-width: 100% !important;
+}
+
+/* Home-page intro (PitchIntro): aerial pitch, badge in the centre circle, then a dive into the badge.
+   Timings: pitch and lines 0-1.4s, badge 0.5-1.4s, hold, zoom 2.1-3.1s, fade out 2.5-3.05s. */
+.pitch-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: var(--ink);
+  cursor: pointer;
+  animation: intro-out 550ms ease-in 2.5s forwards;
+}
+.pitch-intro[data-skip] {
+  display: none;
+}
+.pitch-intro__scene {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  animation: intro-zoom 1000ms cubic-bezier(0.65, 0, 0.9, 0.4) 2.1s forwards;
+}
+.pitch-intro__pitch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: intro-fade 800ms ease-out both;
+}
+.pitch-intro__pitch--portrait {
+  display: none;
+}
+@media (orientation: portrait) {
+  .pitch-intro__pitch--landscape {
+    display: none;
+  }
+  .pitch-intro__pitch--portrait {
+    display: block;
+  }
+}
+.pitch-intro__lines > * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: intro-draw 1100ms cubic-bezier(0.45, 0, 0.2, 1) 250ms forwards;
+}
+.pitch-intro__badge {
+  transform-box: fill-box;
+  transform-origin: 50% 48%;
+  filter: drop-shadow(0 0 2px rgb(255 255 255 / 0.6)) drop-shadow(0 6px 10px rgb(0 0 0 / 0.5));
+  animation: intro-badge 900ms cubic-bezier(0.16, 1, 0.3, 1) 500ms both;
+}
+.pitch-intro__caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 12%;
+  text-align: center;
+  color: white;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.6);
+  animation:
+    intro-fade 600ms ease-out 1.1s both,
+    intro-fade 300ms ease-in 2s reverse forwards;
+}
+.pitch-intro__skip {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: rgb(0 0 0 / 0.35);
+  padding: 0.5rem 1rem;
+  color: white;
+}
+.pitch-intro__skip:hover {
+  background: rgb(0 0 0 / 0.6);
+}
+
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes intro-badge {
+  from {
+    opacity: 0;
+    transform: scale(0.35) rotate(-25deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes intro-zoom {
+  to {
+    transform: scale(9);
+  }
+}
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pitch-intro {
+    display: none;
+  }
+}
+
+/* Hold the hero's own entrance until the intro has handed over. */
+@media (prefers-reduced-motion: no-preference) {
+  .pitch-intro:not([data-skip]) ~ section .animate-rise {
+    animation-delay: 2.7s;
+  }
+  .pitch-intro:not([data-skip]) ~ section .animate-rise-late {
+    animation-delay: 2.85s;
+  }
+}
