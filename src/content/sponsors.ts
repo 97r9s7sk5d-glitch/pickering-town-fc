@@ -48,6 +48,9 @@ export const partners: Partner[] = [
   { name: "M2 Masons Stonemasonry", tier: "Player sponsor" },
   { name: "Salon 16", tier: "Player sponsor" },
   { name: "Personal Promotions", tier: "Player sponsor" },
+  { name: "Young Lines Aesthetics & Skin", tier: "Player sponsor" },
+  { name: "Hungate Cottages", tier: "Player sponsor" },
+  { name: "Calm & Glow Therapy Studio", tier: "Player sponsor" },
 ];
 
 /**
@@ -75,5 +78,11 @@ export const playerSponsorGraphics: PlayerGraphic[] = [
   { src: "/images/player-sponsors/ladies-kira-m2-masons.webp", sponsor: "M2 Masons Stonemasonry", team: "ladies" },
   { src: "/images/player-sponsors/ladies-danielle-salon-16.webp", sponsor: "Salon 16", team: "ladies" },
   { src: "/images/player-sponsors/ladies-eden-personal-promotions.webp", sponsor: "Personal Promotions", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-erin-young-lines.webp", sponsor: "Young Lines Aesthetics & Skin", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-evie-hungate-cottages.webp", sponsor: "Hungate Cottages", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-chloe-hungate-cottages.webp", sponsor: "Hungate Cottages", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-brooke-calm-and-glow.webp", sponsor: "Calm & Glow Therapy Studio", team: "ladies" },
   { src: "/images/player-sponsors/ladies-sophie-available.webp", sponsor: null, team: "ladies" },
+  // CONFIRM: Belle's graphic says "Sponsored by" but has no logo, so she's shown as available for now.
+  { src: "/images/player-sponsors/ladies-belle-available.webp", sponsor: null, team: "ladies" },
 ];
