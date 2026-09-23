@@ -31,6 +31,7 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 - `fixtures.ts`: fixtures, results, league table. The first-team list is real; update `placeholderTeams` and `isPlaceholderTable` as the ladies, U18 and table data are replaced, and add `venue` to games still marked H/A TBC
 - `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
 - `news.ts`: news articles (newest first)
+- `intro.ts`: the home page's opening video (set to `null` for the drawn animation) and where its splash starts
 - `history.ts`: timeline, honours, records
 - `legends.ts`: the Club legends page (copy an entry to add a person)
 - `sponsors.ts`: the main club ambassador (Flamingo Land), sponsorship packages, partners and player-sponsor graphics

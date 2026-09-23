@@ -340,6 +340,147 @@
   }
 }
 
+/* Video version (introVideo): the video plays, then the splash washes out from the net into the home page.
+   The 10s fade is only a fallback for no JavaScript or a stalled video; normally `.is-splashing` takes over. */
+.pitch-intro--video {
+  animation: intro-out 500ms ease-in 10s forwards;
+}
+.pitch-intro__backdrop,
+.pitch-intro__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pitch-intro__backdrop {
+  filter: blur(28px) brightness(0.75);
+  transform: scale(1.15);
+}
+/* Phones: show the whole frame (centre circle to goal) rather than cropping it. */
+@media (orientation: portrait) {
+  .pitch-intro__video {
+    object-fit: contain;
+  }
+}
+.pitch-intro--video .pitch-intro__caption {
+  bottom: 8%;
+  animation:
+    intro-fade 600ms ease-out 400ms both,
+    intro-fade 400ms ease-in 2.4s reverse forwards;
+}
+.pitch-intro.is-splashing {
+  animation: intro-splash-out 450ms ease-in 1.2s forwards;
+}
+.pitch-intro__splash {
+  position: absolute;
+  left: var(--sx, 27%);
+  top: var(--sy, 34%);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.pitch-intro__splash > * {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 9999px;
+  opacity: 0;
+}
+.pitch-intro__flash {
+  width: 60vmin;
+  height: 60vmin;
+  margin: -30vmin 0 0 -30vmin;
+  background: radial-gradient(circle, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0) 60%);
+}
+.pitch-intro__ripple {
+  width: 50vmin;
+  height: 50vmin;
+  margin: -25vmin 0 0 -25vmin;
+  border: 0.6vmin solid var(--pike-bright);
+}
+.pitch-intro__drop {
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  background: radial-gradient(circle at 35% 35%, white, var(--pike-bright) 45%, var(--pike));
+}
+.is-splashing .pitch-intro__flash {
+  animation: splash-flash 420ms ease-out forwards;
+}
+.is-splashing .pitch-intro__ripple {
+  animation: splash-ripple 800ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+.is-splashing .pitch-intro__ripple--late {
+  animation-delay: 140ms;
+}
+.is-splashing .pitch-intro__drop {
+  animation: splash-drop 1000ms cubic-bezier(0.2, 0.8, 0.4, 1) var(--delay) forwards;
+}
+/* The wave: a light-blue edge running just ahead of the royal blue that becomes the home page background. */
+.pitch-intro__wave {
+  position: absolute;
+  inset: 0;
+  clip-path: circle(0 at var(--sx, 27%) var(--sy, 34%));
+}
+.pitch-intro__wave--rim {
+  background: radial-gradient(circle at var(--sx, 27%) var(--sy, 34%), white, var(--pike-bright) 40vmin);
+}
+.pitch-intro__wave--fill {
+  background: var(--ink);
+}
+.is-splashing .pitch-intro__wave--rim {
+  animation: splash-wave 950ms cubic-bezier(0.5, 0, 0.3, 1) 180ms forwards;
+}
+.is-splashing .pitch-intro__wave--fill {
+  animation: splash-wave 950ms cubic-bezier(0.5, 0, 0.3, 1) 330ms forwards;
+}
+@keyframes splash-flash {
+  30% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+@keyframes splash-ripple {
+  from {
+    opacity: 1;
+    transform: scale(0.05);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+@keyframes splash-drop {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.4);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(var(--dx), var(--dy)) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc(var(--dx) * 1.15), calc(var(--dy) + 12vmin)) scale(0.8);
+  }
+}
+@keyframes splash-wave {
+  to {
+    clip-path: circle(150vmax at var(--sx, 27%) var(--sy, 34%));
+  }
+}
+@keyframes intro-splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pitch-intro {
     display: none;
@@ -353,5 +494,11 @@
   }
   .pitch-intro:not([data-skip]) ~ section .animate-rise-late {
     animation-delay: 3.85s;
+  }
+  .pitch-intro--video:not([data-skip]) ~ section .animate-rise {
+    animation-delay: 6.2s;
+  }
+  .pitch-intro--video:not([data-skip]) ~ section .animate-rise-late {
+    animation-delay: 6.35s;
   }
 }
