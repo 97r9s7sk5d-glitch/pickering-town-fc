@@ -81,6 +81,14 @@ export const groundTour: TourShot[] = [
     to: "scale(1.05) translate(-1%, 0)",
   },
   {
+    // Small original (250 px wide), so it gets a gentler zoom than the others to stay sharp.
+    src: "/images/mill-lane-covered-stand.webp",
+    alt: "The covered stand at Mill Lane with seats and sponsor boards along the front",
+    caption: "The covered stand",
+    from: "scale(1.02) translate(1%, 0)",
+    to: "scale(1.08) translate(-1%, 0)",
+  },
+  {
     src: "/images/mill-lane-walkway.webp",
     alt: "The walkway along the side of the pitch at Mill Lane, past the dugout",
     caption: "Along the touchline",
