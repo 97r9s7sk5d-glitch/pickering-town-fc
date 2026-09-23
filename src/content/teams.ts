@@ -34,41 +34,14 @@ export const seniorTeams: SeniorTeam[] = [
   },
 ];
 
-export type JuniorBand = {
-  ages: string;
-  format: string;
-  text: string;
+/** The club's junior side. CONFIRM: add the coach, league and training times as they're agreed. */
+export const juniorTeam = {
+  age: "U18",
+  name: "Under-18s",
+  intro:
+    "Our under-18s give young players in and around Pickering eleven-a-side football in royal blue and white, and a pathway into the first team and the ladies first team.",
+  facts: [
+    { label: "Age group", value: "Under 18" },
+    { label: "Format", value: "11 v 11" },
+  ] as TeamFact[],
 };
-
-/**
- * Junior section, U8 up to U18. CONFIRM: remove any age group the club doesn't run this season,
- * and add coaches, leagues and training times as they're agreed.
- */
-export const juniorAgeGroups = ["U8", "U9", "U10", "U11", "U12", "U13", "U14", "U16", "U18"];
-
-/** Match formats follow the FA's youth football pathway. */
-export const juniorBands: JuniorBand[] = [
-  {
-    ages: "U8",
-    format: "5 v 5",
-    text: "Small-sided mini-soccer: lots of touches, lots of goals and a first taste of playing for the Pikes.",
-  },
-  {
-    ages: "U9 – U10",
-    format: "7 v 7",
-    text: "Bigger pitches and more team play, with coaching focused on skills, confidence and enjoyment.",
-  },
-  {
-    ages: "U11 – U12",
-    format: "9 v 9",
-    text: "Positions, shape and the step towards the full game, still with the emphasis on development over results.",
-  },
-  {
-    ages: "U13 – U18",
-    format: "11 v 11",
-    text: "The full game. Our under-18s are the oldest junior side and the bridge into the first team and the ladies first team.",
-  },
-];
-
-export const juniorsIntro =
-  "Pickering Town's junior section gives boys and girls in and around Pickering a place to play in royal blue and white, from under-8s all the way up to under-18s.";
