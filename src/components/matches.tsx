@@ -168,8 +168,11 @@ function useCountdown(target: Date) {
   };
 }
 
-/** Big "next match" panel with a live countdown to kick-off. */
-export function NextMatchPanel({ match }: { match: Match }) {
+/**
+ * "Next match" panel with a live countdown to kick-off. `compact` is the slimmer version used side by side
+ * in the home page hero (one per team); `label` names the team in that case.
+ */
+export function NextMatchPanel({ match, compact = false, label }: { match: Match; compact?: boolean; label?: string }) {
   const date = kickoffDate(match);
   const countdown = useCountdown(date);
   const { home, away } = homeAway(match);
@@ -181,39 +184,60 @@ export function NextMatchPanel({ match }: { match: Match }) {
   ];
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-line-strong bg-night bg-gradient-to-br from-pike-deep/60 via-surface to-night p-6 shadow-2xl shadow-ink/60 sm:p-8">
+    <div
+      className={`relative overflow-hidden rounded-3xl border border-line-strong bg-night bg-gradient-to-br from-pike-deep/60 via-surface to-night shadow-2xl shadow-ink/60 ${
+        compact ? "h-full p-5" : "p-6 sm:p-8"
+      }`}
+    >
       <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-pike/30 blur-3xl" />
       <div className="relative">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="eyebrow text-pike-bright">Next match · {match.competition}</p>
-          <p className={`eyebrow rounded-full px-3 py-1 !text-[11px] ${match.venue === "H" ? "bg-pike text-white" : "bg-raised text-muted"}`}>
+          <p className={`eyebrow text-pike-bright ${compact ? "!text-[11px]" : ""}`}>
+            {label ?? "Next match"} · {match.competition}
+          </p>
+          <p
+            className={`eyebrow rounded-full px-3 py-1 !text-[11px] ${match.venue === "H" ? "bg-pike text-white" : "bg-raised text-muted"}`}
+          >
             {venueLabel(match)}
           </p>
         </div>
-        <p className="display mt-5 text-4xl sm:text-5xl">
-          {home} <span className="text-pike-bright">v</span> {away}
-        </p>
-        <p className="mt-3 text-muted">
-          {formatLongDate(date)} · <span className="tabular">{formatTime(match)}</span> kick-off
+        {compact ? (
+          // The team is in the label and home/away in the badge, so the compact panel leads with the opponent.
+          <p className="display mt-3 text-2xl xl:text-3xl">
+            <span className="text-pike-bright">v</span> {match.opponent}
+          </p>
+        ) : (
+          <p className="display mt-5 text-4xl sm:text-5xl">
+            {home} <span className="text-pike-bright">v</span> {away}
+          </p>
+        )}
+        <p className={compact ? "mt-2 text-sm text-muted" : "mt-3 text-muted"}>
+          {compact ? formatDay(date) : formatLongDate(date)} · <span className="tabular">{formatTime(match)}</span> kick-off
         </p>
         {match.venue === "H" && (
-          <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
-            <MapPin className="h-4 w-4" aria-hidden="true" />
+          <p className={`mt-1 flex items-center gap-1.5 text-muted ${compact ? "text-xs" : "text-sm"}`}>
+            <MapPin className={compact ? "h-3.5 w-3.5" : "h-4 w-4"} aria-hidden="true" />
             {ground.name}, {ground.postcode}
           </p>
         )}
 
-        <div className="mt-7 grid grid-cols-4 gap-2 sm:max-w-md" role="timer" aria-label="Countdown to kick-off">
-          {units.map(([label, value]) => (
-            <div key={label} className="rounded-xl border border-line bg-ink/60 px-2 py-3 text-center">
-              <p className="display tabular text-4xl sm:text-5xl">{value === undefined ? "–" : String(value).padStart(2, "0")}</p>
-              <p className="eyebrow mt-1 !text-[10px] text-muted">{label}</p>
+        <div
+          className={`grid grid-cols-4 ${compact ? "mt-4 gap-1.5" : "mt-7 gap-2 sm:max-w-md"}`}
+          role="timer"
+          aria-label={`Countdown to kick-off${label ? `, ${label}` : ""}`}
+        >
+          {units.map(([unit, value]) => (
+            <div key={unit} className={`rounded-xl border border-line bg-ink/60 text-center ${compact ? "px-1 py-2" : "px-2 py-3"}`}>
+              <p className={`display tabular ${compact ? "text-2xl xl:text-3xl" : "text-4xl sm:text-5xl"}`}>
+                {value === undefined ? "–" : String(value).padStart(2, "0")}
+              </p>
+              <p className={`eyebrow mt-1 text-muted ${compact ? "!text-[9px]" : "!text-[10px]"}`}>{unit}</p>
             </div>
           ))}
         </div>
         {countdown?.done && <p className="mt-3 text-sm text-pike-bright">Kick-off time has arrived. Up the Pikes!</p>}
 
-        <div className="mt-6">
+        <div className={compact ? "mt-4 text-sm" : "mt-6"}>
           <AddToCalendar match={match} />
         </div>
       </div>

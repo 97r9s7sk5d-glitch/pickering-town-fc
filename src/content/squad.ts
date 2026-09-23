@@ -41,6 +41,12 @@ export const ladiesSquad: Player[] = [
   { image: "/images/ladies/alesha.webp", name: "Alesha", sponsor: "Fabulously Glam Skin & Beyond" },
 ];
 
+/**
+ * Ladies player shown behind the ladies countdown in the home page hero: a cut-out with no background, like the
+ * first-team one. `feather` fades a photo's edges into the page instead, if a player without a cut-out is used.
+ */
+export const ladiesHeroPlayer = { src: "/images/ladies/hero-vicki.webp", width: 410, height: 487, feather: false };
+
 /** Aerial photo of Mill Lane: pitch, Tony Dunning Stand, clubhouse and the town beyond. */
 export const groundPhoto = {
   src: "/images/mill-lane-aerial.webp",
