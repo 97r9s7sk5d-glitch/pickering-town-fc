@@ -4,6 +4,7 @@ import { FormGuide, NextMatchPanel, OutcomeBadge } from "@/components/matches";
 import { LeagueTable } from "@/components/LeagueTable";
 import { Card, Container, SectionHeading } from "@/components/ui";
 import { ArticleCard } from "@/components/ArticleCard";
+import { PitchIntro } from "@/components/PitchIntro";
 import { club, ground } from "@/content/club";
 import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
@@ -31,6 +32,7 @@ function HomePage() {
 
   return (
     <>
+      <PitchIntro />
       {/* Hero */}
       <section className="pitch-backdrop relative overflow-hidden border-b border-line">
         <img src={groundPhoto.src} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-luminosity" fetchPriority="high" />
