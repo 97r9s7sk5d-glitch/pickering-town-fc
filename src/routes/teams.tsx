@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
 import { club } from "@/content/club";
 import { squad, teamPhoto } from "@/content/squad";
-import { juniorAgeGroups, juniorBands, juniorsIntro, seniorTeams } from "@/content/teams";
+import { juniorTeam, seniorTeams } from "@/content/teams";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/teams")({
@@ -11,7 +11,7 @@ export const Route = createFileRoute("/teams")({
     seo({
       title: "Teams",
       path: "/teams",
-      description: `${club.name} first team in the ${club.leagueShort}, the ladies first team, juniors from U8 to U18, and how to get involved as a player, coach or volunteer.`,
+      description: `${club.name} first team in the ${club.leagueShort}, the ladies first team, the under-18s, and how to get involved as a player, coach or volunteer.`,
     }),
   component: TeamsPage,
 });
@@ -20,8 +20,8 @@ function TeamsPage() {
   return (
     <>
       <PageHeader eyebrow="Royal blue and white" title="Our teams">
-        From Step 5 on a Saturday afternoon to a ladies first team in only its second season and juniors from U8 to
-        U18: there's a place for you at Pickering Town.
+        From Step 5 on a Saturday afternoon to a ladies first team in only its second season and our under-18s:
+        there's a place for you at Pickering Town.
       </PageHeader>
       <Container className="mt-12 grid gap-6 lg:grid-cols-2">
         {seniorTeams.map((t) => (
@@ -92,28 +92,21 @@ function TeamsPage() {
 
       <Container className="mt-24">
         <div id="juniors" className="scroll-mt-28" />
-        <SectionHeading eyebrow={`Juniors · ${juniorAgeGroups[0]} to ${juniorAgeGroups.at(-1)}`} title="Junior section" />
-        <div className="reveal overflow-hidden rounded-3xl border border-line bg-surface/70">
+        <SectionHeading eyebrow="Juniors" title={juniorTeam.name} />
+        <div className="reveal overflow-hidden rounded-3xl border border-line bg-surface/70 lg:grid lg:grid-cols-[1.1fr_1fr]">
           <div className="relative bg-gradient-to-br from-pike-deep via-pike to-pike-bright px-6 py-8 sm:px-8">
             <div aria-hidden="true" className="absolute inset-0 [background:repeating-linear-gradient(90deg,oklch(1_0_0/0.14)_0_36px,transparent_36px_72px)]" />
-            <p className="relative max-w-2xl text-lg leading-relaxed text-white">{juniorsIntro}</p>
-            <ul className="relative mt-6 flex flex-wrap gap-2" aria-label="Age groups">
-              {juniorAgeGroups.map((age) => (
-                <li key={age} className="display rounded-full bg-ink/70 px-4 py-1.5 text-xl text-white">
-                  {age}
-                </li>
-              ))}
-            </ul>
+            <p className="display relative text-7xl text-white drop-shadow">{juniorTeam.age}</p>
+            <p className="relative mt-4 max-w-xl text-lg leading-relaxed text-white">{juniorTeam.intro}</p>
           </div>
-          <div className="grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
-            {juniorBands.map((b) => (
-              <div key={b.ages} className="bg-surface p-6">
-                <p className="display text-4xl">{b.ages}</p>
-                <p className="eyebrow mt-1 text-pike-bright">{b.format}</p>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{b.text}</p>
+          <dl className="grid grid-cols-2 gap-4 p-6 sm:p-8 lg:content-center">
+            {juniorTeam.facts.map((f) => (
+              <div key={f.label} className="rounded-xl border border-line bg-ink/40 p-4">
+                <dt className="eyebrow !text-[11px] text-muted">{f.label}</dt>
+                <dd className="display mt-1 text-2xl">{f.value}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
         <Link
           to="/fixtures"
@@ -128,7 +121,7 @@ function TeamsPage() {
         <SectionHeading eyebrow="Get involved" title="Join the club" />
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { title: "Players", text: "Looking for a club? Senior, ladies and junior places (U8 to U18) are arranged through the club. Get in touch and we'll pass you to the right manager or coach." },
+            { title: "Players", text: "Looking for a club? Senior, ladies and under-18 places are arranged through the club. Get in touch and we'll pass you to the right manager or coach." },
             { title: "Coaches", text: "Qualified or keen to learn, we'd love to hear from coaches who want to help grow football in Pickering." },
             { title: "Volunteers", text: "Gate, bar, programme, pitch or social media: every non-league club runs on volunteers, and every hour helps." },
           ].map((c) => (
