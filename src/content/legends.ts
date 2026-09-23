@@ -36,13 +36,19 @@ export const legends: Legend[] = [
     sources: ["NCEL newsletters, 2008 and 2010"],
   },
   {
-    slug: "wissie-wood",
-    name: "Wissie Wood",
+    slug: "wizzie-wood",
+    name: "Wizzie Wood",
     role: "Club legend",
     years: "",
-    summary: "Profile coming soon.",
+    summary: "Remembered at Mill Lane with the stand behind the goal: the Wizzie Wood Stand.",
     story: [
-      "Wissie Wood's story is being written with the club. If you have memories or photos to share, get in touch.",
+      "The covered stand behind the goal at Mill Lane carries Wizzie Wood's name, so every home game is played in front of it.",
+      "Wizzie's full story is being written with the club. If you have memories or photos to share, get in touch.",
     ],
+    image: {
+      src: "/images/wizzie-wood-stand.webp",
+      alt: "The goal at Mill Lane in front of the Wizzie Wood Stand, with its name board above the sponsor boards",
+      caption: "The Wizzie Wood Stand at Mill Lane",
+    },
   },
 ];
