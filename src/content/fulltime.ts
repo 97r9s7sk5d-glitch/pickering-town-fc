@@ -1,3 +1,5 @@
+import type { TeamId } from "./fixtures";
+
 /**
  * Live data from the FA's Full-Time service (fulltime.thefa.com), which runs the NCEL and North Riding leagues.
  *
@@ -15,12 +17,10 @@
  */
 export type FullTimeSnippet = { divId: string; code: string };
 
-export const fullTime: {
-  table: FullTimeSnippet | null;
-  fixtures: { first: FullTimeSnippet | null; ladies: FullTimeSnippet | null };
-  results: { first: FullTimeSnippet | null; ladies: FullTimeSnippet | null };
-} = {
+type PerTeam = Record<TeamId, FullTimeSnippet | null>;
+
+export const fullTime: { table: FullTimeSnippet | null; fixtures: PerTeam; results: PerTeam } = {
   table: null,
-  fixtures: { first: null, ladies: null },
-  results: { first: null, ladies: null },
+  fixtures: { first: null, ladies: null, u18: null },
+  results: { first: null, ladies: null, u18: null },
 };

@@ -115,6 +115,13 @@ function TeamsPage() {
             ))}
           </div>
         </div>
+        <Link
+          to="/fixtures"
+          search={{ team: "u18" }}
+          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-pike-bright hover:text-fg"
+        >
+          U18 fixtures <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </Container>
 
       <Container className="mt-24">

@@ -1,5 +1,5 @@
 import { club, ground } from "@/content/club";
-import { matches, type Match, type TeamId } from "@/content/fixtures";
+import { matches, ourSideNames, type Match, type TeamId } from "@/content/fixtures";
 
 export type Outcome = "W" | "D" | "L";
 
@@ -49,7 +49,7 @@ export function form(team: TeamId = "first", count = 5): { match: Match; outcome
 }
 
 export function homeAway(match: Match): { home: string; away: string } {
-  const us = match.team === "ladies" ? "Pickering Town Ladies" : "Pickering Town";
+  const us = ourSideNames[match.team];
   return match.venue === "H" ? { home: us, away: match.opponent } : { home: match.opponent, away: us };
 }
 

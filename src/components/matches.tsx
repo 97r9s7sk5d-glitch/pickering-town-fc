@@ -93,7 +93,7 @@ export function MatchRow({ match }: { match: Match }) {
       <div className="min-w-0">
         <p className="eyebrow truncate !text-[11px] text-muted">
           {match.competition}
-          {match.team === "ladies" && <span className="text-pike-bright"> · {teamNames.ladies}</span>}
+          {match.team !== "first" && <span className="text-pike-bright"> · {teamNames[match.team]}</span>}
         </p>
         {/* Phones */}
         <dl className="mt-1 space-y-0.5 font-semibold sm:hidden">

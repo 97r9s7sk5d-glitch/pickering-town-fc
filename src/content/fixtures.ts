@@ -7,11 +7,20 @@
  */
 export const isSampleData = true;
 
-export type TeamId = "first" | "ladies";
+export type TeamId = "first" | "ladies" | "u18";
 
+/** Tab and label names on the fixtures pages. */
 export const teamNames: Record<TeamId, string> = {
   first: "First Team",
   ladies: "Ladies",
+  u18: "U18",
+};
+
+/** How each side appears in a fixture line ("Pickering Town U18 v ..."). */
+export const ourSideNames: Record<TeamId, string> = {
+  first: "Pickering Town",
+  ladies: "Pickering Town Ladies",
+  u18: "Pickering Town U18",
 };
 
 export type Match = {
@@ -44,6 +53,9 @@ export const matches: Match[] = [
   { id: "m10", kickoff: "2026-09-19T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "A", score: [0, 3] },
   { id: "l01", kickoff: "2026-09-06T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Whitby Town Ladies", venue: "H", score: [2, 2] },
   { id: "l02", kickoff: "2026-09-20T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Scarborough Athletic Ladies", venue: "A", score: [1, 3] },
+  // U18 PLACEHOLDERS: replace with the real U18 fixtures when the club sends them.
+  { id: "y01", kickoff: "2026-09-13T10:30", team: "u18", competition: "U18 League", opponent: "Malton & Norton U18", venue: "H", score: [3, 1] },
+  { id: "y02", kickoff: "2026-09-20T10:30", team: "u18", competition: "U18 League", opponent: "Scarborough Athletic U18", venue: "A", score: [2, 2] },
 
   // Fixtures
   { id: "m11", kickoff: "2026-09-26T15:00", team: "first", competition: "NCEL Premier", opponent: "Winterton Rangers", venue: "H" },
@@ -54,6 +66,10 @@ export const matches: Match[] = [
   { id: "m16", kickoff: "2026-10-24T15:00", team: "first", competition: "NCEL Premier", opponent: "Hallam", venue: "A" },
   { id: "l03", kickoff: "2026-10-04T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Malton & Norton Ladies", venue: "H" },
   { id: "l04", kickoff: "2026-10-18T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Thirsk Falcons Ladies", venue: "A" },
+  { id: "y03", kickoff: "2026-09-27T10:30", team: "u18", competition: "U18 League", opponent: "Whitby Town U18", venue: "H" },
+  { id: "y04", kickoff: "2026-10-04T10:30", team: "u18", competition: "U18 League", opponent: "Kirkbymoorside U18", venue: "A" },
+  { id: "y05", kickoff: "2026-10-11T10:30", team: "u18", competition: "U18 Cup", opponent: "Helmsley U18", venue: "H" },
+  { id: "y06", kickoff: "2026-10-25T10:30", team: "u18", competition: "U18 League", opponent: "Thirsk Falcons U18", venue: "A" },
 ];
 
 export type TableRow = {
