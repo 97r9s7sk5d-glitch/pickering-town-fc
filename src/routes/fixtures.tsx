@@ -5,7 +5,7 @@ import { FullTimeEmbed } from "@/components/FullTimeEmbed";
 import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
 import { placeholderTeams, teamNames, type Match, type TeamId } from "@/content/fixtures";
-import { fixtures, formatMonth, kickoffDate, results } from "@/lib/matches";
+import { fixtures, formatMonth, kickoffDate, resultsList } from "@/lib/matches";
 import { seo } from "@/lib/seo";
 
 type View = "fixtures" | "results";
@@ -44,7 +44,7 @@ const off = "text-muted hover:text-fg";
 function FixturesPage() {
   const { view = "fixtures", team = "all" } = Route.useSearch();
   const teamId = team === "all" ? undefined : team;
-  const list = view === "results" ? results(teamId) : fixtures(teamId);
+  const list = view === "results" ? resultsList(teamId) : fixtures(teamId);
   const groups = groupByMonth(list);
   // A live Full-Time feed replaces the local list when one is set up for this view. Full-Time feeds are per
   // team, so "All teams" uses the first team's feed.

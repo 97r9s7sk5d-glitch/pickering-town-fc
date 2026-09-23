@@ -91,7 +91,7 @@ export function MatchRow({ match }: { match: Match }) {
     <li className="grid grid-cols-[4rem_1fr_auto] items-center gap-x-3 gap-y-2 border-b border-line py-4 sm:grid-cols-[6rem_1fr_auto] sm:gap-x-4">
       <div className="text-sm leading-tight">
         <p className="font-semibold text-fg">{formatDay(kickoffDate(match))}</p>
-        {!match.score && <p className="tabular text-muted">{formatTime(match)}</p>}
+        {!match.score && !match.postponed && <p className="tabular text-muted">{formatTime(match)}</p>}
       </div>
       <div className="min-w-0">
         <p className="eyebrow truncate !text-[11px] text-muted">
@@ -117,6 +117,8 @@ export function MatchRow({ match }: { match: Match }) {
             <span className="display tabular rounded-md bg-raised px-2.5 py-1 text-xl">
               {homeGoals}–{awayGoals}
             </span>
+          ) : match.postponed ? (
+            <span className="display rounded-md bg-raised px-2.5 py-1 text-xl text-muted">P–P</span>
           ) : (
             <span className="eyebrow rounded-md border border-line px-2 py-1 !text-[11px] text-muted">v</span>
           )}
@@ -133,6 +135,8 @@ export function MatchRow({ match }: { match: Match }) {
       <div className="flex flex-col items-end gap-2 sm:flex-row sm:items-center sm:gap-3">
         {result ? (
           <OutcomeBadge result={result} />
+        ) : match.postponed ? (
+          <span className="eyebrow !text-[11px] text-muted">Postponed</span>
         ) : (
           <>
             <span className={`eyebrow whitespace-nowrap !text-[11px] ${match.venue === "H" ? "text-pike-bright" : "text-muted"}`}>

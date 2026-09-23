@@ -18,6 +18,13 @@ export function isPlayed(match: Match): boolean {
   return match.score !== undefined;
 }
 
+/** Played and postponed matches for the results list, newest first. */
+export function resultsList(team?: TeamId): Match[] {
+  return matches
+    .filter((m) => (isPlayed(m) || m.postponed) && (!team || m.team === team))
+    .sort((a, b) => b.kickoff.localeCompare(a.kickoff));
+}
+
 /** Played matches, newest first. */
 export function results(team?: TeamId): Match[] {
   return matches
@@ -28,7 +35,7 @@ export function results(team?: TeamId): Match[] {
 /** Unplayed matches, soonest first. */
 export function fixtures(team?: TeamId): Match[] {
   return matches
-    .filter((m) => !isPlayed(m) && (!team || m.team === team))
+    .filter((m) => !isPlayed(m) && !m.postponed && (!team || m.team === team))
     .sort((a, b) => a.kickoff.localeCompare(b.kickoff));
 }
 

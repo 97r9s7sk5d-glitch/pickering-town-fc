@@ -4,11 +4,11 @@
  * FIRST TEAM: the club's real 2026–27 list. Scores are [Pickering goals, opponent goals].
  * Home or away is only filled in where it's confirmed; games without a `venue` show "H/A TBC" until it's added.
  *
- * PLACEHOLDERS: the ladies and U18 games, and the league table apart from Pickering's own row, are made up so
+ * LADIES: from FA Full-Time. PLACEHOLDERS: the U18 games, and the league table apart from Pickering's own row, are made up so
  * the pages can be designed. The site shows a notice wherever placeholders appear. Replace them (or wire the
  * pages to FA Full-Time, see the README) and update `placeholderTeams` / `isPlaceholderTable`.
  */
-export const placeholderTeams: TeamId[] = ["ladies", "u18"];
+export const placeholderTeams: TeamId[] = ["u18"];
 export const isPlaceholderTable = true;
 
 export type TeamId = "first" | "ladies" | "u18";
@@ -39,6 +39,8 @@ export type Match = {
   /** [Pickering goals, opponent goals]. Leave out until the match is played. */
   score?: [number, number];
   attendance?: number;
+  /** Called off: listed with the results as "P–P" and left out of fixtures, form and the table. */
+  postponed?: boolean;
   scorers?: string[];
 };
 
@@ -92,13 +94,19 @@ export const matches: Match[] = [
   { id: "f43", kickoff: "2027-03-20T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley", venue: "A" },
   { id: "f44", kickoff: "2027-04-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Frickley Athletic", venue: "H" },
 
-  // PLACEHOLDERS: ladies and U18 games, to be replaced with the real lists.
-  { id: "l01", kickoff: "2026-09-06T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Whitby Town Ladies", venue: "H", score: [2, 2] },
-  { id: "l02", kickoff: "2026-09-20T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Scarborough Athletic Ladies", venue: "A", score: [1, 3] },
+  // LADIES, from FA Full-Time. CONFIRM: the league's name (Full-Time lists it as "WPL") and the dates of
+  // the two September results, which were cut off in the screenshot (taken as Sunday 13 and 20 Sep).
+  { id: "l01", kickoff: "2026-09-06T14:00", team: "ladies", competition: "League", opponent: "Middlesbrough Girls Senior", venue: "H", postponed: true },
+  { id: "l02", kickoff: "2026-09-13T14:00", team: "ladies", competition: "League", opponent: "Middlesbrough Girls Senior", venue: "A", score: [1, 5] },
+  { id: "l03", kickoff: "2026-09-20T14:00", team: "ladies", competition: "League", opponent: "Northallerton Town Women", venue: "H", score: [1, 6] },
+  { id: "l04", kickoff: "2026-09-27T14:00", team: "ladies", competition: "League", opponent: "Wigginton Grasshoppers Ladies", venue: "A" },
+  { id: "l05", kickoff: "2026-10-04T14:00", team: "ladies", competition: "League", opponent: "T.I.B.S Women", venue: "A" },
+  { id: "l06", kickoff: "2026-10-11T14:00", team: "ladies", competition: "League", opponent: "Redcar Athletic Ladies", venue: "H" },
+  { id: "l07", kickoff: "2026-10-18T14:00", team: "ladies", competition: "League", opponent: "Linthorpe Academicals Women", venue: "H" },
+
+  // PLACEHOLDERS: U18 games, to be replaced with the real list.
   { id: "y01", kickoff: "2026-09-13T10:30", team: "u18", competition: "U18 League", opponent: "Malton & Norton U18", venue: "H", score: [3, 1] },
   { id: "y02", kickoff: "2026-09-20T10:30", team: "u18", competition: "U18 League", opponent: "Scarborough Athletic U18", venue: "A", score: [2, 2] },
-  { id: "l03", kickoff: "2026-10-04T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Malton & Norton Ladies", venue: "H" },
-  { id: "l04", kickoff: "2026-10-18T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Thirsk Falcons Ladies", venue: "A" },
   { id: "y03", kickoff: "2026-09-27T10:30", team: "u18", competition: "U18 League", opponent: "Whitby Town U18", venue: "H" },
   { id: "y04", kickoff: "2026-10-04T10:30", team: "u18", competition: "U18 League", opponent: "Kirkbymoorside U18", venue: "A" },
   { id: "y05", kickoff: "2026-10-11T10:30", team: "u18", competition: "U18 Cup", opponent: "Helmsley U18", venue: "H" },
