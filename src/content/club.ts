@@ -13,7 +13,7 @@ export const club = {
   league: "Northern Counties East League Premier Division",
   leagueShort: "NCEL Premier",
   step: "Step 5 of the National League System",
-  colours: "Royal blue and white",
+  colours: "Royal blue and blue",
   shirtSponsor: "Flamingo Land Resort Yorkshire",
   siteUrl: "https://www.pickeringtownfc.com",
   tagline: "Non-league football at Mill Lane since 1888.",

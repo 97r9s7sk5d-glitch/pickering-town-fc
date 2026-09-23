@@ -52,7 +52,7 @@ function HomePage() {
               <span className="bg-gradient-to-r from-pike-bright to-pike bg-clip-text text-transparent">Town FC</span>
             </h1>
             <p className="animate-rise-late mt-6 max-w-lg text-lg leading-relaxed text-muted">
-              Non-league football in the heart of Ryedale. Royal blue and white, {ground.name}, and a club that has
+              Non-league football in the heart of Ryedale. {club.colours}, {ground.name}, and a club that has
               been part of {club.town} for {new Date().getFullYear() - club.founded} years.
             </p>
             <div className="animate-rise-late mt-8 flex flex-wrap gap-3">

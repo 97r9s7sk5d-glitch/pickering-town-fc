@@ -46,7 +46,7 @@ export const juniorTeam = {
   age: "U18",
   name: "Under-18s",
   intro:
-    "Our under-18s give young players in and around Pickering eleven-a-side football in royal blue and white, and a pathway into the first team and the ladies first team.",
+    "Our under-18s give young players in and around Pickering eleven-a-side football in royal blue and blue, and a pathway into the first team and the ladies first team.",
   facts: [
     { label: "Age group", value: "Under 18" },
     { label: "Format", value: "11 v 11" },
