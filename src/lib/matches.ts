@@ -50,7 +50,19 @@ export function form(team: TeamId = "first", count = 5): { match: Match; outcome
 
 export function homeAway(match: Match): { home: string; away: string } {
   const us = ourSideNames[match.team];
-  return match.venue === "H" ? { home: us, away: match.opponent } : { home: match.opponent, away: us };
+  // Pickering are listed first unless the game is confirmed as away.
+  return match.venue === "A" ? { home: match.opponent, away: us } : { home: us, away: match.opponent };
+}
+
+/** The score in the same order as homeAway(). */
+export function scoreline(match: Match): { home: number; away: number } | undefined {
+  if (!match.score) return undefined;
+  const [us, them] = match.score;
+  return match.venue === "A" ? { home: them, away: us } : { home: us, away: them };
+}
+
+export function venueLabel(match: Match): string {
+  return match.venue === "H" ? "Home" : match.venue === "A" ? "Away" : "H/A TBC";
 }
 
 // Dates are formatted by hand rather than with Intl: Node (at build time) and browsers ship different
@@ -72,7 +84,12 @@ export function icsFor(match: Match): string {
   const endDate = new Date(kickoffDate(match).getTime() + 2 * 60 * 60 * 1000);
   const pad = (n: number) => String(n).padStart(2, "0");
   const end = `${endDate.getFullYear()}${pad(endDate.getMonth() + 1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
-  const location = match.venue === "H" ? `${ground.name}, ${ground.addressLines.slice(1).join(", ")} ${ground.postcode}` : match.opponent;
+  const location =
+    match.venue === "H"
+      ? `${ground.name}, ${ground.addressLines.slice(1).join(", ")} ${ground.postcode}`
+      : match.venue === "A"
+        ? match.opponent
+        : "Venue to be confirmed";
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",

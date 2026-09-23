@@ -4,7 +4,7 @@ import { Container, PageHeader, SampleNotice } from "@/components/ui";
 import { FullTimeEmbed } from "@/components/FullTimeEmbed";
 import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
-import { isSampleData, teamNames, type Match, type TeamId } from "@/content/fixtures";
+import { placeholderTeams, teamNames, type Match, type TeamId } from "@/content/fixtures";
 import { fixtures, formatMonth, kickoffDate, results } from "@/lib/matches";
 import { seo } from "@/lib/seo";
 
@@ -49,6 +49,15 @@ function FixturesPage() {
   // A live Full-Time feed replaces the local list when one is set up for this view. Full-Time feeds are per
   // team, so "All teams" uses the first team's feed.
   const liveSnippet = fullTime[view][teamId ?? "first"];
+  const shownPlaceholders = placeholderTeams.filter((t) => !teamId || t === teamId);
+  const hasTbcVenue = !teamId || teamId === "first" ? list.some((m) => m.team === "first" && !m.venue) : false;
+  const notice = [
+    shownPlaceholders.length > 0 &&
+      `${shownPlaceholders.map((t) => teamNames[t]).join(" and ")} games are placeholders until the club adds the real ones.`,
+    hasTbcVenue && `Games marked H/A TBC are still to be confirmed as home or away.`,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <>
@@ -57,7 +66,7 @@ function FixturesPage() {
         fixture to save it to your phone.
       </PageHeader>
       <Container className="mt-10">
-        {isSampleData && !liveSnippet && <SampleNotice />}
+        {!liveSnippet && notice && <SampleNotice>{notice}</SampleNotice>}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex gap-1 rounded-full border border-line bg-surface/60 p-1" role="group" aria-label="Show">
             {(["fixtures", "results"] as const).map((v) => (

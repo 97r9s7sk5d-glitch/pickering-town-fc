@@ -5,7 +5,7 @@ import { Card, Container, PageHeader, SampleNotice } from "@/components/ui";
 import { FullTimeEmbed } from "@/components/FullTimeEmbed";
 import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
-import { isSampleData, tableTitle } from "@/content/fixtures";
+import { isPlaceholderTable, tableTitle } from "@/content/fixtures";
 import { form } from "@/lib/matches";
 import { seo } from "@/lib/seo";
 
@@ -31,7 +31,12 @@ function TablePage() {
             <FullTimeEmbed snippet={fullTime.table} title={tableTitle} />
           ) : (
             <>
-              {isSampleData && <SampleNotice />}
+              {isPlaceholderTable && (
+                <SampleNotice>
+                  Preview: apart from Pickering Town's own record, this table is a placeholder until the club adds the
+                  live league table.
+                </SampleNotice>
+              )}
               <LeagueTable />
               <TableKey />
             </>

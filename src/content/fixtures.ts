@@ -1,11 +1,15 @@
 /**
  * Fixtures, results and the league table.
  *
- * SAMPLE DATA: apart from the rows marked "real", these are placeholders so every page can be designed and
- * tested. While `isSampleData` is true the site shows a small notice on the fixtures and table pages.
- * Replace the lists with the real season (or wire them to FA Full-Time, see the README), then set it to false.
+ * FIRST TEAM: the club's real 2026–27 list. Scores are [Pickering goals, opponent goals].
+ * Home or away is only filled in where it's confirmed; games without a `venue` show "H/A TBC" until it's added.
+ *
+ * PLACEHOLDERS: the ladies and U18 games, and the league table apart from Pickering's own row, are made up so
+ * the pages can be designed. The site shows a notice wherever placeholders appear. Replace them (or wire the
+ * pages to FA Full-Time, see the README) and update `placeholderTeams` / `isPlaceholderTable`.
  */
-export const isSampleData = true;
+export const placeholderTeams: TeamId[] = ["ladies", "u18"];
+export const isPlaceholderTable = true;
 
 export type TeamId = "first" | "ladies" | "u18";
 
@@ -30,7 +34,8 @@ export type Match = {
   team: TeamId;
   competition: string;
   opponent: string;
-  venue: "H" | "A";
+  /** "H" home, "A" away. Leave out while it's still to be confirmed. */
+  venue?: "H" | "A";
   /** [Pickering goals, opponent goals]. Leave out until the match is played. */
   score?: [number, number];
   attendance?: number;
@@ -38,32 +43,59 @@ export type Match = {
 };
 
 export const matches: Match[] = [
-  // Results
-  { id: "m01", kickoff: "2026-08-08T15:00", team: "first", competition: "NCEL Premier", opponent: "Hallam", venue: "H", score: [2, 1] },
-  { id: "m02", kickoff: "2026-08-12T19:45", team: "first", competition: "NCEL Premier", opponent: "Knaresborough Town", venue: "A", score: [1, 1] },
-  { id: "m03", kickoff: "2026-08-15T15:00", team: "first", competition: "NCEL Premier", opponent: "Goole AFC", venue: "A", score: [0, 2] },
-  { id: "m04", kickoff: "2026-08-22T15:00", team: "first", competition: "NCEL Premier", opponent: "Eccleshill United", venue: "H", score: [4, 1] },
-  { id: "m05", kickoff: "2026-08-29T15:00", team: "first", competition: "NCEL Premier", opponent: "Emley AFC", venue: "A", score: [1, 2] },
-  { id: "m06", kickoff: "2026-09-01T19:45", team: "first", competition: "NCEL Premier", opponent: "Barton Town", venue: "H", score: [2, 3] },
-  { id: "m07", kickoff: "2026-09-05T15:00", team: "first", competition: "NCEL Premier", opponent: "Penistone Church", venue: "H", score: [5, 2] },
-  { id: "m08", kickoff: "2026-09-08T19:45", team: "first", competition: "NCEL Premier", opponent: "Hemsworth MW", venue: "A", score: [0, 2] },
-  // real: reported by the NCEL, attendance 224
-  { id: "m09", kickoff: "2026-09-12T15:00", team: "first", competition: "NCEL Premier", opponent: "Golcar United", venue: "H", score: [3, 2], attendance: 224, scorers: ["Own goal", "George Brown", "Souleymane Coulibaly"] },
-  // real: reported by the NCEL
-  { id: "m10", kickoff: "2026-09-19T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "A", score: [0, 3] },
+  // FIRST TEAM results (club's list). Times on played games are the usual kick-offs and aren't shown.
+  { id: "f01", kickoff: "2026-07-25T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "A", score: [0, 3] },
+  { id: "f02", kickoff: "2026-07-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Retford United", venue: "H", score: [0, 2] },
+  { id: "f03", kickoff: "2026-08-04T19:45", team: "first", competition: "NCEL Premier", opponent: "Worsbrough Bridge Athletic", score: [2, 3] },
+  { id: "f04", kickoff: "2026-08-08T15:00", team: "first", competition: "Cup", opponent: "Crook Town", score: [0, 4] },
+  { id: "f05", kickoff: "2026-08-11T19:45", team: "first", competition: "NCEL Premier", opponent: "Rossington Main", score: [1, 4] },
+  { id: "f06", kickoff: "2026-08-15T15:00", team: "first", competition: "Cup", opponent: "Alnwick Town", score: [3, 1] },
+  { id: "f07", kickoff: "2026-08-21T19:45", team: "first", competition: "NCEL Premier", opponent: "Golcar United", score: [3, 1] },
+  { id: "f08", kickoff: "2026-08-25T19:45", team: "first", competition: "NCEL Premier", opponent: "Albion Sports", score: [0, 2] },
+  { id: "f09", kickoff: "2026-08-28T19:45", team: "first", competition: "NCEL Premier", opponent: "Keighley Town", score: [4, 0] },
+  { id: "f10", kickoff: "2026-09-08T19:45", team: "first", competition: "NCEL Premier", opponent: "Horbury Town", score: [3, 2] },
+  { id: "f11", kickoff: "2026-09-11T19:45", team: "first", competition: "FA Vase", opponent: "Grangetown Boys Club", venue: "H", score: [3, 2] },
+  { id: "f12", kickoff: "2026-09-15T19:45", team: "first", competition: "NCEL Premier", opponent: "Tadcaster Albion", venue: "A", score: [3, 0] },
+  { id: "f13", kickoff: "2026-09-19T15:00", team: "first", competition: "NCEL Premier", opponent: "Penistone Church", venue: "A", score: [2, 2] },
+
+  // FIRST TEAM fixtures (club's list). CONFIRM: home or away where `venue` is missing, and the cup competitions.
+  { id: "f14", kickoff: "2026-09-26T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford FC", venue: "H" },
+  { id: "f15", kickoff: "2026-09-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Barton Town" },
+  { id: "f16", kickoff: "2026-10-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth" },
+  { id: "f17", kickoff: "2026-10-06T19:45", team: "first", competition: "NCEL Premier", opponent: "Dearne & District" },
+  { id: "f18", kickoff: "2026-10-10T15:00", team: "first", competition: "FA Vase", opponent: "Holker Old Boys" },
+  { id: "f19", kickoff: "2026-10-13T19:45", team: "first", competition: "Cup", opponent: "Dearne & District" },
+  { id: "f20", kickoff: "2026-10-17T15:00", team: "first", competition: "NCEL Premier", opponent: "Parkgate" },
+  { id: "f21", kickoff: "2026-10-24T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley" },
+  { id: "f22", kickoff: "2026-10-31T15:00", team: "first", competition: "NCEL Premier", opponent: "Frickley Athletic" },
+  { id: "f23", kickoff: "2026-11-07T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "H" },
+  { id: "f24", kickoff: "2026-11-11T19:45", team: "first", competition: "NCEL Premier", opponent: "Campion AFC" },
+  { id: "f25", kickoff: "2026-11-14T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford United", venue: "A" },
+  { id: "f26", kickoff: "2026-11-17T19:45", team: "first", competition: "NCEL Premier", opponent: "Knaresborough Town" },
+  { id: "f27", kickoff: "2026-11-21T15:00", team: "first", competition: "NCEL Premier", opponent: "Worsbrough Bridge Athletic" },
+  { id: "f28", kickoff: "2026-11-24T19:30", team: "first", competition: "Cup", opponent: "Redcar Athletic" },
+  { id: "f29", kickoff: "2026-11-28T15:00", team: "first", competition: "NCEL Premier", opponent: "Rossington Main" },
+  { id: "f30", kickoff: "2026-12-04T20:00", team: "first", competition: "NCEL Premier", opponent: "Golcar United" },
+  { id: "f31", kickoff: "2026-12-12T15:00", team: "first", competition: "NCEL Premier", opponent: "Albion Sports" },
+  { id: "f32", kickoff: "2026-12-19T15:00", team: "first", competition: "NCEL Premier", opponent: "Keighley Town" },
+  { id: "f33", kickoff: "2027-01-02T13:30", team: "first", competition: "NCEL Premier", opponent: "Knaresborough Town" },
+  { id: "f34", kickoff: "2027-01-09T15:00", team: "first", competition: "NCEL Premier", opponent: "Horbury Town" },
+  { id: "f35", kickoff: "2027-01-16T15:00", team: "first", competition: "NCEL Premier", opponent: "Tadcaster Albion", venue: "H" },
+  { id: "f36", kickoff: "2027-01-23T15:00", team: "first", competition: "NCEL Premier", opponent: "Penistone Church", venue: "H" },
+  { id: "f37", kickoff: "2027-01-30T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford FC", venue: "A" },
+  { id: "f38", kickoff: "2027-02-06T15:00", team: "first", competition: "NCEL Premier", opponent: "Barton Town" },
+  { id: "f39", kickoff: "2027-02-13T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth" },
+  { id: "f40", kickoff: "2027-02-20T15:00", team: "first", competition: "NCEL Premier", opponent: "Campion AFC" },
+  { id: "f41", kickoff: "2027-02-27T15:00", team: "first", competition: "NCEL Premier", opponent: "Dearne & District" },
+  { id: "f42", kickoff: "2027-03-13T15:00", team: "first", competition: "NCEL Premier", opponent: "Parkgate" },
+  { id: "f43", kickoff: "2027-03-20T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley" },
+  { id: "f44", kickoff: "2027-04-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Frickley Athletic" },
+
+  // PLACEHOLDERS: ladies and U18 games, to be replaced with the real lists.
   { id: "l01", kickoff: "2026-09-06T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Whitby Town Ladies", venue: "H", score: [2, 2] },
   { id: "l02", kickoff: "2026-09-20T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Scarborough Athletic Ladies", venue: "A", score: [1, 3] },
-  // U18 PLACEHOLDERS: replace with the real U18 fixtures when the club sends them.
   { id: "y01", kickoff: "2026-09-13T10:30", team: "u18", competition: "U18 League", opponent: "Malton & Norton U18", venue: "H", score: [3, 1] },
   { id: "y02", kickoff: "2026-09-20T10:30", team: "u18", competition: "U18 League", opponent: "Scarborough Athletic U18", venue: "A", score: [2, 2] },
-
-  // Fixtures
-  { id: "m11", kickoff: "2026-09-26T15:00", team: "first", competition: "NCEL Premier", opponent: "Winterton Rangers", venue: "H" },
-  { id: "m12", kickoff: "2026-09-29T19:45", team: "first", competition: "NCEL League Cup", opponent: "Athersley Recreation", venue: "A" },
-  { id: "m13", kickoff: "2026-10-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Harrogate Railway Athletic", venue: "A" },
-  { id: "m14", kickoff: "2026-10-10T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth", venue: "H" },
-  { id: "m15", kickoff: "2026-10-17T15:00", team: "first", competition: "North Riding Senior Cup", opponent: "Northallerton Town", venue: "H" },
-  { id: "m16", kickoff: "2026-10-24T15:00", team: "first", competition: "NCEL Premier", opponent: "Hallam", venue: "A" },
   { id: "l03", kickoff: "2026-10-04T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Malton & Norton Ladies", venue: "H" },
   { id: "l04", kickoff: "2026-10-18T14:00", team: "ladies", competition: "North Riding Women's Div 1", opponent: "Thirsk Falcons Ladies", venue: "A" },
   { id: "y03", kickoff: "2026-09-27T10:30", team: "u18", competition: "U18 League", opponent: "Whitby Town U18", venue: "H" },

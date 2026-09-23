@@ -27,18 +27,6 @@ export const articles: Article[] = [
     ],
   },
   {
-    slug: "pikes-edge-golcar-in-five-goal-thriller",
-    title: "Pikes edge Golcar in five-goal thriller",
-    date: "2026-09-12",
-    category: "Match report",
-    summary: "Pickering Town 3 Golcar United 2. George Brown and Souleymane Coulibaly on the scoresheet in front of 224 at Mill Lane.",
-    body: [
-      "Pickering Town took all three points in a five-goal game against Golcar United in the Northern Counties East League Premier Division.",
-      "An own goal, George Brown and Souleymane Coulibaly got the goals for the Pikes, with 224 supporters at Mill Lane.",
-      "Thanks to everyone who came along. The next home game is on the fixtures page.",
-    ],
-  },
-  {
     slug: "ladies-second-season-under-way",
     title: "Pickering Town Ladies: season two under way",
     date: "2026-09-06",

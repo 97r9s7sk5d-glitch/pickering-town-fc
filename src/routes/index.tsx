@@ -10,7 +10,7 @@ import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
 import { groundPhoto, squad } from "@/content/squad";
 import { leagueTable, ownTeamName, tableTitle } from "@/content/fixtures";
-import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome } from "@/lib/matches";
+import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome, scoreline } from "@/lib/matches";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -88,8 +88,7 @@ function HomePage() {
               <OutcomeBadge result={lastOutcome} size="lg" />
               <div>
                 <p className="display text-3xl tabular">
-                  {homeAway(last).home} {last.venue === "H" ? last.score![0] : last.score![1]}–
-                  {last.venue === "H" ? last.score![1] : last.score![0]} {homeAway(last).away}
+                  {homeAway(last).home} {scoreline(last)!.home}–{scoreline(last)!.away} {homeAway(last).away}
                 </p>
                 <p className="mt-1 text-sm text-muted">
                   {formatDay(kickoffDate(last))} · {last.competition}

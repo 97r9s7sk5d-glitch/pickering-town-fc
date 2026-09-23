@@ -28,7 +28,7 @@ phones with no sideways scrolling.
 All the words and data live in `src/content/`, so there's no need to touch page code:
 
 - `club.ts`: club facts, ground, contact details, officials, admission prices
-- `fixtures.ts`: fixtures, results, league table (set `isSampleData = false` once it holds the real season)
+- `fixtures.ts`: fixtures, results, league table. The first-team list is real; update `placeholderTeams` and `isPlaceholderTable` as the ladies, U18 and table data are replaced, and add `venue` to games still marked H/A TBC
 - `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
 - `news.ts`: news articles (newest first)
 - `history.ts`: timeline, honours, records
