@@ -1,10 +1,12 @@
 /**
- * The home page's opening video: the camera starts directly above the centre circle with the badge painted in it,
- * follows the two pikes out of the badge and across the pitch, and ends on the goal in front of the Wizzie Wood
- * Stand as they dive into the net. Made with Higgsfield (Kling 3.0) from the two frames in /assets/intro-frames,
- * then compressed to /public/videos/intro.mp4 (H.264, 1.3 MB).
- * A second clip (water bursting from the net and plunging the camera into royal blue water) is being added to the
- * end, so the site no longer draws its own splash; PitchIntro fades from the water into the home page.
+ * The home page's opening video, in one continuous shot: the camera starts directly above the centre circle with
+ * the badge painted in it, follows the two pikes out of the badge and across the pitch into the goal in front of the
+ * Wizzie Wood Stand, then the net bursts into a real-looking water splash that surges at the camera and plunges it
+ * underwater into royal blue, which PitchIntro fades into the home page.
+ *
+ * Made with Higgsfield (Kling 3.0) as two clips from the frames in /assets/intro-frames (topdown-start and
+ * wizzie-wood-goal, then splash-start and splash-end-underwater), joined where the pikes hit the net (4.58s) and
+ * compressed to /public/videos/intro.mp4 (8.2s, H.264, 2.2 MB).
  *
  * Set `introVideo` to null to use the drawn pitch animation instead.
  */
