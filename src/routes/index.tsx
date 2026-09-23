@@ -10,7 +10,7 @@ import { PitchIntro } from "@/components/PitchIntro";
 import { club, ground } from "@/content/club";
 import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
-import { groundPhoto, squad } from "@/content/squad";
+import { groundPhoto, ladiesHeroPlayer, squad } from "@/content/squad";
 import { leagueTable, ownTeamName, tableTitle } from "@/content/fixtures";
 import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome, scoreline } from "@/lib/matches";
 import { seo } from "@/lib/seo";
@@ -23,10 +23,15 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
+/** Hero countdowns: one per senior side, each with its own featured player cut-out. */
+const heroTeams = [
+  { id: "first", label: "First team", player: { src: squad[2].image, width: 558, height: 900, feather: false } },
+  { id: "ladies", label: "Ladies", player: ladiesHeroPlayer },
+] as const;
+
 const arrowLink = "inline-flex items-center gap-1.5 text-sm font-semibold text-pike-bright hover:text-fg";
 
 function HomePage() {
-  const next = nextMatch();
   const last = lastResult();
   const lastOutcome = last ? outcome(last) : null;
   const position = leagueTable.findIndex((r) => r.team === ownTeamName) + 1;
@@ -41,12 +46,12 @@ function HomePage() {
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink via-ink/75 to-ink/30" />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-ink/60" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-pike-bright/60 to-transparent" />
-        <Container className="relative grid gap-10 pb-16 pt-12 sm:pt-20 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-14 lg:pb-24">
+        <Container className="relative grid gap-10 pb-16 pt-12 sm:pt-20 lg:grid-cols-[1fr_1.15fr] lg:items-center lg:gap-12 lg:pb-24">
           <div>
             <p className="eyebrow animate-rise text-pike-bright">
               {club.nickname} · {club.leagueShort} · Est. {club.founded}
             </p>
-            <h1 className="display animate-rise mt-4 text-[clamp(4rem,14vw,9.5rem)]">
+            <h1 className="display animate-rise mt-4 text-[clamp(4rem,12vw,8rem)]">
               Pickering
               <br />
               <span className="bg-gradient-to-r from-pike-bright to-pike bg-clip-text text-transparent">Town FC</span>
@@ -74,13 +79,30 @@ function HomePage() {
               <AmbassadorBanner compact />
             </div>
           </div>
-          <div className="animate-rise-late relative lg:pt-56">
-            {/* Featured player rising behind the next-match panel. Desktop only: on phones the panel comes first. */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-6 hidden justify-center lg:flex">
-              <div className="absolute top-24 h-72 w-72 rounded-full bg-pike/40 blur-3xl" />
-              <img src={squad[2].image} alt="" width={558} height={900} className="relative h-[30rem] w-auto" fetchPriority="high" />
-            </div>
-            <div className="relative">{next ? <NextMatchPanel match={next} /> : <NoFixtures />}</div>
+          {/* Next game for each senior side, side by side, each with a featured player rising behind the panel
+              (players on large screens only; on phones the panels stack). */}
+          <div className="animate-rise-late grid gap-5 sm:grid-cols-2">
+            {heroTeams.map(({ id, label, player }) => {
+              const match = nextMatch(id);
+              return (
+                <div key={id} className="relative flex flex-col lg:pt-44">
+                  <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-4 hidden justify-center lg:flex">
+                    <div className="absolute top-16 h-48 w-48 rounded-full bg-pike/40 blur-3xl" />
+                    <img
+                      src={player.src}
+                      alt=""
+                      width={player.width}
+                      height={player.height}
+                      className={`relative h-72 w-auto ${player.feather ? "[mask-image:radial-gradient(ellipse_62%_58%_at_50%_42%,black_55%,transparent_100%)]" : ""}`}
+                      fetchPriority="high"
+                    />
+                  </div>
+                  <div className="relative flex-1">
+                    {match ? <NextMatchPanel match={match} compact label={label} /> : <NoFixtures label={label} />}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -238,10 +260,10 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-function NoFixtures() {
+function NoFixtures({ label = "Next match" }: { label?: string }) {
   return (
     <Card className="p-8">
-      <p className="eyebrow text-pike-bright">Next match</p>
+      <p className="eyebrow text-pike-bright">{label}</p>
       <p className="display mt-3 text-4xl">Fixtures coming soon</p>
       <p className="mt-2 text-muted">New fixtures appear here as soon as the league publishes them.</p>
     </Card>
