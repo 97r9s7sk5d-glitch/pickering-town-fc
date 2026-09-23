@@ -19,7 +19,7 @@ export const Route = createFileRoute("/teams")({
 function TeamsPage() {
   return (
     <>
-      <PageHeader eyebrow="Royal blue and white" title="Our teams">
+      <PageHeader eyebrow={club.colours} title="Our teams">
         From Step 5 on a Saturday afternoon to a ladies first team in only its second season and our under-18s:
         there's a place for you at Pickering Town.
       </PageHeader>

@@ -60,7 +60,7 @@ export const teamPhoto = {
 /** Ladies first-team squad photo. */
 export const ladiesTeamPhoto = {
   src: "/images/ladies-first-team.webp",
-  alt: "Pickering Town Ladies first team lined up in front of a goal, in royal blue and white with the goalkeeper in pink",
+  alt: "Pickering Town Ladies first team lined up in front of a goal, in the club's blue kit with the goalkeeper in pink",
   width: 960,
   height: 640,
 };
