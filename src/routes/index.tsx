@@ -69,6 +69,10 @@ function HomePage() {
                 Plan your visit
               </Link>
             </div>
+            {/* Main club ambassador: in the hero on large screens, below the hero on phones (see after the section). */}
+            <div className="animate-rise-late mt-10 hidden lg:block">
+              <AmbassadorBanner compact />
+            </div>
           </div>
           <div className="animate-rise-late relative lg:pt-56">
             {/* Featured player rising behind the next-match panel. Desktop only: on phones the panel comes first. */}
@@ -80,6 +84,10 @@ function HomePage() {
           </div>
         </Container>
       </section>
+
+      <Container className="mt-10 lg:hidden">
+        <AmbassadorBanner compact />
+      </Container>
 
       {/* Season at a glance */}
       <Container className="mt-14 grid gap-4 md:grid-cols-3">
@@ -122,11 +130,6 @@ function HomePage() {
       <Container className="mt-24">
         <SectionHeading eyebrow="Three teams, one club" title="Our teams" />
         <TeamCards />
-      </Container>
-
-      {/* Main club ambassador */}
-      <Container className="mt-12">
-        <AmbassadorBanner compact />
       </Container>
 
       {/* News */}

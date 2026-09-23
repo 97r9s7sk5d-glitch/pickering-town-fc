@@ -29,11 +29,11 @@ export const packages: Package[] = [
   },
 ];
 
-/** The club's principal partner, shown at the top of the Sponsors page and on the home page. */
+/** The main club ambassador, shown at the top of the Sponsors page and in the home page hero. */
 export const clubAmbassador = {
   name: "Flamingo Land Resort Yorkshire",
   role: "Main club ambassador",
-  text: "Flamingo Land is the club's principal partner and shirt sponsor, on the front of the first-team and ladies kits. Thank you for backing the Pikes.",
+  text: "Flamingo Land is our club ambassador and shirt sponsor, on the front of the first-team and ladies kits. Thank you for backing the Pikes.",
   url: "https://www.flamingoland.co.uk",
   logo: "/images/flamingo-land.webp",
 };
