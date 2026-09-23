@@ -15,6 +15,17 @@ export const squad: Player[] = [
   { image: "/images/squad/player-7.webp", name: "" },
 ];
 
+/**
+ * Ladies first-team squad: portraits cropped from the club's player graphics (in /public/images/ladies).
+ * Names are as on the graphics (first names). CONFIRM: surnames, positions and shirt numbers.
+ */
+export const ladiesSquad: Player[] = [
+  { image: "/images/ladies/vicki.webp", name: "Vicki" },
+  { image: "/images/ladies/sophie.webp", name: "Sophie" },
+  { image: "/images/ladies/sofia.webp", name: "Sofia", position: "Goalkeeper" },
+  { image: "/images/ladies/sarah.webp", name: "Sarah", number: 15 },
+];
+
 /** Aerial photo of Mill Lane: pitch, Tony Dunning Stand, clubhouse and the town beyond. */
 export const groundPhoto = {
   src: "/images/mill-lane-aerial.webp",
@@ -29,4 +40,12 @@ export const teamPhoto = {
   alt: "Pickering Town first-team squad and staff lined up in front of the Tony Dunning Stand at Mill Lane",
   width: 571,
   height: 350,
+};
+
+/** Ladies first-team squad photo. */
+export const ladiesTeamPhoto = {
+  src: "/images/ladies-first-team.webp",
+  alt: "Pickering Town Ladies first team lined up in front of a goal, in royal blue and white with the goalkeeper in pink",
+  width: 960,
+  height: 640,
 };

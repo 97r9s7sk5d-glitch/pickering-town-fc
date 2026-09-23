@@ -40,20 +40,30 @@ export const partners: Partner[] = [
   { name: "Harton Works", tier: "Player sponsor" },
   { name: "Television House Pickering", tier: "Player sponsor" },
   { name: "Edge Clothing", tier: "Player sponsor" },
+  { name: "BodyFresh", tier: "Player sponsor" },
+  { name: "LISAM", tier: "Player sponsor" },
+  { name: "Typhon Martial Arts", tier: "Player sponsor" },
 ];
 
 /**
  * Player graphics shown with the Player sponsor package. `sponsor: null` marks a player still looking for a
  * sponsor: the page tags it "Sponsor available". Fill in the sponsor's name once one signs up.
  */
-export const playerSponsorGraphics: { src: string; sponsor: string | null }[] = [
-  { src: "/images/player-sponsors/harome-homes.webp", sponsor: "Harome Homes" },
-  { src: "/images/player-sponsors/harton-works.webp", sponsor: "Harton Works" },
-  { src: "/images/player-sponsors/television-house.webp", sponsor: "Television House Pickering" },
-  { src: "/images/player-sponsors/edge-clothing.webp", sponsor: "Edge Clothing" },
+export type PlayerGraphic = { src: string; sponsor: string | null; team: "first" | "ladies" };
+export const playerSponsorGraphics: PlayerGraphic[] = [
+  // First team
+  { src: "/images/player-sponsors/harome-homes.webp", sponsor: "Harome Homes", team: "first" },
+  { src: "/images/player-sponsors/harton-works.webp", sponsor: "Harton Works", team: "first" },
+  { src: "/images/player-sponsors/television-house.webp", sponsor: "Television House Pickering", team: "first" },
+  { src: "/images/player-sponsors/edge-clothing.webp", sponsor: "Edge Clothing", team: "first" },
   // Individual sponsors appear by name in the sponsor box.
-  { src: "/images/player-sponsors/stuart-elvidge.webp", sponsor: "Stuart Elvidge" },
-  { src: "/images/player-sponsors/mandy-paul-wattam.webp", sponsor: "Mandy & Paul Wattam" },
-  { src: "/images/player-sponsors/available-1.webp", sponsor: null },
-  { src: "/images/player-sponsors/available-2.webp", sponsor: null },
+  { src: "/images/player-sponsors/stuart-elvidge.webp", sponsor: "Stuart Elvidge", team: "first" },
+  { src: "/images/player-sponsors/mandy-paul-wattam.webp", sponsor: "Mandy & Paul Wattam", team: "first" },
+  { src: "/images/player-sponsors/available-1.webp", sponsor: null, team: "first" },
+  { src: "/images/player-sponsors/available-2.webp", sponsor: null, team: "first" },
+  // Ladies first team
+  { src: "/images/player-sponsors/ladies-vicki-bodyfresh.webp", sponsor: "BodyFresh", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-sofia-lisam.webp", sponsor: "LISAM", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-sarah-typhon.webp", sponsor: "Typhon Martial Arts", team: "ladies" },
+  { src: "/images/player-sponsors/ladies-sophie-available.webp", sponsor: null, team: "ladies" },
 ];
