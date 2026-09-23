@@ -1,9 +1,12 @@
 /**
- * The home page's opening video: the camera starts directly above the centre circle with the badge painted in it,
- * follows the two pikes out of the badge and across the pitch, and ends on the goal in front of the Wizzie Wood
- * Stand as they dive into the net. Made with Higgsfield (Kling 3.0) from the two frames in /assets/intro-frames,
- * then compressed to /public/videos/intro.mp4 (H.264, 1.3 MB).
- * The royal blue splash when they hit the net is added by the site (PitchIntro), so it always lands on the goal.
+ * The home page's opening video, in one continuous shot: the camera starts directly above the centre circle with
+ * the badge painted in it, follows the two pikes out of the badge and across the pitch into the goal in front of the
+ * Wizzie Wood Stand, then the net bursts into a real-looking water splash that surges at the camera and plunges it
+ * underwater into royal blue, which PitchIntro fades into the home page.
+ *
+ * Made with Higgsfield (Kling 3.0) as two clips from the frames in /assets/intro-frames (topdown-start and
+ * wizzie-wood-goal, then splash-start and splash-end-underwater), joined where the pikes hit the net (4.58s) and
+ * compressed to /public/videos/intro.mp4 (8.2s, H.264, 2.2 MB).
  *
  * Set `introVideo` to null to use the drawn pitch animation instead.
  */
@@ -12,8 +15,8 @@ export type IntroVideo = {
   poster: string;
   width: number;
   height: number;
-  /** Where the pikes hit the net, as a fraction of the video frame, and when (seconds): the splash starts there. */
-  splash: { x: number; y: number; at: number };
+  /** Seconds before the end at which the intro starts fading into the home page. */
+  fadeFrom: number;
 };
 
 export const introVideo: IntroVideo | null = {
@@ -21,6 +24,5 @@ export const introVideo: IntroVideo | null = {
   poster: "/images/intro/intro-poster.webp",
   width: 1280,
   height: 720,
-  // Measured from the video: the pikes enter the net about 4.45s in, just right of centre in the goal mouth.
-  splash: { x: 0.29, y: 0.37, at: 4.45 },
+  fadeFrom: 0.8,
 };
