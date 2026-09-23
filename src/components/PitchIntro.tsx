@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { club, ground } from "@/content/club";
 import { introVideo, type IntroVideo } from "@/content/intro";
 import { groundPhoto } from "@/content/squad";
 
 /**
- * Opening sequence on the home page. With `introVideo` set (content/intro.ts) it plays that video and, as the pikes
- * hit the net, a royal blue splash washes over the screen into the home page. Without it, the drawn version runs:
+ * Opening sequence on the home page. With `introVideo` set (content/intro.ts) it plays that video (the pikes, the
+ * splash and the plunge into royal blue water) and fades into the home page. Without it, the drawn version runs:
  * the aerial photo of Mill Lane dissolves into a pitch with the badge in the centre circle, then a dive into the badge.
  *
  * Either way it also clears without JavaScript (a CSS fade on `.pitch-intro`), can be skipped by click, button or
@@ -71,23 +71,9 @@ export function PitchIntro() {
 }
 
 /**
- * Droplets thrown out by the splash, drawn over the wave. Fixed values (no Math.random), so the server and the
- * browser render the same markup.
- */
-const droplets = Array.from({ length: 24 }, (_, i) => {
-  const angle = (i / 24) * Math.PI * 2 + (i % 3) * 0.19;
-  const dist = 18 + ((i * 7) % 6) * 6; // vmin
-  return {
-    "--dx": `${(Math.cos(angle) * dist).toFixed(1)}vmin`,
-    "--dy": `${(Math.sin(angle) * dist - 8).toFixed(1)}vmin`,
-    "--size": `${1.2 + ((i * 5) % 5) * 0.55}vmin`,
-    "--delay": `${(i % 4) * 35}ms`,
-  } as CSSProperties;
-});
-
-/**
- * The video, plus the splash layered over the goal. When the pikes reach the net (`splash.at`) the splash starts
- * from the net's position on screen; the root then fades out and PitchIntro unmounts on `animationend`.
+ * The video: the pikes' dive, the water splash and the plunge into royal blue water are all in the footage. As the
+ * underwater shot plays out (`fadeFrom` seconds before the end) the overlay fades into the home page, whose royal
+ * blue matches the water; PitchIntro unmounts on the fade's `animationend`.
  */
 function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObject<HTMLDivElement | null>; onFail: () => void }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -96,40 +82,26 @@ function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObjec
     const el = ref.current;
     const overlay = root.current;
     if (!el || !overlay || overlay.hasAttribute("data-skip")) return;
-    let splashed = false;
 
-    const splash = () => {
-      if (splashed) return;
-      splashed = true;
-      // Map the net's position in the video frame to the screen, allowing for object-fit cover/contain.
-      const r = el.getBoundingClientRect();
-      const vw = el.videoWidth || video.width;
-      const vh = el.videoHeight || video.height;
-      const fit = getComputedStyle(el).objectFit === "contain" ? Math.min : Math.max;
-      const k = fit(r.width / vw, r.height / vh);
-      overlay.style.setProperty("--sx", `${r.left + (r.width - vw * k) / 2 + video.splash.x * vw * k}px`);
-      overlay.style.setProperty("--sy", `${r.top + (r.height - vh * k) / 2 + video.splash.y * vh * k}px`);
-      overlay.classList.add("is-splashing");
-    };
-    // Check every frame while playing, so the splash lands on the moment the pikes hit the net
-    // (timeupdate alone can be a quarter of a second late).
+    const finish = () => overlay.classList.add("is-ending");
+    // Check every frame, so the fade starts on cue (timeupdate alone can be a quarter of a second late).
     let raf = 0;
     const watch = () => {
-      if (el.currentTime >= video.splash.at) splash();
+      if (el.duration && el.currentTime >= el.duration - video.fadeFrom) finish();
       else raf = requestAnimationFrame(watch);
     };
     // Don't keep visitors on a still frame if the video is slow to arrive.
     const slow = window.setTimeout(() => el.paused && onFail(), 4000);
     const onPlaying = () => window.clearTimeout(slow);
 
-    el.addEventListener("ended", splash);
+    el.addEventListener("ended", finish);
     el.addEventListener("playing", onPlaying);
     el.addEventListener("error", onFail);
     el.play().then(() => (raf = requestAnimationFrame(watch)), onFail);
     return () => {
       window.clearTimeout(slow);
       cancelAnimationFrame(raf);
-      el.removeEventListener("ended", splash);
+      el.removeEventListener("ended", finish);
       el.removeEventListener("playing", onPlaying);
       el.removeEventListener("error", onFail);
     };
@@ -151,16 +123,6 @@ function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObjec
         preload="auto"
         aria-hidden="true"
       />
-      <div className="pitch-intro__wave pitch-intro__wave--rim" aria-hidden="true" />
-      <div className="pitch-intro__wave pitch-intro__wave--fill" aria-hidden="true" />
-      <div className="pitch-intro__splash" aria-hidden="true">
-        <span className="pitch-intro__flash" />
-        <span className="pitch-intro__ripple" />
-        <span className="pitch-intro__ripple pitch-intro__ripple--late" />
-        {droplets.map((style, i) => (
-          <span key={i} className="pitch-intro__drop" style={style} />
-        ))}
-      </div>
     </>
   );
 }
