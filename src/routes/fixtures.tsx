@@ -15,13 +15,13 @@ type Search = { view?: View; team?: TeamFilter };
 export const Route = createFileRoute("/fixtures")({
   validateSearch: (search: Record<string, unknown>): Search => ({
     view: search.view === "results" ? "results" : undefined,
-    team: search.team === "first" || search.team === "ladies" ? search.team : undefined,
+    team: typeof search.team === "string" && search.team in teamNames ? (search.team as TeamId) : undefined,
   }),
   head: () =>
     seo({
       title: "Fixtures & results",
       path: "/fixtures",
-      description: `Upcoming fixtures and latest results for ${club.name} first team and ladies, with kick-off times and add-to-calendar links.`,
+      description: `Upcoming fixtures and latest results for ${club.name} first team, ladies and U18s, with kick-off times and add-to-calendar links.`,
     }),
   component: FixturesPage,
 });
@@ -53,7 +53,7 @@ function FixturesPage() {
   return (
     <>
       <PageHeader eyebrow="2026–27 season" title="Fixtures & results">
-        Every game for the first team and the ladies. Tap <strong className="text-fg">Add to calendar</strong> on any
+        Every game for the first team, the ladies and the U18s. Tap <strong className="text-fg">Add to calendar</strong> on any
         fixture to save it to your phone.
       </PageHeader>
       <Container className="mt-10">
@@ -74,7 +74,7 @@ function FixturesPage() {
             ))}
           </div>
           <div className="flex gap-1 rounded-full border border-line bg-surface/60 p-1" role="group" aria-label="Team">
-            {(["all", "first", "ladies"] as const).map((t) => (
+            {(["all", ...(Object.keys(teamNames) as TeamId[])] as const).map((t) => (
               <Link
                 key={t}
                 to="/fixtures"
