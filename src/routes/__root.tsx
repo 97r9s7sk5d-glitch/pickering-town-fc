@@ -9,6 +9,7 @@ import {
 import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CookieBanner } from "@/components/CookieBanner";
 import { club, contact, ground } from "@/content/club";
 import { useRevealOnScroll } from "@/hooks/use-reveal";
 import { Centered, NotFound, button } from "@/components/NotFound";
@@ -90,6 +91,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <SiteFooter />
+      <CookieBanner />
     </>
   );
 }

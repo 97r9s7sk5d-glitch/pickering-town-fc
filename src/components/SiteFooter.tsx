@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Crest } from "@/components/Crest";
 import { navItems } from "@/components/SiteHeader";
+import { CookieSettingsButton } from "@/components/CookieBanner";
 import { club, contact, ground } from "@/content/club";
 
 export function SiteFooter() {
@@ -50,9 +51,22 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-line">
-        <p className="mx-auto max-w-7xl px-4 py-5 text-xs text-muted sm:px-6">
-          © {new Date().getFullYear()} {club.fullName}. Up the Pikes.
-        </p>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-5 text-xs text-muted sm:px-6">
+          <p>
+            © {new Date().getFullYear()} {club.fullName}. Up the Pikes.
+          </p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2">
+            <li>
+              <Link to="/privacy" className="hover:text-fg">Privacy & cookies</Link>
+            </li>
+            <li>
+              <Link to="/terms" className="hover:text-fg">Terms of use</Link>
+            </li>
+            <li>
+              <CookieSettingsButton className="hover:text-fg" />
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
   );

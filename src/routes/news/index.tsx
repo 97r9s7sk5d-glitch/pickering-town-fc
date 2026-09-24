@@ -17,6 +17,7 @@ function NewsPage() {
       <PageHeader eyebrow="From Mill Lane" title="News">
         Match reports, club announcements and everything happening at the Pikes.
       </PageHeader>
+      <h2 className="sr-only">All news</h2>
       <Container className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((a) => (
           <ArticleCard key={a.slug} article={a} />
