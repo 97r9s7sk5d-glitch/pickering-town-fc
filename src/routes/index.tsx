@@ -173,7 +173,7 @@ function HomePage() {
       </Container>
 
       {/* Table + matchday */}
-      <Container className="mt-24 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+      <Container className="mt-24 grid gap-6 lg:grid-cols-[1.2fr_1fr] [&>*]:min-w-0">
         <Card className="reveal p-6 sm:p-8">
           <SectionHeading
             eyebrow={club.leagueShort}

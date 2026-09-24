@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import type { Article } from "@/content/news";
 import { formatDate } from "@/lib/dates";
 
-/** Coloured tile standing in for a photo: each category gets its own treatment. */
+/** Colour behind each category's photo while it loads. */
 const categoryArt: Record<Article["category"], string> = {
   Club: "from-pike-deep via-pike to-pike-bright",
   "Match report": "from-ink via-pike-deep to-pike",
@@ -18,8 +18,14 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
       params={{ slug: article.slug }}
       className="reveal group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface/70 transition-colors hover:border-pike-bright"
     >
-      <div className={`relative flex h-40 items-end bg-gradient-to-br p-5 ${categoryArt[article.category]}`}>
-        <div aria-hidden="true" className="absolute inset-0 opacity-25 [background:repeating-linear-gradient(90deg,oklch(1_0_0/0.08)_0_24px,transparent_24px_48px)]" />
+      <div className={`relative flex h-44 items-end overflow-hidden bg-gradient-to-br p-5 ${categoryArt[article.category]}`}>
+        <img
+          src={article.image.src}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
         <span className="eyebrow relative rounded-full bg-ink/70 px-3 py-1 !text-[11px] text-white backdrop-blur">
           {article.category}
         </span>

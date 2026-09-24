@@ -10,11 +10,14 @@ export type Article = {
   category: "Club" | "Match report" | "Ladies" | "Community" | "Commercial";
   summary: string;
   body: string[];
+  /** Photo for the card and article header. */
+  image: { src: string; alt: string };
 };
 
 export const articles: Article[] = [
   {
     slug: "welcome-to-the-new-website",
+    image: { src: "/images/mill-lane-aerial.webp", alt: "Aerial view of Mill Lane" },
     title: "Welcome to the new Pickering Town FC website",
     date: "2026-09-22",
     category: "Club",
@@ -28,6 +31,7 @@ export const articles: Article[] = [
   },
   {
     slug: "ladies-second-season-under-way",
+    image: { src: "/images/ladies-first-team.webp", alt: "Pickering Town Ladies first team" },
     title: "Pickering Town Ladies: season two under way",
     date: "2026-09-06",
     category: "Ladies",
@@ -40,6 +44,7 @@ export const articles: Article[] = [
   },
   {
     slug: "partner-with-the-pikes",
+    image: { src: "/images/tony-dunning-stand.webp", alt: "Sponsor boards along the Tony Dunning Stand at Mill Lane" },
     title: "Partner with the Pikes this season",
     date: "2026-08-01",
     category: "Commercial",
@@ -52,6 +57,7 @@ export const articles: Article[] = [
   },
   {
     slug: "fa-cup-run-2025-26",
+    image: { src: "/images/first-team-tony-dunning-stand.webp", alt: "Pickering Town first team in front of the Tony Dunning Stand" },
     title: "Looking back: our 2025–26 FA Cup run",
     date: "2025-10-01",
     category: "Club",

@@ -112,7 +112,7 @@ export function MatchRow({ match }: { match: Match }) {
         </dl>
         {/* Tablet and up */}
         <p className="mt-1 hidden grid-cols-[1fr_auto_1fr] items-center gap-3 font-semibold sm:grid">
-          <span className={`truncate text-right ${nameClass(home)}`}>{home}</span>
+          <span className={`min-w-0 break-words text-right ${nameClass(home)}`}>{home}</span>
           {match.score ? (
             <span className="display tabular rounded-md bg-raised px-2.5 py-1 text-xl">
               {homeGoals}–{awayGoals}
@@ -122,7 +122,7 @@ export function MatchRow({ match }: { match: Match }) {
           ) : (
             <span className="eyebrow rounded-md border border-line px-2 py-1 !text-[11px] text-muted">v</span>
           )}
-          <span className={`truncate ${nameClass(away)}`}>{away}</span>
+          <span className={`min-w-0 break-words ${nameClass(away)}`}>{away}</span>
         </p>
         {(match.scorers || match.attendance) && (
           <p className="mt-1 text-xs text-muted sm:text-center">
