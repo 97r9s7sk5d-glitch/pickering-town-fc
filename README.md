@@ -52,7 +52,7 @@ These came from public sources (NCEL statistics, Wikipedia, the current club sit
 be read directly. Each one is marked `CONFIRM` in the code:
 
 - [ ] Ground postcode (YO18 7DB), capacity (~2,000) and seats (~200)
-- [ ] Officials: Chairman Jamie Hopwood, manager Paul Marshall (after Tony Hackworth left in January 2026), kit managers
+- [ ] Officials: Chairman Jamie Hopwood, manager Simon Heslop, kit managers
 - [ ] Club email/phone, Facebook and Instagram accounts (only X @PickeringTownFC is set)
 - [ ] Admission prices (currently "TBC")
 - [ ] Names and positions for the seven squad photos in `squad.ts`
