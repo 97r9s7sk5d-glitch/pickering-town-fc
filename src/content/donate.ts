@@ -25,7 +25,7 @@ export type BankDetails = { accountName: string; bankName?: string; sortCode: st
 
 export const donate = {
   intro:
-    "Pickering Town is run by volunteers, for the town. Every pound given goes back into the club: the pitch at Mill Lane, kit and equipment, and football for the first team, the ladies and our young players.",
+    "Pickering Town is run by volunteers, for the town. Your support helps keep football at the heart of the Pickering community: a place for local players, young people and families to come together, now and for generations to come.",
   /**
    * The current fundraising appeal, shown with a progress bar at the top of the Donate page. Update `raised` as money
    * comes in (whole pounds). Set `appeal` to null when there's no appeal running.
@@ -56,9 +56,9 @@ export const donate = {
     reference: "Flood Light Donation",
   } as BankDetails | null,
   uses: [
-    { title: "The pitch and ground", text: "Keeping Mill Lane in shape: mowing, marking, drainage, and repairs to the stands and fencing." },
-    { title: "Kit and equipment", text: "Balls, nets, training gear and first-aid kits for every team." },
-    { title: "Young players", text: "Helping our under-18s and the pathway into senior football, so the cost never stops a young player taking part." },
-    { title: "Running costs", text: "League and referee fees, travel to away games, floodlights and utilities." },
+    { title: "A club for the town", text: "Keeping the Pikes a place where Pickering comes together, as the club has been since 1888." },
+    { title: "Young people", text: "Giving local young players a pathway into football, and a club to belong to." },
+    { title: "Football for everyone", text: "Supporting the first team, the ladies and the next generation, so there's a team for anyone who wants to play." },
+    { title: "The future of Mill Lane", text: "Protecting the ground and the club for the supporters and players still to come." },
   ],
 };
