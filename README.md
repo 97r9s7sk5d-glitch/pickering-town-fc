@@ -38,7 +38,7 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 - `donate.ts`: the Donate page: the current appeal (floodlights, target and amount raised: update `raised` as money comes in), the online donation link (hidden until filled in) and the club bank details
 - `shop.ts`: the Shop page (the O'Neills club shop link, photo and ranges)
 - `media.ts`: the local radio panel on the News page
-- `fixtures.ts`: fixtures, results, league table. The first-team list is real; update `placeholderTeams` and `isPlaceholderTable` as the ladies, U18 and table data are replaced, and add `venue` to games still marked H/A TBC
+- `fixtures.ts`: fixtures and results for the first team and the ladies. The U18s show an "in progress" message until their games are added: add them, then take `"u18"` out of `inProgressTeams`. Add `venue` to any game still marked H/A TBC. League tables are in `tables.ts`
 - `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
 - `news.ts`: news articles (newest first)
 - `intro.ts`: the home page's opening video (set to `null` for the drawn animation) and where its splash starts

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Crest } from "@/components/Crest";
-import { placeholderTeams, type TeamId } from "@/content/fixtures";
+import { inProgressTeams, type TeamId } from "@/content/fixtures";
 import { juniorTeam, seniorTeams, type TeamPhoto } from "@/content/teams";
 import { formatDay, formatTime, homeAway, nextMatch, kickoffDate, venueLabel } from "@/lib/matches";
 
@@ -18,7 +18,7 @@ export function TeamCards() {
     <div className="grid gap-5 md:grid-cols-3">
       {cards.map((t) => {
         const next = nextMatch(t.id);
-        const isPreview = placeholderTeams.includes(t.id);
+        const inProgress = inProgressTeams.includes(t.id);
         return (
           <Link
             key={t.id}
@@ -54,8 +54,9 @@ export function TeamCards() {
                   <p className="text-sm text-muted">
                     {formatDay(kickoffDate(next))} · <span className="tabular">{formatTime(next)}</span> · {venueLabel(next)}
                   </p>
-                  {isPreview && <p className="mt-1 text-xs text-draw">Preview fixture: real list to follow</p>}
                 </>
+              ) : inProgress ? (
+                <p className="mt-1 text-muted">Fixtures currently in progress, coming soon</p>
               ) : (
                 <p className="mt-1 text-muted">Fixtures coming soon</p>
               )}
