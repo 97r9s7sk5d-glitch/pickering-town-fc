@@ -1,17 +1,17 @@
 /**
  * First-team squad photos (cut-outs with transparent backgrounds, in /public/images/squad).
  * Add each player's name, position and shirt number; any left blank are simply not shown.
- * CONFIRM: names still to be added for every photo below.
+ * Sponsors are as on the club's player graphics. CONFIRM: names still to be added for every photo below.
  */
 export type Player = { image: string; name: string; position?: string; number?: number; sponsor?: string };
 
 export const squad: Player[] = [
-  { image: "/images/squad/player-1.webp", name: "" },
-  { image: "/images/squad/player-2.webp", name: "" },
+  { image: "/images/squad/player-1.webp", name: "", sponsor: "The Spotted Cow" },
+  { image: "/images/squad/player-2.webp", name: "", sponsor: "Nicky Jackson" },
   { image: "/images/squad/player-3.webp", name: "" },
   { image: "/images/squad/player-4.webp", name: "" },
   { image: "/images/squad/player-5.webp", name: "" },
-  { image: "/images/squad/player-6.webp", name: "" },
+  { image: "/images/squad/player-6.webp", name: "", sponsor: "Severfield" },
   { image: "/images/squad/player-7.webp", name: "" },
 ];
 

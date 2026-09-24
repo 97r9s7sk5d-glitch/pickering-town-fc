@@ -82,17 +82,26 @@ function TeamsPage() {
                 className="relative mx-auto h-56 w-auto pt-4 transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
-              {p.name && (
-                <div className="relative border-t border-line bg-ink/80 px-3 py-2.5">
-                  <p className="display text-xl">{p.name}</p>
-                  {(p.position || p.number) && (
-                    <p className="eyebrow !text-[10px] text-muted">
-                      {p.number && `#${p.number} `}
-                      {p.position}
-                    </p>
+              <div className="relative border-t border-line bg-ink/80 px-3 py-2.5">
+                {p.name && <p className="display text-xl">{p.name}</p>}
+                {(p.position || p.number) && (
+                  <p className="eyebrow !text-[10px] text-muted">
+                    {p.number && `#${p.number} `}
+                    {p.position}
+                  </p>
+                )}
+                <p className="text-[11px] leading-snug text-muted [&:not(:first-child)]:mt-1">
+                  {p.sponsor ? (
+                    <>
+                      Sponsored by <span className="text-fg/90">{p.sponsor}</span>
+                    </>
+                  ) : (
+                    <Link to="/sponsors" className="text-pike-bright hover:text-fg">
+                      Sponsor this player
+                    </Link>
                   )}
-                </div>
-              )}
+                </p>
+              </div>
             </li>
           ))}
         </ul>
