@@ -5,6 +5,10 @@ It's built with TanStack Start, React 19 and Tailwind CSS v4. Every page is
 prerendered to plain HTML at build time, so it's fast, search-engine friendly and can be hosted free on any static
 host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
 
+Live at **https://www.pickeringtownfc.com**, hosted on Netlify and deployed from `main`. The domain is registered with
+GoDaddy: `@` is an A record to `75.2.60.5` and `www` is a CNAME to `pickering-town-fc-draft.netlify.app`, with www
+as Netlify's primary domain. The old draft address redirects to the live site (see `netlify.toml`).
+
 ## Pages
 
 | Page | What's on it |
