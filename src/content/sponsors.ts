@@ -33,7 +33,7 @@ export const packages: Package[] = [
 export const clubAmbassador = {
   name: "Flamingo Land Resort Yorkshire",
   role: "Main club ambassador",
-  text: "Flamingo Land is our club ambassador and shirt sponsor, on the front of the first-team and ladies kits. Thank you for backing the Pikes.",
+  text: "Flamingo Land is our main club ambassador and all club officials and players respect wearing the brand on match day and training kits. Thank you for all your support and trust and backing the Pikes.",
   url: "https://www.flamingoland.co.uk",
   logo: "/images/flamingo-land.webp",
 };
