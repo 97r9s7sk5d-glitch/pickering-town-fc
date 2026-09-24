@@ -12,7 +12,7 @@ export const squad: Player[] = [
   { image: "/images/squad/player-4.webp", name: "" },
   { image: "/images/squad/player-5.webp", name: "" },
   { image: "/images/squad/player-6.webp", name: "", sponsor: "Severfield" },
-  { image: "/images/squad/player-7.webp", name: "" },
+  { image: "/images/squad/player-7.webp", name: "", sponsor: "Cladding & Roofing Solutions Limited" },
 ];
 
 /**
