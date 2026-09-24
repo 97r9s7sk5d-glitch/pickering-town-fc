@@ -51,6 +51,7 @@ export const partners: Partner[] = [
   { name: "The Spotted Cow", tier: "Player sponsor" },
   { name: "Severfield", tier: "Player sponsor" },
   { name: "Tom Parsons Trust", tier: "Player sponsor" },
+  { name: "Cladding & Roofing Solutions Limited", tier: "Player sponsor" },
   { name: "BodyFresh", tier: "Player sponsor" },
   { name: "LISAM", tier: "Player sponsor" },
   { name: "Typhon Martial Arts", tier: "Player sponsor" },
@@ -83,6 +84,7 @@ export const playerSponsorGraphics: PlayerGraphic[] = [
   { src: "/images/player-sponsors/spotted-cow.webp", sponsor: "The Spotted Cow", team: "first" },
   { src: "/images/player-sponsors/severfield.webp", sponsor: "Severfield", team: "first" },
   { src: "/images/player-sponsors/tom-parsons-trust.webp", sponsor: "Tom Parsons Trust", team: "first" },
+  { src: "/images/player-sponsors/crs-cladding-roofing.webp", sponsor: "Cladding & Roofing Solutions Limited", team: "first" },
   // Individual sponsors appear by name in the sponsor box.
   { src: "/images/player-sponsors/stuart-elvidge.webp", sponsor: "Stuart Elvidge", team: "first" },
   { src: "/images/player-sponsors/mandy-paul-wattam.webp", sponsor: "Mandy & Paul Wattam", team: "first" },
@@ -90,6 +92,7 @@ export const playerSponsorGraphics: PlayerGraphic[] = [
   { src: "/images/player-sponsors/available-1.webp", sponsor: null, team: "first" },
   { src: "/images/player-sponsors/available-2.webp", sponsor: null, team: "first" },
   { src: "/images/player-sponsors/available-3.webp", sponsor: null, team: "first" },
+  { src: "/images/player-sponsors/available-4.webp", sponsor: null, team: "first" },
   // Ladies first team
   { src: "/images/player-sponsors/ladies-vicki-bodyfresh.webp", sponsor: "BodyFresh", team: "ladies" },
   { src: "/images/player-sponsors/ladies-sofia-lisam.webp", sponsor: "LISAM", team: "ladies" },
