@@ -11,7 +11,7 @@ import { club, ground } from "@/content/club";
 import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
 import { groundPhoto, ladiesHeroPlayer, squad } from "@/content/squad";
-import { leagueTable, ownTeamName, tableTitle } from "@/content/fixtures";
+import { firstTeamTable } from "@/content/tables";
 import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome, scoreline } from "@/lib/matches";
 import { seo } from "@/lib/seo";
 
@@ -34,7 +34,7 @@ const arrowLink = "inline-flex items-center gap-1.5 text-sm font-semibold text-p
 function HomePage() {
   const last = lastResult();
   const lastOutcome = last ? outcome(last) : null;
-  const position = leagueTable.findIndex((r) => r.team === ownTeamName) + 1;
+  const position = firstTeamTable.rows.findIndex((r) => r.team === firstTeamTable.ownTeam) + 1;
   const trophies = honours.reduce((n, h) => n + h.seasons.length, 0);
 
   return (
@@ -144,7 +144,7 @@ function HomePage() {
             {position}
             <sup className="ml-1 text-2xl text-pike-bright">{ordinal(position)}</sup>
           </p>
-          <p className="text-sm text-muted">{tableTitle}</p>
+          <p className="text-sm text-muted">{firstTeamTable.title}</p>
         </Card>
       </Container>
 
@@ -184,7 +184,7 @@ function HomePage() {
               </Link>
             }
           />
-          <LeagueTable compact />
+          <LeagueTable table={firstTeamTable} compact />
         </Card>
         <div className="reveal relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-pike-deep to-night p-6 sm:p-8">
           <img src={groundPhoto.src} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />

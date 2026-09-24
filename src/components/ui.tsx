@@ -14,12 +14,22 @@ export function PageHeader({ eyebrow, title, children }: { eyebrow: string; titl
   );
 }
 
-export function SectionHeading({ eyebrow, title, action }: { eyebrow?: string; title: string; action?: ReactNode }) {
+export function SectionHeading({
+  eyebrow,
+  title,
+  action,
+  titleId,
+}: {
+  eyebrow?: string;
+  title: string;
+  action?: ReactNode;
+  titleId?: string;
+}) {
   return (
     <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
       <div>
         {eyebrow && <p className="eyebrow text-pike-bright">{eyebrow}</p>}
-        <h2 className="display mt-2 text-4xl sm:text-5xl">{title}</h2>
+        <h2 id={titleId} className="display mt-2 text-4xl sm:text-5xl">{title}</h2>
         <div aria-hidden="true" className="pike-rule mt-4 h-1 w-24 rounded-full" />
       </div>
       {action}

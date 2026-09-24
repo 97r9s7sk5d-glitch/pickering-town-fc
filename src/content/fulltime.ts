@@ -19,8 +19,12 @@ export type FullTimeSnippet = { divId: string; code: string };
 
 type PerTeam = Record<TeamId, FullTimeSnippet | null>;
 
-export const fullTime: { table: FullTimeSnippet | null; fixtures: PerTeam; results: PerTeam } = {
-  table: null,
+export const fullTime: {
+  table: { first: FullTimeSnippet | null; ladies: FullTimeSnippet | null };
+  fixtures: PerTeam;
+  results: PerTeam;
+} = {
+  table: { first: null, ladies: null },
   fixtures: { first: null, ladies: null, u18: null },
   results: { first: null, ladies: null, u18: null },
 };
