@@ -54,7 +54,7 @@ be read directly. Each one is marked `CONFIRM` in the code:
 - [ ] Ground postcode (YO18 7DB), capacity (~2,000) and seats (~200)
 - [ ] Officials: Chairman Jamie Hopwood, manager Simon Heslop, kit managers
 - [ ] Club email/phone, Facebook and Instagram accounts (only X @PickeringTownFC is set)
-- [ ] Admission prices (currently "TBC")
+- [x] Admission prices (adults £8, concessions £6, under 16s free, season ticket £100)
 - [ ] Names and positions for the seven squad photos in `squad.ts`
 - [ ] Partners in `sponsors.ts` (Flamingo Land shirt sponsor, and the player sponsors Harome Homes, Harton Works, Television House Pickering, Edge Clothing)
 - [ ] Photo credit for the team photo (watermarked bottom right)

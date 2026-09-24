@@ -54,10 +54,10 @@ export const officials: Official[] = [
 
 export type Admission = { label: string; price: string; note?: string };
 
-/** CONFIRM: prices for the current season. */
+/** Admission prices for 2026-27, from the club. */
 export const admission: Admission[] = [
-  { label: "Adults", price: "TBC" },
-  { label: "Concessions", price: "TBC" },
-  { label: "Under 16s", price: "TBC" },
-  { label: "Season ticket", price: "TBC", note: "All home league games" },
+  { label: "Adults", price: "£8" },
+  { label: "Concessions", price: "£6" },
+  { label: "Under 16s", price: "Free" },
+  { label: "Season ticket", price: "£100", note: "All home league games" },
 ];
