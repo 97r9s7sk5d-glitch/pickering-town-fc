@@ -92,3 +92,12 @@ site (menus, countdown, filters, images, fonts) in a single file that opens in a
 
 To deploy, point any static host at `npm run build` with output directory `dist/client`. `vercel.json` already
 sets this up for Vercel: import the GitHub repo and it deploys on every push.
+
+## Contact form and analytics
+
+- **Contact form:** messages arrive in Netlify under **Forms → contact**. To get each one by email, go to
+  Netlify → Project configuration → Notifications → Form submission notifications → Add notification → Email.
+  Netlify's free plan includes 100 submissions a month. Spam is filtered by a hidden honeypot field, a minimum
+  fill-in time and Netlify's own spam check (flagged messages are under **Forms → Spam**).
+- **Analytics:** create a Google Analytics 4 property, copy its measurement ID (`G-…`) into
+  `src/content/site.ts`, and push. It only loads for visitors who accept analytics cookies.
