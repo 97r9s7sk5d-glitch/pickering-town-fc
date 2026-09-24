@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Bus, Car, MapPin, Train, Beer, Accessibility } from "lucide-react";
 import { NextMatchPanel } from "@/components/matches";
+import { MatchdayProgramme } from "@/components/MatchdayProgramme";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
 import { admission, club, ground } from "@/content/club";
 import { fixtures } from "@/lib/matches";
@@ -90,6 +91,10 @@ function MatchdayPage() {
             <NextMatchPanel match={nextHome} />
           </div>
         ) : null}
+      </Container>
+
+      <Container className="mt-20">
+        <MatchdayProgramme />
       </Container>
 
       <Container className="mt-20 grid gap-10 lg:grid-cols-2">

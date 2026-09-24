@@ -16,7 +16,8 @@ export default defineConfig({
         crawlLinks: true,
         failOnError: true,
         // Filtered views (e.g. /fixtures?view=results) are the same page; prerendering them would overwrite it.
-        filter: (page) => !page.path.includes("?"),
+        // Links to files (e.g. a programme PDF in /public) aren't pages, so they're not crawled either.
+        filter: (page) => !page.path.includes("?") && !/\.[a-z0-9]+$/i.test(page.path),
       },
       // A static 404 page for hosts that serve /404.html for unknown paths.
       pages: [{ path: "/404", prerender: { enabled: true, outputPath: "/404.html" }, sitemap: { exclude: true } }],

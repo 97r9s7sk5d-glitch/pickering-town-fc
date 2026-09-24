@@ -23,7 +23,7 @@ export function SiteFooter() {
         <div>
           <h2 className="eyebrow text-muted">Explore</h2>
           <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
-            {[...navItems.slice(1), { to: "/contact" as const, label: "Contact" }].map((item) => (
+            {[...navItems.slice(1), { to: "/donate" as const, label: "Donate" }, { to: "/contact" as const, label: "Contact" }].map((item) => (
               <li key={item.label}>
                 <Link to={item.to} className="text-fg/90 hover:text-pike-bright">
                   {item.label}

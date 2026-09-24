@@ -12,6 +12,7 @@ const topics = {
   playing: "Playing or coaching",
   volunteering: "Volunteering",
   media: "Press and media",
+  donation: "Donations",
 } as const;
 type Topic = keyof typeof topics;
 
