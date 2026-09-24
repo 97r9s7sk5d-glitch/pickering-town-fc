@@ -34,7 +34,7 @@ export const seniorTeams: SeniorTeam[] = [
   {
     id: "ladies",
     name: "Ladies First Team",
-    league: "North Riding Women's League Division One",
+    league: "North Riding Women's League Premier Division",
     text: "Formed in 2025 and now in their second season. New players of every experience level are welcome.",
     facts: [{ label: "Formed", value: "2025" }],
     photo: { ...ladiesTeamPhoto, focus: "50% 62%" },

@@ -113,21 +113,21 @@ function SponsorsPage() {
             <p className="mt-2 text-muted">Partner logos appear here.</p>
           </div>
         ) : (
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {partners.map((p) => (
               <li
                 key={p.name}
-                className={`rounded-2xl border p-6 text-center ${
+                className={`flex flex-col justify-center rounded-2xl border p-4 text-center sm:p-6 ${
                   p.tier === "Shirt sponsor" ? "border-pike-bright bg-gradient-to-b from-pike-deep/70 to-surface sm:col-span-2 lg:col-span-4" : "border-line bg-surface/70"
                 }`}
               >
-                <p className="eyebrow !text-[11px] text-pike-bright">{p.tier}</p>
+                <p className="eyebrow !text-[10px] text-pike-bright sm:!text-[11px]">{p.tier}</p>
                 {p.url ? (
                   <a href={p.url} target="_blank" rel="noopener noreferrer" className="display mt-2 block text-3xl hover:text-pike-bright">
                     {p.name}
                   </a>
                 ) : (
-                  <p className={`display mt-2 ${p.tier === "Shirt sponsor" ? "text-4xl sm:text-5xl" : "text-2xl"}`}>{p.name}</p>
+                  <p className={`display mt-2 break-words ${p.tier === "Shirt sponsor" ? "text-4xl sm:text-5xl" : "text-lg sm:text-2xl"}`}>{p.name}</p>
                 )}
               </li>
             ))}

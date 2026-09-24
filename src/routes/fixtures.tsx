@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MatchRow } from "@/components/matches";
 import { Container, PageHeader, SampleNotice } from "@/components/ui";
@@ -37,12 +38,17 @@ function groupByMonth(list: Match[]) {
   return groups;
 }
 
-const tab = "eyebrow whitespace-nowrap rounded-full px-3.5 py-2 transition-colors sm:px-4";
+const tab = "eyebrow whitespace-nowrap rounded-full px-3 py-2 transition-colors min-[400px]:px-3.5 sm:px-4";
 const on = "bg-pike text-white";
 const off = "text-muted hover:text-fg";
 
 function FixturesPage() {
-  const { view = "fixtures", team = "all" } = Route.useSearch();
+  // The page is prerendered once (no query string), so the first client render must match it: the tab from the
+  // URL (?view=results, ?team=ladies) is applied straight after hydration.
+  const search = Route.useSearch();
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const { view = "fixtures", team = "all" } = hydrated ? search : {};
   const teamId = team === "all" ? undefined : team;
   const list = view === "results" ? resultsList(teamId) : fixtures(teamId);
   const groups = groupByMonth(list);
@@ -82,7 +88,7 @@ function FixturesPage() {
               </Link>
             ))}
           </div>
-          <div className="flex gap-1 rounded-full border border-line bg-surface/60 p-1" role="group" aria-label="Team">
+          <div className="flex max-w-full gap-1 overflow-x-auto rounded-full border border-line bg-surface/60 p-1 [scrollbar-width:none]" role="group" aria-label="Team">
             {(["all", ...(Object.keys(teamNames) as TeamId[])] as const).map((t) => (
               <Link
                 key={t}

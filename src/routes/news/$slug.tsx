@@ -39,6 +39,11 @@ function ArticlePage() {
           </Container>
         </header>
         <Container className="mt-10 max-w-3xl">
+          <img
+            src={article.image.src}
+            alt={article.image.alt}
+            className="mb-10 aspect-[16/9] w-full rounded-2xl border border-line object-cover"
+          />
           <div className="space-y-5 text-lg leading-relaxed text-fg/90">
             {article.body.map((p, i) => (
               <p key={i}>{p}</p>
