@@ -62,4 +62,6 @@ export const academy = {
   title: "Academy",
   text: "Young players in and around Pickering can develop their game with Hawkes 360, the 360 Centre of Development run by Hawkes Football Sessions. It offers professional coaching and a player pathway, with sessions in Pickering, Malton and Scarborough.",
   url: "https://www.hawkeshealth.org/360-centre-of-development",
+  /** Hawkes Health's main website, linked beside the 360 page. */
+  site: { label: "Hawkes Health", url: "https://www.hawkeshealth.org" },
 };
