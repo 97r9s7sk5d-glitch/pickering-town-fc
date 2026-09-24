@@ -41,7 +41,7 @@ export function Container({ children, className = "" }: { children: ReactNode; c
   return <div className={`mx-auto max-w-7xl px-4 sm:px-6 ${className}`}>{children}</div>;
 }
 
-/** Shown on pages that still use placeholder fixtures/table data. */
+/** Info notice above the fixtures, e.g. for fixtures still in progress or venues still to confirm. */
 export function SampleNotice({ children }: { children: ReactNode }) {
   return (
     <p className="mb-8 flex items-start gap-2 rounded-xl border border-draw/40 bg-draw/10 px-4 py-3 text-sm text-fg">

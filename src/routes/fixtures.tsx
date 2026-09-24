@@ -5,7 +5,7 @@ import { Container, PageHeader, SampleNotice } from "@/components/ui";
 import { FullTimeEmbed } from "@/components/FullTimeEmbed";
 import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
-import { placeholderTeams, teamNames, type Match, type TeamId } from "@/content/fixtures";
+import { inProgressTeams, teamNames, type Match, type TeamId } from "@/content/fixtures";
 import { fixtures, formatMonth, kickoffDate, resultsList } from "@/lib/matches";
 import { seo } from "@/lib/seo";
 
@@ -55,11 +55,11 @@ function FixturesPage() {
   // A live Full-Time feed replaces the local list when one is set up for this view. Full-Time feeds are per
   // team, so "All teams" uses the first team's feed.
   const liveSnippet = fullTime[view][teamId ?? "first"];
-  const shownPlaceholders = placeholderTeams.filter((t) => !teamId || t === teamId);
+  const inProgress = inProgressTeams.filter((t) => !teamId || t === teamId);
   const hasTbcVenue = !teamId || teamId === "first" ? list.some((m) => m.team === "first" && !m.venue) : false;
   const notice = [
-    shownPlaceholders.length > 0 &&
-      `${shownPlaceholders.map((t) => teamNames[t]).join(" and ")} games are placeholders until the club adds the real ones.`,
+    inProgress.length > 0 &&
+      `${inProgress.map((t) => teamNames[t]).join(" and ")} fixtures and results are currently in progress and will be added here soon.`,
     hasTbcVenue && `Games marked H/A TBC are still to be confirmed as home or away.`,
   ]
     .filter(Boolean)
@@ -113,7 +113,7 @@ function FixturesPage() {
             />
           </div>
         ) : groups.length === 0 ? (
-          <p className="mt-12 text-muted">Nothing here yet. Check back soon.</p>
+          teamId && inProgress.includes(teamId) ? null : <p className="mt-12 text-muted">Nothing here yet. Check back soon.</p>
         ) : (
           groups.map((g) => (
             <section key={g.month} className="mt-10" aria-labelledby={`m-${g.month}`}>

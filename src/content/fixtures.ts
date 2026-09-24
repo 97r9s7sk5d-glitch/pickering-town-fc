@@ -4,11 +4,14 @@
  * FIRST TEAM: the club's real 2026–27 list. Scores are [Pickering goals, opponent goals].
  * Home or away is only filled in where it's confirmed; games without a `venue` show "H/A TBC" until it's added.
  *
- * LADIES: from FA Full-Time. PLACEHOLDERS: the U18 games are made up so
- * the pages can be designed. The site shows a notice wherever placeholders appear. Replace them (or wire the
- * pages to FA Full-Time, see the README) and update `placeholderTeams` / `isPlaceholderTable`.
+ * LADIES: from FA Full-Time.
+ *
+ * U18: no games yet. The U18 fixtures are still being put together, so the site shows an "in progress" message
+ * instead (see `inProgressTeams`). Add the real games at the bottom of the list, or wire the pages to FA
+ * Full-Time (see the README), then take "u18" out of `inProgressTeams`.
  */
-export const placeholderTeams: TeamId[] = ["u18"];
+/** Teams whose fixtures are still being put together: their tab and home page card show an "in progress" message. */
+export const inProgressTeams: TeamId[] = ["u18"];
 
 export type TeamId = "first" | "ladies" | "u18";
 
@@ -102,13 +105,5 @@ export const matches: Match[] = [
   { id: "l05", kickoff: "2026-10-04T14:00", team: "ladies", competition: "NRWL Premier", opponent: "T.I.B.S Women", venue: "A" },
   { id: "l06", kickoff: "2026-10-11T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Redcar Athletic Ladies", venue: "H" },
   { id: "l07", kickoff: "2026-10-18T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Linthorpe Academicals Women", venue: "H" },
-
-  // PLACEHOLDERS: U18 games, to be replaced with the real list.
-  { id: "y01", kickoff: "2026-09-13T10:30", team: "u18", competition: "U18 League", opponent: "Malton & Norton U18", venue: "H", score: [3, 1] },
-  { id: "y02", kickoff: "2026-09-20T10:30", team: "u18", competition: "U18 League", opponent: "Scarborough Athletic U18", venue: "A", score: [2, 2] },
-  { id: "y03", kickoff: "2026-09-27T10:30", team: "u18", competition: "U18 League", opponent: "Whitby Town U18", venue: "H" },
-  { id: "y04", kickoff: "2026-10-04T10:30", team: "u18", competition: "U18 League", opponent: "Kirkbymoorside U18", venue: "A" },
-  { id: "y05", kickoff: "2026-10-11T10:30", team: "u18", competition: "U18 Cup", opponent: "Helmsley U18", venue: "H" },
-  { id: "y06", kickoff: "2026-10-25T10:30", team: "u18", competition: "U18 League", opponent: "Thirsk Falcons U18", venue: "A" },
 ];
 
