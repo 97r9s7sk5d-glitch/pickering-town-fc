@@ -17,6 +17,7 @@ host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
 | `/club` | History timeline, honours, cup records, officials |
 | `/matchday` | Mill Lane: address and map, next home game, digital matchday programme, admission, clubhouse, accessibility, travel |
 | `/sponsors` | Club ambassador, club sponsors, sponsorship packages, player sponsors and partners |
+| `/shop` | Club shop: links to the club's O'Neills online shop for kit and clubwear |
 | `/donate` | What donations pay for, how to give, and other ways to back the club |
 | `/contact` | Enquiry form (opens the visitor's email app) or social links if no email is set |
 
@@ -31,6 +32,7 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 - `club.ts`: club facts, ground, contact details, officials, admission prices
 - `programmes.ts`: digital matchday programmes (add a PDF to `public/programmes/` and one line here)
 - `donate.ts`: the Donate page: the current appeal (floodlights, target and amount raised: update `raised` as money comes in), the online donation link and bank details (both hidden until filled in)
+- `shop.ts`: the Shop page (the O'Neills club shop link, photo and ranges)
 - `media.ts`: the local radio panel on the News page
 - `fixtures.ts`: fixtures, results, league table. The first-team list is real; update `placeholderTeams` and `isPlaceholderTable` as the ladies, U18 and table data are replaced, and add `venue` to games still marked H/A TBC
 - `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
