@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
 import { Container, PageHeader, SectionHeading } from "@/components/ui";
 import { AmbassadorBanner } from "@/components/AmbassadorBanner";
+import { ClubSponsors } from "@/components/ClubSponsors";
 import { club } from "@/content/club";
 import { packages, partners, playerSponsorGraphics } from "@/content/sponsors";
 import { seo } from "@/lib/seo";
@@ -31,6 +32,7 @@ function SponsorsPage() {
 
       <Container className="mt-12">
         <AmbassadorBanner />
+        <ClubSponsors />
       </Container>
 
       <Container className="mt-12">
