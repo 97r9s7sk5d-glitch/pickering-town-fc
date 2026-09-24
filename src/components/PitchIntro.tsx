@@ -83,6 +83,13 @@ function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObjec
     const overlay = root.current;
     if (!el || !overlay || overlay.hasAttribute("data-skip")) return;
 
+    // Backup for the inline script: make sure an upright phone plays the tall version, full screen.
+    if (video.portrait && !el.hasAttribute("data-portrait") && matchMedia("(orientation: portrait)").matches) {
+      el.setAttribute("data-portrait", "");
+      el.poster = video.portrait.poster;
+      el.src = video.portrait.src;
+    }
+
     const finish = () => overlay.classList.add("is-ending");
     // Check every frame, so the fade starts on cue (timeupdate alone can be a quarter of a second late).
     let raf = 0;
