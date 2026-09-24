@@ -39,6 +39,16 @@ export const clubAmbassador = {
 };
 
 /**
+ * Club sponsors, shown as smaller cards under the club ambassador on the Sponsors page. `logo` is optional: without
+ * one the card shows the name. CONFIRM: The Black Bull's logo and both sponsors' web links.
+ */
+export type ClubSponsor = { name: string; logo?: string; url?: string };
+export const clubSponsors: ClubSponsor[] = [
+  { name: "The Black Bull" },
+  { name: "Television House Pickering", logo: "/images/television-house-logo.webp" },
+];
+
+/**
  * Current partners, as seen on the kit, the stand and the club's player graphics.
  * CONFIRM each one with the club before launch, and add { name, url?, tier } entries for any others.
  */
