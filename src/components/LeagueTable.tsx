@@ -15,8 +15,8 @@ function zone(position: number, total: number): string {
 }
 
 /**
- * The league table. `compact` shows only the rows around Pickering (for the home page) and hides the
- * goal columns; the full version scrolls sideways on small phones rather than squashing.
+ * The league table (played, goal difference, points, as published by the NCEL). `compact` shows only the rows
+ * around Pickering, for the home page.
  */
 export function LeagueTable({ compact = false }: { compact?: boolean }) {
   const total = leagueTable.length;
@@ -37,15 +37,6 @@ export function LeagueTable({ compact = false }: { compact?: boolean }) {
             </th>
             <th scope="col" className="py-3 text-left font-semibold">Club</th>
             <th scope="col" className="w-10 py-3 text-center font-semibold"><abbr title="Played">P</abbr></th>
-            {!compact && (
-              <>
-                <th scope="col" className="w-10 py-3 text-center font-semibold"><abbr title="Won">W</abbr></th>
-                <th scope="col" className="w-10 py-3 text-center font-semibold"><abbr title="Drawn">D</abbr></th>
-                <th scope="col" className="w-10 py-3 text-center font-semibold"><abbr title="Lost">L</abbr></th>
-                <th scope="col" className="hidden w-12 py-3 text-center font-semibold sm:table-cell"><abbr title="Goals for">F</abbr></th>
-                <th scope="col" className="hidden w-12 py-3 text-center font-semibold sm:table-cell"><abbr title="Goals against">A</abbr></th>
-              </>
-            )}
             <th scope="col" className="w-12 py-3 text-center font-semibold"><abbr title="Goal difference">GD</abbr></th>
             <th scope="col" className="w-12 py-3 text-center font-semibold"><abbr title="Points">Pts</abbr></th>
           </tr>
@@ -53,7 +44,7 @@ export function LeagueTable({ compact = false }: { compact?: boolean }) {
         <tbody className="tabular">
           {rows.map(({ row, position }) => {
             const own = row.team === ownTeamName;
-            const gd = row.goalsFor - row.goalsAgainst;
+            const gd = row.goalDifference;
             return (
               <tr
                 key={row.team}
@@ -66,15 +57,6 @@ export function LeagueTable({ compact = false }: { compact?: boolean }) {
                 </td>
                 <td className="py-3 pr-2">{row.team}</td>
                 <td className="py-3 text-center">{row.played}</td>
-                {!compact && (
-                  <>
-                    <td className="py-3 text-center">{row.won}</td>
-                    <td className="py-3 text-center">{row.drawn}</td>
-                    <td className="py-3 text-center">{row.lost}</td>
-                    <td className="hidden py-3 text-center sm:table-cell">{row.goalsFor}</td>
-                    <td className="hidden py-3 text-center sm:table-cell">{row.goalsAgainst}</td>
-                  </>
-                )}
                 <td className="py-3 text-center">{gd > 0 ? `+${gd}` : gd}</td>
                 <td className="display py-3 text-center text-lg">{row.points}</td>
               </tr>

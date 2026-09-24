@@ -4,12 +4,12 @@
  * FIRST TEAM: the club's real 2026–27 list. Scores are [Pickering goals, opponent goals].
  * Home or away is only filled in where it's confirmed; games without a `venue` show "H/A TBC" until it's added.
  *
- * LADIES: from FA Full-Time. PLACEHOLDERS: the U18 games, and the league table apart from Pickering's own row, are made up so
+ * LADIES: from FA Full-Time. LEAGUE TABLE: from the NCEL website (see tableUpdated). PLACEHOLDERS: the U18 games are made up so
  * the pages can be designed. The site shows a notice wherever placeholders appear. Replace them (or wire the
  * pages to FA Full-Time, see the README) and update `placeholderTeams` / `isPlaceholderTable`.
  */
 export const placeholderTeams: TeamId[] = ["u18"];
-export const isPlaceholderTable = true;
+export const isPlaceholderTable = false;
 
 export type TeamId = "first" | "ladies" | "u18";
 
@@ -116,39 +116,40 @@ export const matches: Match[] = [
 export type TableRow = {
   team: string;
   played: number;
-  won: number;
-  drawn: number;
-  lost: number;
-  goalsFor: number;
-  goalsAgainst: number;
+  goalDifference: number;
   points: number;
 };
 
 export const tableTitle = "NCEL Premier Division 2026–27";
+/** When the table below was copied from the NCEL website. Update it with the table. */
+export const tableUpdated = "24 September 2026";
 
-/** Rows in league order. The club's own row is matched by name and highlighted. */
+/** Rows in league order, from the NCEL website. The club's own row is matched by name and highlighted. */
 export const leagueTable: TableRow[] = [
-  { team: "Hemsworth MW", played: 10, won: 8, drawn: 1, lost: 1, goalsFor: 24, goalsAgainst: 9, points: 25 },
-  { team: "Goole AFC", played: 10, won: 7, drawn: 2, lost: 1, goalsFor: 21, goalsAgainst: 8, points: 23 },
-  { team: "Bottesford Town", played: 10, won: 7, drawn: 1, lost: 2, goalsFor: 22, goalsAgainst: 11, points: 22 },
-  { team: "Emley AFC", played: 10, won: 6, drawn: 2, lost: 2, goalsFor: 19, goalsAgainst: 12, points: 20 },
-  { team: "Barton Town", played: 10, won: 6, drawn: 1, lost: 3, goalsFor: 20, goalsAgainst: 14, points: 19 },
-  { team: "Knaresborough Town", played: 10, won: 5, drawn: 3, lost: 2, goalsFor: 17, goalsAgainst: 12, points: 18 },
-  { team: "Handsworth", played: 10, won: 5, drawn: 1, lost: 4, goalsFor: 16, goalsAgainst: 15, points: 16 },
-  { team: "Winterton Rangers", played: 10, won: 4, drawn: 3, lost: 3, goalsFor: 15, goalsAgainst: 14, points: 15 },
-  { team: "Harrogate Railway Athletic", played: 10, won: 4, drawn: 2, lost: 4, goalsFor: 16, goalsAgainst: 16, points: 14 },
-  // real: 10th after 10 games, as published by the NCEL
-  { team: "Pickering Town", played: 10, won: 4, drawn: 1, lost: 5, goalsFor: 18, goalsAgainst: 19, points: 13 },
-  { team: "Athersley Recreation", played: 10, won: 3, drawn: 3, lost: 4, goalsFor: 13, goalsAgainst: 15, points: 12 },
-  { team: "Penistone Church", played: 10, won: 3, drawn: 2, lost: 5, goalsFor: 14, goalsAgainst: 19, points: 11 },
-  { team: "Hallam", played: 10, won: 3, drawn: 1, lost: 6, goalsFor: 12, goalsAgainst: 18, points: 10 },
-  { team: "Eccleshill United", played: 10, won: 2, drawn: 3, lost: 5, goalsFor: 11, goalsAgainst: 17, points: 9 },
-  { team: "Golcar United", played: 10, won: 2, drawn: 2, lost: 6, goalsFor: 12, goalsAgainst: 21, points: 8 },
-  { team: "Thackley", played: 10, won: 1, drawn: 2, lost: 7, goalsFor: 8, goalsAgainst: 22, points: 5 },
+  { team: "Dearne & District", played: 10, goalDifference: 15, points: 24 },
+  { team: "Bottesford Town", played: 9, goalDifference: 21, points: 21 },
+  { team: "Retford United", played: 12, goalDifference: 3, points: 19 },
+  { team: "Worsbrough Bridge Athletic", played: 8, goalDifference: 11, points: 16 },
+  { team: "Knaresborough Town", played: 8, goalDifference: 8, points: 16 },
+  { team: "Retford FC", played: 10, goalDifference: 1, points: 16 },
+  { team: "Handsworth", played: 9, goalDifference: -1, points: 15 },
+  { team: "Barton Town", played: 6, goalDifference: 6, points: 13 },
+  { team: "Albion Sports", played: 11, goalDifference: 2, points: 13 },
+  { team: "Pickering Town", played: 10, goalDifference: -1, points: 13 },
+  { team: "Campion AFC", played: 10, goalDifference: -2, points: 13 },
+  { team: "Golcar United", played: 8, goalDifference: 5, points: 12 },
+  { team: "Penistone Church", played: 9, goalDifference: 0, points: 12 },
+  { team: "Horbury Town", played: 8, goalDifference: 3, points: 11 },
+  { team: "Rossington Main", played: 9, goalDifference: 2, points: 11 },
+  { team: "Thackley", played: 11, goalDifference: 0, points: 11 },
+  { team: "Tadcaster Albion", played: 8, goalDifference: -9, points: 7 },
+  { team: "Parkgate", played: 10, goalDifference: -18, points: 7 },
+  { team: "Frickley Athletic", played: 9, goalDifference: -5, points: 5 },
+  { team: "Keighley Town", played: 11, goalDifference: -41, points: 2 },
 ];
 
 export const ownTeamName = "Pickering Town";
-/** Positions that go up / down, for the coloured markers on the table. CONFIRM for the current season. */
+/** Positions that go up / down, for the coloured markers on the table (as marked on the NCEL table). */
 export const promotionPlaces = 1;
 export const playoffPlaces = 5;
 export const relegationPlaces = 2;
