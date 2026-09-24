@@ -23,7 +23,7 @@ export const contactForm = {
 /** When the privacy policy and terms were last updated. */
 export const legalUpdated = "24 September 2026";
 
-/** The website credit, shown small at the very bottom of every page. Set to null to remove it. */
+/** The website credit, a thin line at the top left of every page, above the header. Set to null to remove it. */
 export const siteCredit: { label: string; url: string } | null = {
   label: "The Chairman",
   url: "https://thechairman.org.uk",

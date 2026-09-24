@@ -3,7 +3,6 @@ import { Crest } from "@/components/Crest";
 import { navItems } from "@/components/SiteHeader";
 import { CookieSettingsButton } from "@/components/CookieBanner";
 import { club, contact, ground } from "@/content/club";
-import { siteCredit } from "@/content/site";
 
 export function SiteFooter() {
   return (
@@ -66,19 +65,6 @@ export function SiteFooter() {
             <li>
               <CookieSettingsButton className="hover:text-fg" />
             </li>
-            {siteCredit && (
-              <li>
-                <a
-                  href={siteCredit.url}
-                  target="_blank"
-                  rel="noopener"
-                  className="text-muted/80 transition-colors hover:text-fg"
-                >
-                  Website by <span className="font-semibold">{siteCredit.label}</span>
-                  <span className="sr-only"> (opens in a new tab)</span>
-                </a>
-              </li>
-            )}
           </ul>
         </div>
       </div>

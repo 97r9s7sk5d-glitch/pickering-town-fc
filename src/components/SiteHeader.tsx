@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { Crest } from "@/components/Crest";
 import { RoutePillNav, type NavItem } from "@/components/RoutePillNav";
 import { club } from "@/content/club";
+import { siteCredit } from "@/content/site";
 
 export const navItems: NavItem[] = [
   { to: "/", label: "Home" },
@@ -20,12 +21,16 @@ export const navItems: NavItem[] = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  // The mobile menu opens just below the header, wherever the header sits (the credit line above it scrolls away).
+  const [menuTop, setMenuTop] = useState(69);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   // Close the mobile menu after navigating, and let Escape close it.
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
     if (!open) return;
+    if (headerRef.current) setMenuTop(Math.round(headerRef.current.getBoundingClientRect().bottom));
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -37,7 +42,17 @@ export function SiteHeader() {
 
   return (
     <>
-    <header className="sticky top-0 z-40 border-b border-line bg-ink/80 backdrop-blur-md">
+    {siteCredit && (
+      <aside aria-label="Website credit" className="bg-night">
+        <p className="mx-auto max-w-7xl px-4 py-1 text-[11px] leading-5 text-muted sm:px-6">
+          <a href={siteCredit.url} target="_blank" rel="noopener" className="transition-colors hover:text-fg">
+            Website by <span className="font-semibold">{siteCredit.label}</span>
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </p>
+      </aside>
+    )}
+    <header ref={headerRef} className="sticky top-0 z-40 border-b border-line bg-ink/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <Link to="/" className="flex items-center gap-3" aria-label={`${club.name} home`}>
           <Crest className="h-12 w-auto shrink-0" />
@@ -80,7 +95,8 @@ export function SiteHeader() {
         <nav
           id="mobile-menu"
           aria-label="Main"
-          className="animate-rise fixed inset-x-0 bottom-0 top-[69px] z-30 overflow-y-auto border-t border-line bg-ink px-4 pb-10 pt-4 xl:hidden"
+          style={{ top: menuTop }}
+          className="animate-rise fixed inset-x-0 bottom-0 z-30 overflow-y-auto border-t border-line bg-ink px-4 pb-10 pt-4 xl:hidden"
         >
           <ul className="flex flex-col">
             {[...navItems, { to: "/donate", label: "Donate" } as NavItem, { to: "/contact", label: "Contact" } as NavItem].map((item) => (
