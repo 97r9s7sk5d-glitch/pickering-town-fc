@@ -31,7 +31,7 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 
 - `club.ts`: club facts, ground, contact details, officials, admission prices
 - `programmes.ts`: digital matchday programmes (add a PDF to `public/programmes/` and one line here)
-- `donate.ts`: the Donate page: the current appeal (floodlights, target and amount raised: update `raised` as money comes in), the online donation link and bank details (both hidden until filled in)
+- `donate.ts`: the Donate page: the current appeal (floodlights, target and amount raised: update `raised` as money comes in), the online donation link (hidden until filled in) and the club bank details
 - `shop.ts`: the Shop page (the O'Neills club shop link, photo and ranges)
 - `media.ts`: the local radio panel on the News page
 - `fixtures.ts`: fixtures, results, league table. The first-team list is real; update `placeholderTeams` and `isPlaceholderTable` as the ladies, U18 and table data are replaced, and add `venue` to games still marked H/A TBC
