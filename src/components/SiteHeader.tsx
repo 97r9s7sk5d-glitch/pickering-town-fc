@@ -15,6 +15,7 @@ export const navItems: NavItem[] = [
   { to: "/legends", label: "Legends" },
   { to: "/matchday", label: "Matchday" },
   { to: "/sponsors", label: "Sponsors" },
+  { to: "/shop", label: "Shop" },
 ];
 
 export function SiteHeader() {
