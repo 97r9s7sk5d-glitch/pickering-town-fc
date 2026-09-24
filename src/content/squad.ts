@@ -10,9 +10,19 @@ export const squad: Player[] = [
   { image: "/images/squad/player-2.webp", name: "", sponsor: "Nicky Jackson" },
   { image: "/images/squad/player-3.webp", name: "" },
   { image: "/images/squad/player-4.webp", name: "" },
-  { image: "/images/squad/player-5.webp", name: "" },
+  { image: "/images/squad/player-5.webp", name: "", sponsor: "Tom Parsons Trust" },
   { image: "/images/squad/player-6.webp", name: "", sponsor: "Severfield" },
   { image: "/images/squad/player-7.webp", name: "", sponsor: "Cladding & Roofing Solutions Limited" },
+  // Players 8 to 16 are cut out from the club's player sponsor graphics.
+  { image: "/images/squad/player-8.webp", name: "", position: "Goalkeeper", sponsor: "Mandy & Paul Wattam" },
+  { image: "/images/squad/player-9.webp", name: "" },
+  { image: "/images/squad/player-10.webp", name: "" },
+  { image: "/images/squad/player-11.webp", name: "" },
+  { image: "/images/squad/player-12.webp", name: "", sponsor: "Edge Clothing" },
+  { image: "/images/squad/player-13.webp", name: "", sponsor: "Harome Homes" },
+  { image: "/images/squad/player-14.webp", name: "", sponsor: "Harton Works" },
+  { image: "/images/squad/player-15.webp", name: "", sponsor: "Stuart Elvidge" },
+  { image: "/images/squad/player-16.webp", name: "", sponsor: "Television House Pickering" },
 ];
 
 /**
