@@ -7,8 +7,8 @@ export type Player = { image: string; name: string; position?: string; number?: 
 
 export const squad: Player[] = [
   { image: "/images/squad/player-1.webp", name: "", sponsor: "The Spotted Cow" },
-  { image: "/images/squad/player-2.webp", name: "", sponsor: "Nicky Jackson" },
-  { image: "/images/squad/player-3.webp", name: "" },
+  { image: "/images/squad/player-2.webp", name: "Wayne", sponsor: "Nicky Jackson" },
+  { image: "/images/squad/player-3.webp", name: "Blake" },
   { image: "/images/squad/player-4.webp", name: "" },
   { image: "/images/squad/player-5.webp", name: "", sponsor: "Tom Parsons Trust" },
   { image: "/images/squad/player-6.webp", name: "", sponsor: "Severfield" },
@@ -50,6 +50,9 @@ export const ladiesSquad: Player[] = [
   { image: "/images/ladies/aimee.webp", name: "Aimee", sponsor: "Trequinho" },
   { image: "/images/ladies/alesha.webp", name: "Alesha", sponsor: "Fabulously Glam Skin & Beyond" },
 ];
+
+/** First-team player shown above the men's countdown in the home page hero (Wayne). */
+export const firstTeamHeroPlayer = { src: "/images/squad/player-2.webp", width: 585, height: 900, feather: false };
 
 /**
  * Ladies player shown behind the ladies countdown in the home page hero: a cut-out with no background, like the

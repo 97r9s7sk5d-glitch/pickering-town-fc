@@ -10,7 +10,7 @@ import { PitchIntro } from "@/components/PitchIntro";
 import { club, ground } from "@/content/club";
 import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
-import { groundPhoto, ladiesHeroPlayer, squad } from "@/content/squad";
+import { firstTeamHeroPlayer, groundPhoto, ladiesHeroPlayer } from "@/content/squad";
 import { firstTeamTable } from "@/content/tables";
 import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome, scoreline } from "@/lib/matches";
 import { seo } from "@/lib/seo";
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
 
 /** Hero countdowns: one per senior side, each with its own featured player cut-out. */
 const heroTeams = [
-  { id: "first", label: "First team", player: { src: squad[2].image, width: 558, height: 900, feather: false } },
+  { id: "first", label: "First team", player: firstTeamHeroPlayer },
   { id: "ladies", label: "Ladies", player: ladiesHeroPlayer },
 ] as const;
 
