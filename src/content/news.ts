@@ -35,9 +35,9 @@ export const articles: Article[] = [
     title: "Pickering Town Ladies: season two under way",
     date: "2026-09-06",
     category: "Ladies",
-    summary: "Formed in 2025, our women's team is back in the North Riding Women's League Division One. New players welcome.",
+    summary: "Formed in 2025, our women's team is back in the North Riding Women's League Premier Division. New players welcome.",
     body: [
-      "Pickering Town Ladies were formed in 2025 and are now into their second season in the North Riding Women's League Division One.",
+      "Pickering Town Ladies were formed in 2025 and are now into their second season in the North Riding Women's League Premier Division.",
       "The team is always looking for new players, whatever your experience.",
       "If you'd like to play, coach or help out, get in touch with the club. Come and support the team at home games too: fixtures are on the fixtures page under \"Ladies\".",
     ],

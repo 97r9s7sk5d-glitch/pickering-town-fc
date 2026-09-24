@@ -94,15 +94,15 @@ export const matches: Match[] = [
   { id: "f43", kickoff: "2027-03-20T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley", venue: "A" },
   { id: "f44", kickoff: "2027-04-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Frickley Athletic", venue: "H" },
 
-  // LADIES, from FA Full-Time. CONFIRM: the league's name (Full-Time lists it as "WPL") and the dates of
+  // LADIES, from FA Full-Time (North Riding Women's League Premier Division). CONFIRM: the dates of
   // the two September results, which were cut off in the screenshot (taken as Sunday 13 and 20 Sep).
-  { id: "l01", kickoff: "2026-09-06T14:00", team: "ladies", competition: "League", opponent: "Middlesbrough Girls Senior", venue: "H", postponed: true },
-  { id: "l02", kickoff: "2026-09-13T14:00", team: "ladies", competition: "League", opponent: "Middlesbrough Girls Senior", venue: "A", score: [1, 5] },
-  { id: "l03", kickoff: "2026-09-20T14:00", team: "ladies", competition: "League", opponent: "Northallerton Town Women", venue: "H", score: [1, 6] },
-  { id: "l04", kickoff: "2026-09-27T14:00", team: "ladies", competition: "League", opponent: "Wigginton Grasshoppers Ladies", venue: "A" },
-  { id: "l05", kickoff: "2026-10-04T14:00", team: "ladies", competition: "League", opponent: "T.I.B.S Women", venue: "A" },
-  { id: "l06", kickoff: "2026-10-11T14:00", team: "ladies", competition: "League", opponent: "Redcar Athletic Ladies", venue: "H" },
-  { id: "l07", kickoff: "2026-10-18T14:00", team: "ladies", competition: "League", opponent: "Linthorpe Academicals Women", venue: "H" },
+  { id: "l01", kickoff: "2026-09-06T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Middlesbrough Girls Senior", venue: "H", postponed: true },
+  { id: "l02", kickoff: "2026-09-13T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Middlesbrough Girls Senior", venue: "A", score: [1, 5] },
+  { id: "l03", kickoff: "2026-09-20T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Northallerton Town Women", venue: "H", score: [1, 6] },
+  { id: "l04", kickoff: "2026-09-27T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Wigginton Grasshoppers Ladies", venue: "A" },
+  { id: "l05", kickoff: "2026-10-04T14:00", team: "ladies", competition: "NRWL Premier", opponent: "T.I.B.S Women", venue: "A" },
+  { id: "l06", kickoff: "2026-10-11T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Redcar Athletic Ladies", venue: "H" },
+  { id: "l07", kickoff: "2026-10-18T14:00", team: "ladies", competition: "NRWL Premier", opponent: "Linthorpe Academicals Women", venue: "H" },
 
   // PLACEHOLDERS: U18 games, to be replaced with the real list.
   { id: "y01", kickoff: "2026-09-13T10:30", team: "u18", competition: "U18 League", opponent: "Malton & Norton U18", venue: "H", score: [3, 1] },
