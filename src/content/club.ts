@@ -37,9 +37,9 @@ export const contact = {
   email: "", // CONFIRM: club secretary / general enquiries address
   phone: "",
   social: [
+    { label: "Facebook", handle: "Pickeringtownfc", url: "https://www.facebook.com/Pickeringtownfc" },
+    { label: "Instagram", handle: "@pickeringtownfc", url: "https://www.instagram.com/pickeringtownfc" },
     { label: "X (Twitter)", handle: "@PickeringTownFC", url: "https://x.com/PickeringTownFC" },
-    // CONFIRM and add: { label: "Facebook", handle: "...", url: "https://www.facebook.com/..." },
-    // CONFIRM and add: { label: "Instagram", handle: "...", url: "https://www.instagram.com/..." },
   ],
 };
 
