@@ -8,6 +8,9 @@
  * wizzie-wood-goal, then splash-start and splash-end-underwater), joined where the pikes hit the net (4.58s) and
  * compressed to /public/videos/intro.mp4 (8.2s, H.264, 2.2 MB).
  *
+ * The phone version (/public/videos/intro-portrait.mp4, 540 × 960, 2.1 MB) is cut from the same video: a 9:16 window
+ * that pans to follow the pikes out of the badge and into the goal, then opens onto the splash.
+ *
  * Set `introVideo` to null to use the drawn pitch animation instead.
  */
 export type IntroVideo = {
@@ -17,6 +20,8 @@ export type IntroVideo = {
   height: number;
   /** Seconds before the end at which the intro starts fading into the home page. */
   fadeFrom: number;
+  /** A tall version for phones held upright, played full screen instead of the wide video with bands. */
+  portrait?: { src: string; poster: string; width: number; height: number };
 };
 
 export const introVideo: IntroVideo | null = {
@@ -25,4 +30,10 @@ export const introVideo: IntroVideo | null = {
   width: 1280,
   height: 720,
   fadeFrom: 0.8,
+  portrait: {
+    src: "/videos/intro-portrait.mp4",
+    poster: "/images/intro/intro-poster-portrait.webp",
+    width: 540,
+    height: 960,
+  },
 };
