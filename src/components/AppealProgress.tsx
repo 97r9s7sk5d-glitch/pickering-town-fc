@@ -40,7 +40,7 @@ export function AppealProgress({ appeal, donateHref }: { appeal: Appeal; donateH
           aria-valuetext={`${pounds(appeal.raised)} of ${pounds(appeal.target)} (${pct}%)`}
           className="mt-4 h-5 overflow-hidden rounded-full border border-line-strong bg-ink/60"
         >
-          <div className="h-full rounded-full bg-gradient-to-r from-pike to-pike-bright" style={{ width: `${Math.max(pct, 2)}%` }} />
+          <div className="h-full rounded-full bg-gradient-to-r from-pike to-pike-bright" style={{ width: `${appeal.raised > 0 ? Math.max(pct, 2) : 0}%` }} />
         </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
           <p className="text-sm text-muted">

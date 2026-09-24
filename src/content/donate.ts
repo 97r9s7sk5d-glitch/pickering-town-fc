@@ -20,7 +20,7 @@ export const donate = {
     title: "New floodlights for Mill Lane",
     text: "New floodlights will keep evening kick-offs and winter training going at Mill Lane, and help the ground meet league standards for years to come.",
     target: 30000,
-    raised: 5000,
+    raised: 0,
   } as Appeal | null,
   onlineUrl: "",
   bank: null as BankDetails | null,
