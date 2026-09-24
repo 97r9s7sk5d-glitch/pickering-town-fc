@@ -5,7 +5,7 @@ import { Card, Container, PageHeader, SampleNotice } from "@/components/ui";
 import { FullTimeEmbed } from "@/components/FullTimeEmbed";
 import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
-import { isPlaceholderTable, tableTitle } from "@/content/fixtures";
+import { isPlaceholderTable, tableTitle, tableUpdated } from "@/content/fixtures";
 import { form } from "@/lib/matches";
 import { seo } from "@/lib/seo";
 
@@ -39,6 +39,7 @@ function TablePage() {
               )}
               <LeagueTable />
               <TableKey />
+              <p className="mt-3 text-xs text-muted">Table as at {tableUpdated}.</p>
             </>
           )}
         </div>
