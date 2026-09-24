@@ -43,9 +43,10 @@ export function SiteHeader() {
   return (
     <>
     {siteCredit && (
-      <aside aria-label="Website credit" className="bg-night">
-        <p className="mx-auto max-w-7xl px-4 py-1 text-[11px] leading-5 text-muted sm:px-6">
-          <a href={siteCredit.url} target="_blank" rel="noopener" className="transition-colors hover:text-fg">
+      <aside aria-label="Website credit" className="bg-black">
+        <p className="mx-auto max-w-7xl px-4 py-1 text-[11px] leading-5 sm:px-6">
+          {/* Silver on black, The Chairman's colours rather than the club's. */}
+          <a href={siteCredit.url} target="_blank" rel="noopener" className="text-[#c0c0c0] transition-colors hover:text-white">
             Website by <span className="font-semibold">{siteCredit.label}</span>
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
