@@ -40,11 +40,12 @@ export const clubAmbassador = {
 
 /**
  * Club sponsors, shown as smaller cards under the club ambassador on the Sponsors page. `logo` is optional: without
- * one the card shows the name. CONFIRM: The Black Bull's logo and both sponsors' web links.
+ * one the card shows the name. `round` shows a circular logo as a circle rather than on a white panel.
+ * CONFIRM: both sponsors' web links.
  */
-export type ClubSponsor = { name: string; logo?: string; url?: string };
+export type ClubSponsor = { name: string; logo?: string; round?: boolean; url?: string };
 export const clubSponsors: ClubSponsor[] = [
-  { name: "The Black Bull" },
+  { name: "The Black Bull", logo: "/images/black-bull.webp", round: true },
   { name: "Television House Pickering", logo: "/images/television-house-logo.webp" },
 ];
 
