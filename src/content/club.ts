@@ -48,7 +48,7 @@ export type Official = { role: string; name: string };
 /** CONFIRM: taken from the club's current website and public sources in September 2026. */
 export const officials: Official[] = [
   { role: "Chairman", name: "Jamie Hopwood" },
-  { role: "First-team manager", name: "Paul Marshall" },
+  { role: "First-team manager", name: "Simon Heslop" },
   { role: "Kit managers", name: "Tim Prest & Sam Prest" },
 ];
 
