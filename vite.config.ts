@@ -15,6 +15,11 @@ export default defineConfig({
         enabled: true,
         crawlLinks: true,
         failOnError: true,
+        // Netlify's build machines report many CPUs but share them, so rendering a page per CPU at once could time
+        // out and fail the whole build now and then. Render four at a time and retry a failed page before giving up.
+        concurrency: 4,
+        retryCount: 3,
+        retryDelay: 1000,
         // Filtered views (e.g. /fixtures?view=results) are the same page; prerendering them would overwrite it.
         // Links to files (e.g. a programme PDF in /public) aren't pages, so they're not crawled either.
         filter: (page) => !page.path.includes("?") && !/\.[a-z0-9]+$/i.test(page.path),
