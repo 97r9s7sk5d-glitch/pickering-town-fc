@@ -6,11 +6,22 @@
  * - `bank`: bank transfer details. Leave as null to hide them.
  * Without either, the page asks supporters to get in touch through the contact form.
  */
+export type Appeal = { title: string; text: string; target: number; raised: number };
 export type BankDetails = { accountName: string; sortCode: string; accountNumber: string; reference: string };
 
 export const donate = {
   intro:
     "Pickering Town is run by volunteers, for the town. Every pound given goes back into the club: the pitch at Mill Lane, kit and equipment, and football for the first team, the ladies and our young players.",
+  /**
+   * The current fundraising appeal, shown with a progress bar at the top of the Donate page. Update `raised` as money
+   * comes in (whole pounds). Set `appeal` to null when there's no appeal running.
+   */
+  appeal: {
+    title: "New floodlights for Mill Lane",
+    text: "New floodlights will keep evening kick-offs and winter training going at Mill Lane, and help the ground meet league standards for years to come.",
+    target: 30000,
+    raised: 5000,
+  } as Appeal | null,
   onlineUrl: "",
   bank: null as BankDetails | null,
   uses: [

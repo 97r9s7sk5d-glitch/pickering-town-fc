@@ -85,16 +85,15 @@ function MatchdayPage() {
           </a>
           </div>
         </Card>
-        {nextHome ? (
-          <div>
-            <p className="eyebrow mb-3 text-muted">Next home game</p>
-            <NextMatchPanel match={nextHome} />
-          </div>
-        ) : null}
-      </Container>
-
-      <Container className="mt-20">
-        <MatchdayProgramme />
+        <div className="space-y-8">
+          {nextHome ? (
+            <div>
+              <p className="eyebrow mb-3 text-muted">Next home game</p>
+              <NextMatchPanel match={nextHome} />
+            </div>
+          ) : null}
+          <MatchdayProgramme />
+        </div>
       </Container>
 
       <Container className="mt-20 grid gap-10 lg:grid-cols-2">

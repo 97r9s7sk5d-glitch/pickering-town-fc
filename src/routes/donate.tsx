@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, HandCoins, HeartHandshake, Landmark, Mail, Shirt, Ticket, Trophy, Users, Wrench } from "lucide-react";
+import { AppealProgress } from "@/components/AppealProgress";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
 import { admission, club } from "@/content/club";
 import { donate } from "@/content/donate";
@@ -26,7 +27,13 @@ function DonatePage() {
         {donate.intro}
       </PageHeader>
 
-      <Container className="mt-12">
+      {donate.appeal && (
+        <Container className="mt-12">
+          <AppealProgress appeal={donate.appeal} donateHref={onlineUrl || undefined} />
+        </Container>
+      )}
+
+      <Container className="mt-20">
         <SectionHeading eyebrow="Where it goes" title="What your donation pays for" />
         <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {donate.uses.map((u, i) => {
