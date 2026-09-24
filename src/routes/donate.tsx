@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, HandCoins, HeartHandshake, Landmark, Mail, Shirt, Ticket, Trophy, Users, Wrench } from "lucide-react";
+import { ArrowRight, ArrowUpRight, HandCoins, HeartHandshake, Landmark, Mail, Ticket, Trophy, Users } from "lucide-react";
 import { AppealProgress } from "@/components/AppealProgress";
 import { BankDetails } from "@/components/BankDetails";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
@@ -12,12 +12,12 @@ export const Route = createFileRoute("/donate")({
     seo({
       title: "Donate",
       path: "/donate",
-      description: `Support ${club.name} with a donation: the pitch at Mill Lane, kit and equipment, and football for every team.`,
+      description: `Support ${club.name}, run by volunteers for the town: help keep football at the heart of the Pickering community.`,
     }),
   component: DonatePage,
 });
 
-const useIcons = [Wrench, Shirt, Users, Trophy];
+const useIcons = [HeartHandshake, Users, Trophy, Landmark];
 const seasonTicket = admission.find((a) => a.label === "Season ticket");
 
 function DonatePage() {
@@ -35,7 +35,7 @@ function DonatePage() {
       )}
 
       <Container className="mt-20">
-        <SectionHeading eyebrow="Where it goes" title="What your donation pays for" />
+        <SectionHeading eyebrow="Where it goes" title="How your support helps" />
         <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {donate.uses.map((u, i) => {
             const Icon = useIcons[i % useIcons.length];
