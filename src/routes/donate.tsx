@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, HandCoins, HeartHandshake, Landmark, Mail, Shirt, Ticket, Trophy, Users, Wrench } from "lucide-react";
 import { AppealProgress } from "@/components/AppealProgress";
+import { BankDetails } from "@/components/BankDetails";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
 import { admission, club } from "@/content/club";
 import { donate } from "@/content/donate";
@@ -29,7 +30,7 @@ function DonatePage() {
 
       {donate.appeal && (
         <Container className="mt-12">
-          <AppealProgress appeal={donate.appeal} donateHref={onlineUrl || undefined} />
+          <AppealProgress appeal={donate.appeal} bank={bank} donateHref={onlineUrl || undefined} />
         </Container>
       )}
 
@@ -72,16 +73,9 @@ function DonatePage() {
             <Card className="reveal p-6 sm:p-8">
               <Landmark className="h-8 w-8 text-pike-bright" aria-hidden="true" />
               <h3 className="display mt-4 text-3xl">Bank transfer</h3>
-              <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
-                <dt className="text-muted">Account name</dt>
-                <dd className="font-semibold">{bank.accountName}</dd>
-                <dt className="text-muted">Sort code</dt>
-                <dd className="tabular font-semibold">{bank.sortCode}</dd>
-                <dt className="text-muted">Account number</dt>
-                <dd className="tabular font-semibold">{bank.accountNumber}</dd>
-                <dt className="text-muted">Reference</dt>
-                <dd className="font-semibold">{bank.reference}</dd>
-              </dl>
+              <div className="mt-2">
+                <BankDetails bank={bank} />
+              </div>
             </Card>
           )}
           <Card className={`reveal flex flex-col p-6 sm:p-8 ${!onlineUrl && !bank ? "lg:col-span-2" : ""}`}>
