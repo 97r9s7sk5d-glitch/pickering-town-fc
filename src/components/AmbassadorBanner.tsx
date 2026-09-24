@@ -11,9 +11,9 @@ export function AmbassadorBanner({ compact = false }: { compact?: boolean }) {
         <img
           src={clubAmbassador.logo}
           alt={`${clubAmbassador.name} logo`}
-          width={164}
-          height={164}
-          className={`shrink-0 rounded-full bg-white p-1.5 shadow-xl ${compact ? "h-20 w-20" : "h-24 w-24 sm:h-28 sm:w-28"}`}
+          width={256}
+          height={256}
+          className={`shrink-0 rounded-full shadow-xl ring-2 ring-white/80 ${compact ? "h-20 w-20" : "h-24 w-24 sm:h-28 sm:w-28"}`}
           loading="lazy"
         />
         <div className="flex-1">
@@ -41,9 +41,9 @@ function AmbassadorCompact() {
       <img
         src={clubAmbassador.logo}
         alt={`${clubAmbassador.name} logo`}
-        width={164}
-        height={164}
-        className="h-16 w-16 shrink-0 rounded-full bg-white p-1 shadow-lg"
+        width={256}
+        height={256}
+        className="h-16 w-16 shrink-0 rounded-full shadow-lg ring-2 ring-white/80"
       />
       <div className="min-w-0 flex-1">
         <p className="eyebrow !text-[11px] text-pike-bright">{clubAmbassador.role}</p>

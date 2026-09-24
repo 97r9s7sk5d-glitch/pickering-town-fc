@@ -80,7 +80,7 @@ function FixturesPage() {
                 key={v}
                 to="/fixtures"
                 search={(s: Search) => ({ ...s, view: v === "results" ? ("results" as const) : undefined })}
-                aria-pressed={view === v}
+                aria-current={view === v ? "true" : undefined}
                 className={`${tab} ${view === v ? on : off}`}
                 replace
               >
@@ -94,7 +94,7 @@ function FixturesPage() {
                 key={t}
                 to="/fixtures"
                 search={(s: Search) => ({ ...s, team: t === "all" ? undefined : t })}
-                aria-pressed={team === t}
+                aria-current={team === t ? "true" : undefined}
                 className={`${tab} ${team === t ? on : off}`}
                 replace
               >

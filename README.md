@@ -32,6 +32,8 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 - `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
 - `news.ts`: news articles (newest first)
 - `intro.ts`: the home page's opening video (set to `null` for the drawn animation) and where its splash starts
+- `site.ts`: analytics (Google Analytics 4 ID, loads only after cookie consent), contact form settings and the date on the legal pages
+- `legal.ts`: the privacy & cookies policy and terms of use
 - `history.ts`: timeline, honours, records
 - `legends.ts`: the Club legends page (copy an entry to add a person)
 - `sponsors.ts`: the main club ambassador (Flamingo Land), sponsorship packages, partners and player-sponsor graphics
