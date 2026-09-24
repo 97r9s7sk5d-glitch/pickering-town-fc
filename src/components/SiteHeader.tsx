@@ -43,14 +43,19 @@ export function SiteHeader() {
   return (
     <>
     {siteCredit && (
-      <aside aria-label="Website credit" className="bg-black">
-        <p className="mx-auto max-w-7xl px-4 py-1 text-[11px] leading-5 sm:px-6">
-          {/* Silver on black, The Chairman's colours rather than the club's. */}
-          <a href={siteCredit.url} target="_blank" rel="noopener" className="text-[#c0c0c0] transition-colors hover:text-white">
-            Website by <span className="font-semibold">{siteCredit.label}</span>
+      <aside aria-label="Website credit">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          {/* A small black tab in the top left, silver on black: The Chairman's colours rather than the club's. */}
+          <a
+            href={siteCredit.url}
+            target="_blank"
+            rel="noopener"
+            className="inline-block rounded-b-lg bg-black px-3 py-1 text-[11px] leading-5 text-[#c0c0c0] transition-colors hover:text-white"
+          >
+            Website designed by <span className="font-semibold">{siteCredit.label}</span>
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
-        </p>
+        </div>
       </aside>
     )}
     <header ref={headerRef} className="sticky top-0 z-40 border-b border-line bg-ink/80 backdrop-blur-md">
