@@ -12,11 +12,12 @@ host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
 | `/` | Hero, next match with live countdown, last result, form guide, league position, latest news, table snippet |
 | `/fixtures` | Fixtures and results by month, filter by first team or ladies, **add any game to your calendar** (.ics) |
 | `/table` | Full league table with Pickering highlighted and promotion/play-off/relegation markers |
-| `/news`, `/news/<slug>` | News and match reports |
+| `/news`, `/news/<slug>` | News and match reports, and the Radio Scarborough 107.6 FM panel |
 | `/teams` | First team, ladies, and how to join as a player, coach or volunteer |
 | `/club` | History timeline, honours, cup records, officials |
-| `/matchday` | Mill Lane: address and map, admission, clubhouse, accessibility, travel by car/train/bus |
-| `/sponsors` | Sponsorship packages and partner listing |
+| `/matchday` | Mill Lane: address and map, next home game, digital matchday programme, admission, clubhouse, accessibility, travel |
+| `/sponsors` | Club ambassador, club sponsors, sponsorship packages, player sponsors and partners |
+| `/donate` | What donations pay for, how to give, and other ways to back the club |
 | `/contact` | Enquiry form (opens the visitor's email app) or social links if no email is set |
 
 It also includes SEO tags and social-share cards on every page, schema.org `SportsTeam` data, a sitemap and
@@ -28,6 +29,9 @@ phones with no sideways scrolling.
 All the words and data live in `src/content/`, so there's no need to touch page code:
 
 - `club.ts`: club facts, ground, contact details, officials, admission prices
+- `programmes.ts`: digital matchday programmes (add a PDF to `public/programmes/` and one line here)
+- `donate.ts`: the Donate page, including the online donation link and bank details (both hidden until filled in)
+- `media.ts`: the local radio panel on the News page
 - `fixtures.ts`: fixtures, results, league table. The first-team list is real; update `placeholderTeams` and `isPlaceholderTable` as the ladies, U18 and table data are replaced, and add `venue` to games still marked H/A TBC
 - `fulltime.ts`: FA Full-Time snippet codes for live fixtures, results and table (see below)
 - `news.ts`: news articles (newest first)
@@ -36,7 +40,7 @@ All the words and data live in `src/content/`, so there's no need to touch page 
 - `legal.ts`: the privacy & cookies policy and terms of use
 - `history.ts`: timeline, honours, records
 - `legends.ts`: the Club legends page (copy an entry to add a person)
-- `sponsors.ts`: the main club ambassador (Flamingo Land), sponsorship packages, partners and player-sponsor graphics
+- `sponsors.ts`: the main club ambassador (Flamingo Land), club sponsors (The Black Bull, Television House), sponsorship packages, partners and player-sponsor graphics
 - `squad.ts`: first-team and ladies squad photos (add names and positions here) and the team photos
 - `teams.ts`: the teams, their banner photos, the U18s and the academy link (Hawkes 360)
 

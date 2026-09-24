@@ -48,12 +48,20 @@ export function SiteHeader() {
         <nav aria-label="Main" className="hidden xl:block">
           <RoutePillNav items={navItems} />
         </nav>
-        <Link
-          to="/contact"
-          className="eyebrow hidden rounded-full border border-line-strong px-4 py-2 text-fg transition-colors hover:border-pike-bright hover:text-pike-bright xl:inline-flex"
-        >
-          Contact
-        </Link>
+        <div className="hidden items-center gap-2 xl:flex">
+          <Link
+            to="/donate"
+            className="eyebrow inline-flex rounded-full bg-white px-4 py-2 text-ink transition-colors hover:bg-pike-bright"
+          >
+            Donate
+          </Link>
+          <Link
+            to="/contact"
+            className="eyebrow inline-flex rounded-full border border-line-strong px-4 py-2 text-fg transition-colors hover:border-pike-bright hover:text-pike-bright"
+          >
+            Contact
+          </Link>
+        </div>
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
@@ -74,7 +82,7 @@ export function SiteHeader() {
           className="animate-rise fixed inset-x-0 bottom-0 top-[69px] z-30 overflow-y-auto border-t border-line bg-ink px-4 pb-10 pt-4 xl:hidden"
         >
           <ul className="flex flex-col">
-            {[...navItems, { to: "/contact", label: "Contact" } as NavItem].map((item) => (
+            {[...navItems, { to: "/donate", label: "Donate" } as NavItem, { to: "/contact", label: "Contact" } as NavItem].map((item) => (
               <li key={item.label} className="border-b border-line">
                 <Link
                   to={item.to}

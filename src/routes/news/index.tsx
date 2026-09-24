@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArticleCard } from "@/components/ArticleCard";
+import { RadioPanel } from "@/components/RadioPanel";
 import { Container, PageHeader } from "@/components/ui";
 import { club } from "@/content/club";
 import { articles } from "@/content/news";
@@ -17,8 +18,11 @@ function NewsPage() {
       <PageHeader eyebrow="From Mill Lane" title="News">
         Match reports, club announcements and everything happening at the Pikes.
       </PageHeader>
+      <Container className="mt-12">
+        <RadioPanel />
+      </Container>
       <h2 className="sr-only">All news</h2>
-      <Container className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <Container className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((a) => (
           <ArticleCard key={a.slug} article={a} />
         ))}
