@@ -184,15 +184,26 @@ function TeamsPage() {
             <GraduationCap className="h-10 w-10 text-white" aria-hidden="true" />
           </div>
           <p className="flex-1 leading-relaxed text-muted">{academy.text}</p>
-          <a
-            href={academy.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="eyebrow inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-pike px-6 py-3 text-white transition-colors hover:bg-pike-bright hover:text-ink sm:self-center"
-          >
-            Visit {academy.partner} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
+          <div className="flex shrink-0 flex-col gap-3 self-start sm:self-center">
+            <a
+              href={academy.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="eyebrow inline-flex items-center justify-center gap-2 rounded-full bg-pike px-6 py-3 text-white transition-colors hover:bg-pike-bright hover:text-ink"
+            >
+              Visit {academy.partner} <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+            <a
+              href={academy.site.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="eyebrow inline-flex items-center justify-center gap-2 rounded-full border border-line-strong px-6 py-3 text-fg transition-colors hover:border-pike-bright hover:text-pike-bright"
+            >
+              {academy.site.label} website <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          </div>
         </div>
       </Container>
 
