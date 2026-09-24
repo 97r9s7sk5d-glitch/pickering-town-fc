@@ -14,8 +14,8 @@ import { groundPhoto } from "@/content/squad";
 let played = false;
 
 // Runs before hydration: on a repeat load in the same visit (or with reduced motion), hide the intro before it
-// paints and stop its video downloading.
-const skipIfSeen = `(function(){var e=document.currentScript.parentElement;var skip=matchMedia("(prefers-reduced-motion: reduce)").matches;try{if(sessionStorage.getItem("ptfc-intro"))skip=true;sessionStorage.setItem("ptfc-intro","1")}catch(_){}if(!skip)return;e.setAttribute("data-skip","");var v=e.querySelector("video");if(v){v.removeAttribute("autoplay");v.removeAttribute("src");v.load()}})()`;
+// paints and stop its video downloading. On a phone held upright, swap in the tall version of the video.
+const skipIfSeen = `(function(){var e=document.currentScript.parentElement;var v=e.querySelector("video");var skip=matchMedia("(prefers-reduced-motion: reduce)").matches;try{if(sessionStorage.getItem("ptfc-intro"))skip=true;sessionStorage.setItem("ptfc-intro","1")}catch(_){}if(!skip){if(v&&v.dataset.portraitSrc&&matchMedia("(orientation: portrait)").matches){v.setAttribute("data-portrait","");v.poster=v.dataset.portraitPoster;v.src=v.dataset.portraitSrc;var b=e.querySelector(".pitch-intro__backdrop");if(b)b.src=v.dataset.portraitPoster}return}e.setAttribute("data-skip","");if(v){v.removeAttribute("autoplay");v.removeAttribute("src");v.load()}})()`;
 
 export function PitchIntro() {
   const [show, setShow] = useState(!played);
@@ -109,12 +109,16 @@ function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObjec
 
   return (
     <>
-      <img className="pitch-intro__backdrop" src={video.poster} alt="" aria-hidden="true" />
+      <img className="pitch-intro__backdrop" src={video.poster} alt="" aria-hidden="true" suppressHydrationWarning />
+      {/* The inline script in PitchIntro may swap in the portrait video before hydration, hence the warning opt-out. */}
       <video
         ref={ref}
         className="pitch-intro__video"
         src={video.src}
         poster={video.poster}
+        data-portrait-src={video.portrait?.src}
+        data-portrait-poster={video.portrait?.poster}
+        suppressHydrationWarning
         width={video.width}
         height={video.height}
         muted

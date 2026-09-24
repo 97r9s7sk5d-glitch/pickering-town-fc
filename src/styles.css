@@ -357,10 +357,13 @@
   filter: blur(28px) brightness(0.75);
   transform: scale(1.15);
 }
-/* Phones: show the whole frame (centre circle to goal) rather than cropping it. */
+/* Upright phones play the tall version full screen. If it's missing, show the whole wide frame rather than cropping it. */
 @media (orientation: portrait) {
   .pitch-intro__video {
     object-fit: contain;
+  }
+  .pitch-intro__video[data-portrait] {
+    object-fit: cover;
   }
 }
 .pitch-intro--video .pitch-intro__caption {
