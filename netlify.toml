@@ -1,13 +1,15 @@
-# Netlify build for the draft site.
+# Netlify build for www.pickeringtownfc.com.
 [build]
   command = "npm run build"
   publish = "dist/client"
 
-# Draft only: keep every page out of search engines. Delete this block when the site goes live.
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
+# The old draft address sends visitors (and search engines) to the live site. Deploy previews use their own
+# deploy-preview-… addresses, so they aren't affected.
+[[redirects]]
+  from = "https://pickering-town-fc-draft.netlify.app/*"
+  to = "https://www.pickeringtownfc.com/:splat"
+  status = 301
+  force = true
 
 # Security: force HTTPS for a year (Netlify already redirects http to https), and standard hardening headers.
 [[headers]]
