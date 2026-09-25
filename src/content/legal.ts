@@ -19,7 +19,7 @@ export const privacySections: LegalSection[] = [
     paragraphs: [
       "Contact form: when you send us a message we receive your name, email address, the topic you chose and your message. We use these only to reply to you and to deal with your enquiry.",
       "Analytics: if you accept analytics cookies, we use Google Analytics to count visits and see which pages are popular. It records things like the pages you view, roughly where you are (country or city), and your device and browser. It does not tell us who you are. If you reject analytics cookies, it does not run.",
-      "Server logs: our hosting provider (Netlify) keeps standard technical logs, such as IP addresses and the pages requested, for security and to keep the site running.",
+      "Server logs: our hosting provider (GitHub Pages) keeps standard technical logs, such as IP addresses and the pages requested, for security and to keep the site running.",
     ],
   },
   {
@@ -38,7 +38,7 @@ export const privacySections: LegalSection[] = [
   {
     heading: "Who we share it with",
     paragraphs: [
-      "Contact form messages are delivered through Netlify, which hosts the site. Analytics data, if you consent, is processed by Google. Both act on our behalf. We never sell your information, and we don't share it with anyone else unless the law requires it.",
+      "Contact form messages come to the club by email. The site is hosted by GitHub Pages. Analytics data, if you consent, is processed by Google. They act on our behalf. We never sell your information, and we don't share it with anyone else unless the law requires it.",
     ],
   },
   {

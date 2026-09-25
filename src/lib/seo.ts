@@ -3,7 +3,8 @@ import { club } from "@/content/club";
 /** Per-page <head> tags: title, description and the social-share (Open Graph / X) equivalents. */
 export function seo({ title, description, path = "/" }: { title?: string; description: string; path?: string }) {
   const fullTitle = title ? `${title} | ${club.name}` : `${club.name} | ${club.nickname} · Est. ${club.founded}`;
-  const url = `${club.siteUrl}${path}`;
+  // Pages are served as folders (/teams/), so the canonical address ends in a slash; GitHub Pages redirects /teams to it.
+  const url = `${club.siteUrl}${path.endsWith("/") ? path : `${path}/`}`;
   return {
     meta: [
       { title: fullTitle },

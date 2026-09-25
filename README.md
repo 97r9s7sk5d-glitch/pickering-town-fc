@@ -5,9 +5,14 @@ It's built with TanStack Start, React 19 and Tailwind CSS v4. Every page is
 prerendered to plain HTML at build time, so it's fast, search-engine friendly and can be hosted free on any static
 host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
 
-Live at **https://www.pickeringtownfc.com**, hosted on Netlify and deployed from `main`. The domain is registered with
-GoDaddy: `@` is an A record to `75.2.60.5` and `www` is a CNAME to `pickering-town-fc-draft.netlify.app`, with www
-as Netlify's primary domain. The old draft address redirects to the live site (see `netlify.toml`).
+Live at **https://www.pickeringtownfc.com**, hosted free on **GitHub Pages**. Every change merged into `main` is
+built and published by the GitHub Action in `.github/workflows/deploy-pages.yml` (see the repository's **Actions**
+tab). It can also be re-run by hand there with **Run workflow**.
+
+The domain is registered with GoDaddy. `@` has four A records to GitHub Pages (`185.199.108.153`, `185.199.109.153`,
+`185.199.110.153`, `185.199.111.153`) and `www` is a CNAME to `97r9s7sk5d-glitch.github.io`, with
+`www.pickeringtownfc.com` as the custom domain in the repository's **Settings → Pages**. The site was on Netlify
+until its free plan ran out of credits; `netlify.toml` is kept only for reference.
 
 ## Pages
 
@@ -105,9 +110,9 @@ sets this up for Vercel: import the GitHub repo and it deploys on every push.
 
 ## Contact form and analytics
 
-- **Contact form:** messages arrive in Netlify under **Forms → contact**. To get each one by email, go to
-  Netlify → Project configuration → Notifications → Form submission notifications → Add notification → Email.
-  Netlify's free plan includes 100 submissions a month. Spam is filtered by a hidden honeypot field, a minimum
-  fill-in time and Netlify's own spam check (flagged messages are under **Forms → Spam**).
+- **Contact form:** pressing **Send message** opens the visitor's email app with their message written out and addressed
+  to the club email in `club.ts`. To have messages sent straight from the page instead, get a free access key at
+  web3forms.com (enter the club email; the key is emailed to you) and put it in `contactForm.web3formsKey` in `site.ts`.
+  Spam is filtered by a hidden honeypot field and a minimum fill-in time.
 - **Analytics:** create a Google Analytics 4 property, copy its measurement ID (`G-…`) into
   `src/content/site.ts`, and push. It only loads for visitors who accept analytics cookies.

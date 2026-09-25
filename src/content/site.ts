@@ -10,18 +10,21 @@ export const analytics = {
 };
 
 /**
- * Contact form: messages are sent through Netlify Forms and appear in the Netlify dashboard (Forms → contact),
- * which can email each one to the club: Netlify → Project configuration → Notifications → Form submission
- * notifications. Spam is filtered by a hidden honeypot field, a minimum fill-in time and Netlify's own spam check.
+ * Contact form. With no Web3Forms key, "Send message" opens the visitor's email app with their message written out
+ * and addressed to the club email (contact.email in club.ts), ready to send.
+ *
+ * To have messages sent straight from the page instead: go to web3forms.com, enter the club email address, and paste
+ * the access key they email you into `web3formsKey` (it's meant to be public). Messages then arrive in that inbox.
+ * Spam protection: a hidden honeypot field bots fill in, and a minimum fill-in time.
  */
 export const contactForm = {
-  name: "contact",
+  web3formsKey: "",
   /** Submissions faster than this (in ms) after the page loads are treated as bots. */
   minFillTime: 3000,
 };
 
 /** When the privacy policy and terms were last updated. */
-export const legalUpdated = "24 September 2026";
+export const legalUpdated = "25 September 2026";
 
 /** The website credit, a thin line at the top left of every page, above the header. Set to null to remove it. */
 export const siteCredit: { label: string; url: string } | null = {
