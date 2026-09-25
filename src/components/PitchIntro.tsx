@@ -14,8 +14,9 @@ import { groundPhoto } from "@/content/squad";
 let played = false;
 
 // Runs before hydration: on a repeat load in the same visit (or with reduced motion), hide the intro before it
-// paints and stop its video downloading. On a phone held upright, swap in the tall version of the video.
-const skipIfSeen = `(function(){var e=document.currentScript.parentElement;var v=e.querySelector("video");var skip=matchMedia("(prefers-reduced-motion: reduce)").matches;try{if(sessionStorage.getItem("ptfc-intro"))skip=true;sessionStorage.setItem("ptfc-intro","1")}catch(_){}if(!skip){if(v&&v.dataset.portraitSrc&&matchMedia("(orientation: portrait)").matches){v.setAttribute("data-portrait","");v.poster=v.dataset.portraitPoster;v.src=v.dataset.portraitSrc;var b=e.querySelector(".pitch-intro__backdrop");if(b)b.src=v.dataset.portraitPoster}return}e.setAttribute("data-skip","");if(v){v.removeAttribute("autoplay");v.removeAttribute("src");v.load()}})()`;
+// paints. Otherwise pick the video for the screen (the tall version on a phone held upright) and only then give the
+// video and backdrop their files, so a phone never starts downloading the wide video too.
+const skipIfSeen = `(function(){var e=document.currentScript.parentElement;var skip=matchMedia("(prefers-reduced-motion: reduce)").matches;try{if(sessionStorage.getItem("ptfc-intro"))skip=true;sessionStorage.setItem("ptfc-intro","1")}catch(_){}if(skip){e.setAttribute("data-skip","");return}var v=e.querySelector("video");if(!v)return;var d=v.dataset;var tall=d.portraitSrc&&matchMedia("(orientation: portrait)").matches;if(tall)v.setAttribute("data-portrait","");v.poster=tall?d.portraitPoster:d.poster;v.src=tall?d.portraitSrc:d.src;var b=e.querySelector(".pitch-intro__backdrop");if(b)b.src=v.poster})()`;
 
 export function PitchIntro() {
   const [show, setShow] = useState(!played);
@@ -83,11 +84,12 @@ function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObjec
     const overlay = root.current;
     if (!el || !overlay || overlay.hasAttribute("data-skip")) return;
 
-    // Backup for the inline script: make sure an upright phone plays the tall version, full screen.
-    if (video.portrait && !el.hasAttribute("data-portrait") && matchMedia("(orientation: portrait)").matches) {
-      el.setAttribute("data-portrait", "");
-      el.poster = video.portrait.poster;
-      el.src = video.portrait.src;
+    // Backup for the inline script, which normally gives the video its file before hydration.
+    if (!el.getAttribute("src")) {
+      const tall = video.portrait && matchMedia("(orientation: portrait)").matches ? video.portrait : null;
+      if (tall) el.setAttribute("data-portrait", "");
+      el.poster = (tall ?? video).poster;
+      el.src = (tall ?? video).src;
     }
 
     const finish = () => overlay.classList.add("is-ending");
@@ -116,13 +118,14 @@ function VideoScene({ video, root, onFail }: { video: IntroVideo; root: RefObjec
 
   return (
     <>
-      <img className="pitch-intro__backdrop" src={video.poster} alt="" aria-hidden="true" suppressHydrationWarning />
-      {/* The inline script in PitchIntro may swap in the portrait video before hydration, hence the warning opt-out. */}
+      {/* No files in the HTML: the inline script in PitchIntro picks the wide or tall version and sets them before
+          hydration, hence the warning opt-outs. */}
+      <img className="pitch-intro__backdrop" alt="" aria-hidden="true" suppressHydrationWarning />
       <video
         ref={ref}
         className="pitch-intro__video"
-        src={video.src}
-        poster={video.poster}
+        data-src={video.src}
+        data-poster={video.poster}
         data-portrait-src={video.portrait?.src}
         data-portrait-poster={video.portrait?.poster}
         suppressHydrationWarning
