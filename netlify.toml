@@ -34,3 +34,7 @@
   for = "/videos/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/programmes/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
