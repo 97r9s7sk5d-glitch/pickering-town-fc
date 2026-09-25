@@ -7,4 +7,6 @@
  */
 export type Programme = { matchId: string; file: string; cover?: string };
 
-export const programmes: Programme[] = [];
+export const programmes: Programme[] = [
+  { matchId: "f14", file: "/programmes/2026-09-26-retford-fc.pdf", cover: "/programmes/2026-09-26-retford-fc-cover.webp" },
+];
