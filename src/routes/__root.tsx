@@ -38,6 +38,7 @@ const structuredData = {
       addressCountry: "GB",
     },
   },
+  ...(contact.email ? { email: contact.email } : {}),
   sameAs: contact.social.map((s) => s.url),
 };
 
