@@ -1,4 +1,4 @@
-import { ArrowUpRight, Radio } from "lucide-react";
+import { ArrowUpRight, Headphones, Radio } from "lucide-react";
 import { radio } from "@/content/media";
 
 /** Local radio panel on the News page (details in content/media.ts). */
@@ -20,15 +20,32 @@ export function RadioPanel() {
           </h2>
           <p className="mt-2 max-w-2xl leading-relaxed text-muted">{radio.text}</p>
         </div>
-        <a
-          href={radio.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="eyebrow inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-white px-5 py-2.5 text-ink transition-colors hover:bg-pike-bright sm:self-center"
-        >
-          Listen live <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          <span className="sr-only">(opens {radio.name} in a new tab)</span>
-        </a>
+        <div className="flex shrink-0 flex-col gap-3 self-start sm:self-center">
+          {radio.latestInterview && (
+            <a
+              href={radio.latestInterview}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="eyebrow inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-ink transition-colors hover:bg-pike-bright"
+            >
+              <Headphones className="h-4 w-4" aria-hidden="true" /> Listen to the latest interview
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+          <a
+            href={radio.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`eyebrow inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 transition-colors ${
+              radio.latestInterview
+                ? "border border-line-strong text-fg hover:border-pike-bright hover:text-pike-bright"
+                : "bg-white text-ink hover:bg-pike-bright"
+            }`}
+          >
+            Listen live <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            <span className="sr-only">(opens {radio.name} in a new tab)</span>
+          </a>
+        </div>
       </div>
     </section>
   );

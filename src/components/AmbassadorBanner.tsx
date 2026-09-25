@@ -19,7 +19,11 @@ export function AmbassadorBanner({ compact = false }: { compact?: boolean }) {
         <div className="flex-1">
           <p className="eyebrow text-pike-bright">{clubAmbassador.role}</p>
           <p className={`display mt-1 ${compact ? "text-3xl sm:text-4xl" : "text-4xl sm:text-5xl"}`}>{clubAmbassador.name}</p>
-          <p className="mt-2 max-w-2xl leading-relaxed text-muted">{clubAmbassador.text}</p>
+          <div className="mt-2 max-w-3xl space-y-3 leading-relaxed text-muted">
+            {clubAmbassador.text.map((para) => (
+              <p key={para}>{para}</p>
+            ))}
+          </div>
         </div>
         <a
           href={clubAmbassador.url}
@@ -48,7 +52,7 @@ function AmbassadorCompact() {
       <div className="min-w-0 flex-1">
         <p className="eyebrow !text-[11px] text-pike-bright">{clubAmbassador.role}</p>
         <p className="display mt-0.5 text-2xl">{clubAmbassador.name}</p>
-        <p className="mt-1 text-sm leading-snug text-muted">{clubAmbassador.text}</p>
+        <p className="mt-1 text-sm leading-snug text-muted">{clubAmbassador.text[0]}</p>
         <a
           href={clubAmbassador.url}
           target="_blank"

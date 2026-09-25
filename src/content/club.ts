@@ -34,7 +34,7 @@ export const ground = {
 
 /** Leave a value empty ("") and the site hides it rather than showing a broken link. */
 export const contact = {
-  email: "", // CONFIRM: club secretary / general enquiries address
+  email: "pickeringtownfc@outlook.com",
   phone: "",
   social: [
     { label: "Facebook", handle: "Pickeringtownfc", url: "https://www.facebook.com/Pickeringtownfc" },
