@@ -45,7 +45,7 @@ function validate(f: Fields): Errors {
   return e;
 }
 
-type Status = "idle" | "sending" | "sent" | "error";
+type Status = "idle" | "sending" | "sent" | "opened" | "error";
 
 function ContactPage() {
   const { topic = "general" } = Route.useSearch();
@@ -59,9 +59,9 @@ function ContactPage() {
   }, [topic]);
 
   /**
-   * Sends the message through Netlify Forms (the form is detected from the prerendered HTML at deploy).
-   * Spam protection: a hidden honeypot field bots fill in, a minimum time before submitting, and Netlify's
-   * own spam filtering. Bots are shown the normal "sent" message but nothing is delivered.
+   * Sends the message straight to the club through Web3Forms when a key is set (site.ts); otherwise opens the
+   * visitor's email app with the message written out, addressed to the club. Spam protection: a hidden honeypot
+   * field bots fill in, and a minimum time before submitting. Bots are shown the normal "sent" message.
    */
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -79,18 +79,35 @@ function ContactPage() {
       form.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
       return;
     }
-    if (data.get("bot-field") || Date.now() - startedAt.current < contactForm.minFillTime) {
+    if (data.get("botcheck") || Date.now() - startedAt.current < contactForm.minFillTime) {
       setStatus("sent");
       return;
     }
+    const topicLabel = String(data.get("topic") ?? topics.general);
+
+    if (!contactForm.web3formsKey) {
+      const body = `${fields.message}\n\nFrom: ${fields.name} (${fields.email})`;
+      window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(`${topicLabel}: website enquiry`)}&body=${encodeURIComponent(body)}`;
+      setStatus("opened");
+      return;
+    }
+
     setStatus("sending");
     try {
-      const res = await fetch("/", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: contactForm.web3formsKey,
+          subject: `${topicLabel}: website enquiry`,
+          from_name: "Pickering Town FC website",
+          replyto: fields.email,
+          topic: topicLabel,
+          ...fields,
+        }),
       });
-      if (!res.ok) throw new Error(String(res.status));
+      const json = (await res.json().catch(() => ({}))) as { success?: boolean };
+      if (!res.ok || !json.success) throw new Error(String(res.status));
       form.reset();
       setStatus("sent");
     } catch {
@@ -117,12 +134,23 @@ function ContactPage() {
       </PageHeader>
       <Container className="mt-12 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
         <Card className="p-6 sm:p-8">
-          {status === "sent" ? (
+          {status === "sent" || status === "opened" ? (
             <div role="status">
               <CheckCircle2 className="h-10 w-10 text-win" aria-hidden="true" />
-              <h2 className="display mt-4 text-4xl">Message sent</h2>
+              <h2 className="display mt-4 text-4xl">{status === "sent" ? "Message sent" : "Almost done"}</h2>
               <p className="mt-3 leading-relaxed text-muted">
-                Thanks for getting in touch. Someone from the club will reply by email as soon as they can.
+                {status === "sent" ? (
+                  "Thanks for getting in touch. Someone from the club will reply by email as soon as they can."
+                ) : (
+                  <>
+                    Your email app should now be open with your message ready: just press send. If it didn't open,
+                    email us at{" "}
+                    <a href={`mailto:${contact.email}`} className="text-pike-bright underline underline-offset-2">
+                      {contact.email}
+                    </a>
+                    .
+                  </>
+                )}
               </p>
               <button
                 type="button"
@@ -137,20 +165,18 @@ function ContactPage() {
             </div>
           ) : (
             <form
-              name={contactForm.name}
+              name="contact"
               method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
-              action="/contact"
+              action={`mailto:${contact.email}`}
+              encType="text/plain"
               onSubmit={onSubmit}
               noValidate
               className="grid gap-5"
             >
-              <input type="hidden" name="form-name" value={contactForm.name} />
               {/* Honeypot: hidden from people, filled in by bots. */}
               <p className="hidden" aria-hidden="true">
                 <label>
-                  Leave this empty <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                  Leave this empty <input name="botcheck" tabIndex={-1} autoComplete="off" />
                 </label>
               </p>
               <label className="text-sm font-semibold">
