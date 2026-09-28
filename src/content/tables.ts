@@ -1,6 +1,7 @@
 /**
  * League tables, one per team, shown on the Table page (and the first team's on the home page).
- * To update one, copy the rows from the league's website in order and change `updated`.
+ * The first team's table is kept up to date from the NCEL website by scripts/sync-league.mjs. To update another,
+ * copy the rows from the league's website in order and change `updated`.
  * W/D/L and goals are optional: the columns only show when every row has them.
  */
 export type TableRow = {
@@ -32,31 +33,31 @@ export type LeagueTableData = {
 export const firstTeamTable: LeagueTableData = {
   label: "First Team",
   title: "NCEL Premier Division 2026–27",
-  updated: "24 September 2026",
+  updated: "28 September 2026",
   source: { name: "Northern Counties East League", url: "https://www.ncefl.org.uk/tables/" },
   ownTeam: "Pickering Town",
   zones: { promotion: 1, playoffs: 5, relegation: 2 },
   rows: [
-    { team: "Dearne & District", played: 10, goalDifference: 15, points: 24 },
-    { team: "Bottesford Town", played: 9, goalDifference: 21, points: 21 },
-    { team: "Retford United", played: 12, goalDifference: 3, points: 19 },
-    { team: "Worsbrough Bridge Athletic", played: 8, goalDifference: 11, points: 16 },
-    { team: "Knaresborough Town", played: 8, goalDifference: 8, points: 16 },
-    { team: "Retford FC", played: 10, goalDifference: 1, points: 16 },
-    { team: "Handsworth", played: 9, goalDifference: -1, points: 15 },
-    { team: "Barton Town", played: 6, goalDifference: 6, points: 13 },
-    { team: "Albion Sports", played: 11, goalDifference: 2, points: 13 },
-    { team: "Pickering Town", played: 10, goalDifference: -1, points: 13 },
-    { team: "Campion AFC", played: 10, goalDifference: -2, points: 13 },
-    { team: "Golcar United", played: 8, goalDifference: 5, points: 12 },
-    { team: "Penistone Church", played: 9, goalDifference: 0, points: 12 },
-    { team: "Horbury Town", played: 8, goalDifference: 3, points: 11 },
-    { team: "Rossington Main", played: 9, goalDifference: 2, points: 11 },
-    { team: "Thackley", played: 11, goalDifference: 0, points: 11 },
-    { team: "Tadcaster Albion", played: 8, goalDifference: -9, points: 7 },
-    { team: "Parkgate", played: 10, goalDifference: -18, points: 7 },
-    { team: "Frickley Athletic", played: 9, goalDifference: -5, points: 5 },
-    { team: "Keighley Town", played: 11, goalDifference: -41, points: 2 },
+    { team: "Dearne & District", played: 11, won: 8, drawn: 1, lost: 2, goalsFor: 25, goalsAgainst: 10, goalDifference: 15, points: 25 },
+    { team: "Bottesford Town", played: 10, won: 7, drawn: 1, lost: 2, goalsFor: 26, goalsAgainst: 5, goalDifference: 21, points: 22 },
+    { team: "Retford United", played: 13, won: 5, drawn: 5, lost: 3, goalsFor: 19, goalsAgainst: 16, goalDifference: 3, points: 20 },
+    { team: "Knaresborough Town", played: 9, won: 5, drawn: 2, lost: 2, goalsFor: 23, goalsAgainst: 15, goalDifference: 8, points: 17 },
+    { team: "Barton Town", played: 7, won: 5, drawn: 1, lost: 1, goalsFor: 15, goalsAgainst: 7, goalDifference: 8, points: 16 },
+    { team: "Worsbrough Bridge Athletic", played: 9, won: 5, drawn: 1, lost: 3, goalsFor: 18, goalsAgainst: 11, goalDifference: 7, points: 16 },
+    { team: "Campion", played: 11, won: 5, drawn: 1, lost: 5, goalsFor: 23, goalsAgainst: 21, goalDifference: 2, points: 16 },
+    { team: "Pickering Town", played: 11, won: 5, drawn: 1, lost: 5, goalsFor: 20, goalsAgainst: 20, goalDifference: 0, points: 16 },
+    { team: "Retford FC", played: 11, won: 4, drawn: 4, lost: 3, goalsFor: 16, goalsAgainst: 16, goalDifference: 0, points: 16 },
+    { team: "Handsworth", played: 10, won: 4, drawn: 4, lost: 2, goalsFor: 21, goalsAgainst: 22, goalDifference: -1, points: 16 },
+    { team: "Penistone Church", played: 10, won: 4, drawn: 3, lost: 3, goalsFor: 19, goalsAgainst: 16, goalDifference: 3, points: 15 },
+    { team: "Horbury Town", played: 9, won: 4, drawn: 2, lost: 3, goalsFor: 17, goalsAgainst: 11, goalDifference: 6, points: 14 },
+    { team: "Albion Sports", played: 12, won: 4, drawn: 1, lost: 7, goalsFor: 20, goalsAgainst: 21, goalDifference: -1, points: 13 },
+    { team: "Golcar United", played: 9, won: 3, drawn: 3, lost: 3, goalsFor: 17, goalsAgainst: 14, goalDifference: 3, points: 12 },
+    { team: "Rossington Main", played: 10, won: 2, drawn: 6, lost: 2, goalsFor: 13, goalsAgainst: 11, goalDifference: 2, points: 12 },
+    { team: "Thackley", played: 12, won: 2, drawn: 5, lost: 5, goalsFor: 17, goalsAgainst: 19, goalDifference: -2, points: 11 },
+    { team: "Frickley Athletic", played: 10, won: 2, drawn: 2, lost: 6, goalsFor: 15, goalsAgainst: 18, goalDifference: -3, points: 8 },
+    { team: "Tadcaster Albion", played: 9, won: 1, drawn: 5, lost: 3, goalsFor: 9, goalsAgainst: 18, goalDifference: -9, points: 8 },
+    { team: "Parkgate", played: 11, won: 2, drawn: 2, lost: 7, goalsFor: 8, goalsAgainst: 26, goalDifference: -18, points: 8 },
+    { team: "Keighley Town", played: 12, won: 0, drawn: 2, lost: 10, goalsFor: 7, goalsAgainst: 51, goalDifference: -44, points: 2 },
   ],
 };
 

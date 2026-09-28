@@ -79,14 +79,29 @@ be read directly. Each one is marked `CONFIRM` in the code:
 - [ ] **Fixtures and table**: only the Golcar United (3–2) and Bottesford Town (0–3) results and Pickering's
       table row (10th, 13 pts) are real. Everything else is placeholder, and the site shows a notice saying so.
 
-## Keeping fixtures up to date (FA Full-Time)
+## Keeping fixtures up to date
 
-The NCEL and the North Riding leagues run on the FA's **Full-Time** service. The FA doesn't offer a public data
+### First team: automatic, from the NCEL website
+
+`.github/workflows/sync-league.yml` runs `scripts/sync-league.mjs` four times a day (morning, midday, and after
+Saturday and midweek games). It reads the club's page and the tables page on www.ncefl.org.uk and updates
+`src/content/fixtures.ts` (scores, attendances, Pikes scorers, kick-off times, moved and new games; friendlies are
+left out) and the first-team table in `src/content/tables.ts`. If anything changed it checks the site builds,
+commits to `main` and republishes. If the league's pages can't be read it changes nothing and the run shows as
+failed in the **Actions** tab. Run it by hand there with **Run workflow**, or locally with
+`node scripts/sync-league.mjs --dry-run` to see what it would change.
+
+### Ladies and U18: by hand, or FA Full-Time code snippets
+
+The ladies' league (and any U18 league) is on FA Full-Time, which blocks automated reading, so their scores and
+tables are edited by hand in `fixtures.ts` and `tables.ts`, or switched to the live Full-Time feeds below.
+
+The North Riding leagues run on the FA's **Full-Time** service. The FA doesn't offer a public data
 feed. Its supported way to show fixtures, results and tables on a club site is **code snippets**, and the site
 is ready for them:
 
 1. A Full-Time team administrator for the club signs in at fulltime.thefa.com and goes to **Media → Code snippets**.
-2. Create a snippet for each of: league table, first-team fixtures, first-team results (and the ladies' too).
+2. Create a snippet for each of the ladies' league table, fixtures and results.
 3. From each embed code, copy the `div` id (`lrep…`) and the `lrcode` value into `src/content/fulltime.ts`.
 
 Each filled slot switches that page to the live Full-Time feed, styled in club colours, so there's no manual
