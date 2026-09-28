@@ -40,6 +40,8 @@ export const contact = {
     { label: "Facebook", handle: "Pickeringtownfc", url: "https://www.facebook.com/Pickeringtownfc" },
     { label: "Instagram", handle: "@pickeringtownfc", url: "https://www.instagram.com/pickeringtownfc" },
     { label: "X (Twitter)", handle: "@PickeringTownFC", url: "https://x.com/PickeringTownFC" },
+    { label: "Ladies Facebook", handle: "Pickering Town FC Ladies", url: "https://www.facebook.com/share/19eEsX2Jpo/" },
+    { label: "Ladies Instagram", handle: "@pickeringtownfcladies", url: "https://www.instagram.com/pickeringtownfcladies" },
   ],
 };
 

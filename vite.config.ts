@@ -8,6 +8,9 @@ import tailwindcss from "@tailwindcss/vite";
 // Plugin order matters: tanstackStart() must come before viteReact().
 export default defineConfig({
   server: { port: 3000 },
+  // When the site was built: the prerendered pages pick the next games as of then, and the browser moves them on
+  // from its own clock (src/lib/now.ts).
+  define: { __BUILD_TIME__: JSON.stringify(Date.now()) },
   resolve: { tsconfigPaths: true },
   plugins: [
     tanstackStart({

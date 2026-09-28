@@ -1,10 +1,13 @@
-# Builds the site and publishes it to GitHub Pages (www.pickeringtownfc.com) every time main changes.
+# Builds the site and publishes it to GitHub Pages (www.pickeringtownfc.com) every time main changes, and once a day
+# so the prerendered "next match" moves on after each game (browsers also move it on from their own clock).
 # It can also be run by hand from the Actions tab ("Run workflow").
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: "17 4 * * *" # daily, early morning
   workflow_dispatch:
 
 permissions:
@@ -28,6 +31,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # Kick-off times in the content are UK time.
+          TZ: Europe/London
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

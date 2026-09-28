@@ -5,6 +5,7 @@ import { MatchdayProgramme } from "@/components/MatchdayProgramme";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
 import { admission, club, ground } from "@/content/club";
 import { fixtures } from "@/lib/matches";
+import { useNow } from "@/lib/now";
 import { groundPhoto } from "@/content/squad";
 import { seo } from "@/lib/seo";
 
@@ -37,7 +38,8 @@ const travel = [
 ];
 
 function MatchdayPage() {
-  const nextHome = fixtures().find((m) => m.venue === "H");
+  const now = useNow();
+  const nextHome = fixtures("first", now).find((m) => m.venue === "H");
 
   return (
     <>

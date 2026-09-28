@@ -3,6 +3,7 @@ import { Crest } from "@/components/Crest";
 import { matches, type Match } from "@/content/fixtures";
 import { programmes, type Programme } from "@/content/programmes";
 import { fixtures, formatLongDate, homeAway, kickoffDate } from "@/lib/matches";
+import { useNow } from "@/lib/now";
 
 type Issue = Programme & { match: Match };
 
@@ -16,11 +17,12 @@ const title = (m: Match) => {
  * issue and back issues, or a note until the first one is added.
  */
 export function MatchdayProgramme() {
+  const now = useNow();
   const issues = programmes
     .map((p) => ({ ...p, match: matches.find((m) => m.id === p.matchId) }))
     .filter((p): p is Issue => Boolean(p.match));
   const [latest, ...back] = issues;
-  const nextHome = fixtures("first").find((m) => m.venue === "H");
+  const nextHome = fixtures("first", now).find((m) => m.venue === "H");
 
   return (
     <section aria-labelledby="programme-title">

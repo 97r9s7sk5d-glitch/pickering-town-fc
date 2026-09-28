@@ -32,15 +32,26 @@ export function results(team?: TeamId): Match[] {
     .sort((a, b) => b.kickoff.localeCompare(a.kickoff));
 }
 
-/** Unplayed matches, soonest first. */
-export function fixtures(team?: TeamId): Match[] {
+/** How long after kick-off a game counts as over (90 minutes, half time and stoppages, with some to spare). */
+const MATCH_LENGTH_MS = 2 * 60 * 60 * 1000;
+
+/** Whether the game has finished by `now`, whether or not its score has been added yet. */
+export function isOver(match: Match, now: number): boolean {
+  return kickoffDate(match).getTime() + MATCH_LENGTH_MS <= now;
+}
+
+/**
+ * Upcoming matches, soonest first: not played, not postponed, and (given `now`, from useNow()) not already over, so
+ * the next game moves on by itself after full time. A finished game shows in the results once its score is added.
+ */
+export function fixtures(team?: TeamId, now?: number): Match[] {
   return matches
-    .filter((m) => !isPlayed(m) && !m.postponed && (!team || m.team === team))
+    .filter((m) => !isPlayed(m) && !m.postponed && (!team || m.team === team) && (now === undefined || !isOver(m, now)))
     .sort((a, b) => a.kickoff.localeCompare(b.kickoff));
 }
 
-export function nextMatch(team: TeamId = "first"): Match | undefined {
-  return fixtures(team)[0];
+export function nextMatch(team: TeamId = "first", now?: number): Match | undefined {
+  return fixtures(team, now)[0];
 }
 
 export function lastResult(team: TeamId = "first"): Match | undefined {

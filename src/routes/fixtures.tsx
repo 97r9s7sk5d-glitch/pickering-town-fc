@@ -7,6 +7,7 @@ import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
 import { inProgressTeams, teamNames, type Match, type TeamId } from "@/content/fixtures";
 import { fixtures, formatMonth, kickoffDate, resultsList } from "@/lib/matches";
+import { useNow } from "@/lib/now";
 import { seo } from "@/lib/seo";
 
 type View = "fixtures" | "results";
@@ -46,11 +47,12 @@ function FixturesPage() {
   // The page is prerendered once (no query string), so the first client render must match it: the tab from the
   // URL (?view=results, ?team=ladies) is applied straight after hydration.
   const search = Route.useSearch();
+  const now = useNow();
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
   const { view = "fixtures", team = "all" } = hydrated ? search : {};
   const teamId = team === "all" ? undefined : team;
-  const list = view === "results" ? resultsList(teamId) : fixtures(teamId);
+  const list = view === "results" ? resultsList(teamId) : fixtures(teamId, now);
   const groups = groupByMonth(list);
   // A live Full-Time feed replaces the local list when one is set up for this view. Full-Time feeds are per
   // team, so "All teams" uses the first team's feed.

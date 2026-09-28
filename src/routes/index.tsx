@@ -13,6 +13,7 @@ import { articles } from "@/content/news";
 import { firstTeamHeroPlayer, groundPhoto, ladiesHeroPlayer } from "@/content/squad";
 import { firstTeamTable } from "@/content/tables";
 import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome, scoreline } from "@/lib/matches";
+import { useNow } from "@/lib/now";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -32,6 +33,7 @@ const heroTeams = [
 const arrowLink = "inline-flex items-center gap-1.5 text-sm font-semibold text-pike-bright hover:text-fg";
 
 function HomePage() {
+  const now = useNow();
   const last = lastResult();
   const lastOutcome = last ? outcome(last) : null;
   const position = firstTeamTable.rows.findIndex((r) => r.team === firstTeamTable.ownTeam) + 1;
@@ -83,7 +85,7 @@ function HomePage() {
               (players on large screens only; on phones the panels stack). */}
           <div className="animate-rise-late grid gap-5 sm:grid-cols-2">
             {heroTeams.map(({ id, label, player }) => {
-              const match = nextMatch(id);
+              const match = nextMatch(id, now);
               return (
                 <div key={id} className="relative flex flex-col lg:pt-44">
                   <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-4 hidden justify-center lg:flex">
