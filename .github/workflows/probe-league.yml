@@ -1,0 +1,32 @@
+# Temporary: fetches the league pages once so the results/table sync can be written against them. Removed afterwards.
+name: Probe league pages
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-league.yml]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p .probe
+          UA="Mozilla/5.0 (compatible; PickeringTownFC-site/1.0; +https://www.pickeringtownfc.com)"
+          get() { curl -sSL -A "$UA" --max-time 30 -o ".probe/$1" -w "$1 %{http_code} %{url_effective}\n" "$2" >> .probe/index.txt || echo "$1 FAILED $2" >> .probe/index.txt; }
+          get ncel-pickering-matches-2026.html "https://www.ncefl.org.uk/teams/pickeringtown/matches/2026/"
+          get ncel-pickering-matches.html "https://www.ncefl.org.uk/teams/pickeringtown/matches/"
+          get ncel-tables.html "https://www.ncefl.org.uk/tables/"
+          get ncel-premier-matches.html "https://www.ncefl.org.uk/matches/ncelpremierdivision/"
+          get ft-search1.html "https://fulltime.thefa.com/home/search.html?searchText=Pickering+Town"
+          get ft-search2.html "https://fulltime.thefa.com/home/search.html?q=Pickering+Town"
+          get ft-home.html "https://fulltime.thefa.com/"
+          cat .probe/index.txt
+          ls -la .probe
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .probe
+          git commit -m "Probe: league page snapshots (temporary)"
+          git push
