@@ -1,7 +1,9 @@
 /**
  * Fixtures, results and the league table.
  *
- * FIRST TEAM: the club's real 2026–27 list. Scores are [Pickering goals, opponent goals].
+ * FIRST TEAM: the club's real 2026–27 list. Scores are [Pickering goals, opponent goals]. Kept up to date from the
+ * NCEL website by scripts/sync-league.mjs (scores, attendances, scorers, kick-off times and new games), which only
+ * edits the first-team lines, so keep each game on one line.
  * Home or away is only filled in where it's confirmed; games without a `venue` show "H/A TBC" until it's added.
  *
  * LADIES: from FA Full-Time.
@@ -64,7 +66,7 @@ export const matches: Match[] = [
   { id: "f13", kickoff: "2026-09-19T15:00", team: "first", competition: "NCEL Premier", opponent: "Penistone Church", venue: "A", score: [2, 2], attendance: 286, scorers: ["Joseph Bhaskaran (17)", "George Thewlis (19)"] },
 
   // FIRST TEAM fixtures, from the NCEL's Pickering Town page.
-  { id: "f14", kickoff: "2026-09-26T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford FC", venue: "H" },
+  { id: "f14", kickoff: "2026-09-26T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford FC", venue: "H", score: [2, 1], attendance: 208, scorers: ["Dominic Weston (38)", "Souleymane Coulibaly (42)"] },
   { id: "f15", kickoff: "2026-09-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Barton Town", venue: "A" },
   { id: "f16", kickoff: "2026-10-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth", venue: "H" },
   { id: "f17", kickoff: "2026-10-06T19:45", team: "first", competition: "NCEL League Cup", opponent: "Dearne & District", venue: "H" },
@@ -88,7 +90,7 @@ export const matches: Match[] = [
   { id: "f35", kickoff: "2027-01-16T15:00", team: "first", competition: "NCEL Premier", opponent: "Tadcaster Albion", venue: "H" },
   { id: "f36", kickoff: "2027-01-23T15:00", team: "first", competition: "NCEL Premier", opponent: "Penistone Church", venue: "H" },
   { id: "f37", kickoff: "2027-01-30T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford FC", venue: "A" },
-  { id: "f38", kickoff: "2027-02-06T15:00", team: "first", competition: "NCEL Premier", opponent: "Barton Town", venue: "H" },
+  { id: "f38", kickoff: "2027-02-05T19:45", team: "first", competition: "NCEL Premier", opponent: "Barton Town", venue: "H" },
   { id: "f39", kickoff: "2027-02-13T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth", venue: "A" },
   { id: "f40", kickoff: "2027-02-20T15:00", team: "first", competition: "NCEL Premier", opponent: "Campion AFC", venue: "H" },
   { id: "f41", kickoff: "2027-02-27T15:00", team: "first", competition: "NCEL Premier", opponent: "Dearne & District", venue: "A" },

@@ -1,0 +1,52 @@
+# Brings the first team's results, kick-off times and the NCEL Premier Division table up to date from the league's
+# website (scripts/sync-league.mjs). Runs a few times a day, timed for after Saturday and midweek games. When
+# anything changed it checks the site still builds, commits the change to main and republishes the site.
+# It can also be run by hand from the Actions tab ("Run workflow").
+name: Sync results and table from the NCEL
+
+on:
+  schedule:
+    - cron: "10 6,12 * * *" # morning and midday
+    - cron: "40 17,21 * * *" # after Saturday afternoon and midweek evening games
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sync-league
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: node scripts/sync-league.mjs
+      - id: diff
+        run: git diff --quiet || echo "changed=true" >> "$GITHUB_OUTPUT"
+      # Only publish an update that still type-checks and builds.
+      - if: steps.diff.outputs.changed == 'true'
+        run: npm ci && npm run typecheck && npm run build
+      - if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/fixtures.ts src/content/tables.ts
+          git commit -m "Results and table from the NCEL ($(date '+%-d %b %Y'))"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
+          exit 1
+      # Pushes made by this job don't start other workflows, so ask for the site to be republished.
+      - if: steps.diff.outputs.changed == 'true'
+        run: gh workflow run deploy-pages.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}

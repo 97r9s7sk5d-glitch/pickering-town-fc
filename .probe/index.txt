@@ -1,7 +1,0 @@
-ncel-pickering-matches-2026.html 200 https://www.ncefl.org.uk/teams/pickeringtown/matches/2026/
-ncel-pickering-matches.html 200 https://www.ncefl.org.uk/teams/pickeringtown/matches/
-ncel-tables.html 200 https://www.ncefl.org.uk/tables/
-ncel-premier-matches.html 200 https://www.ncefl.org.uk/matches/ncelpremierdivision/
-ft-search1.html 403 https://fulltime.thefa.com/home/search.html?searchText=Pickering+Town
-ft-search2.html 403 https://fulltime.thefa.com/home/search.html?q=Pickering+Town
-ft-home.html 403 https://fulltime.thefa.com/
