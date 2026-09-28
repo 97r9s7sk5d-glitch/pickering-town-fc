@@ -4,6 +4,7 @@ import { Crest } from "@/components/Crest";
 import { inProgressTeams, type TeamId } from "@/content/fixtures";
 import { juniorTeam, seniorTeams, type TeamPhoto } from "@/content/teams";
 import { formatDay, formatTime, homeAway, nextMatch, kickoffDate, venueLabel } from "@/lib/matches";
+import { useNow } from "@/lib/now";
 
 type CardTeam = { id: TeamId; name: string; league: string; photo?: TeamPhoto & { focus: string } };
 
@@ -14,10 +15,11 @@ const cards: CardTeam[] = [
 
 /** Home page: one card per team, with its photo and next game. */
 export function TeamCards() {
+  const now = useNow();
   return (
     <div className="grid gap-5 md:grid-cols-3">
       {cards.map((t) => {
-        const next = nextMatch(t.id);
+        const next = nextMatch(t.id, now);
         const inProgress = inProgressTeams.includes(t.id);
         return (
           <Link
