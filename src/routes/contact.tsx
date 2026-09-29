@@ -270,9 +270,12 @@ function ContactPage() {
             <ul className="mt-3 space-y-2">
               {contact.social.map((sc) => (
                 <li key={sc.url}>
-                  <a href={sc.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-pike-bright">
-                    <AtSign className="h-5 w-5 text-pike-bright" aria-hidden="true" />
-                    {sc.label} <span className="text-muted">{sc.handle}</span>
+                  <a href={sc.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 hover:text-pike-bright">
+                    <AtSign className="mt-0.5 h-5 w-5 shrink-0 text-pike-bright" aria-hidden="true" />
+                    {/* One run of text, so a long label and handle wrap together rather than side by side. */}
+                    <span>
+                      {sc.label} <span className="text-muted">{sc.handle}</span>
+                    </span>
                   </a>
                 </li>
               ))}
