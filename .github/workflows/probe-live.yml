@@ -1,0 +1,30 @@
+# Temporary: saves the NCEL live scores page so the live-score feature can be built against it. Removed afterwards.
+name: Probe live scores page
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-live.yml]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p .probe
+          UA="Mozilla/5.0 (compatible; PickeringTownFC-site/1.0; +https://www.pickeringtownfc.com)"
+          curl -sSL -A "$UA" --max-time 30 -D .probe/live-headers.txt -o .probe/live.html -w "live %{http_code}\n" "https://www.ncefl.org.uk/live/" > .probe/index.txt
+          # every script, iframe and link the page pulls in, then fetch the scripts so the feed address can be found
+          grep -oE '(src|href|data-[a-z-]+)="[^"]+"' .probe/live.html | sort -u > .probe/live-refs.txt || true
+          i=0; for u in $(grep -oE 'src="[^"]+\.js[^"]*"' .probe/live.html | sed 's/src="//;s/"$//' | sort -u); do
+            case "$u" in http*) url="$u";; //*) url="https:$u";; /*) url="https://www.ncefl.org.uk$u";; *) url="https://www.ncefl.org.uk/live/$u";; esac
+            i=$((i+1)); curl -sSL -A "$UA" --max-time 30 -o ".probe/script-$i.js" -w "script-$i %{http_code} $url\n" "$url" >> .probe/index.txt || true
+          done
+          cat .probe/index.txt; ls -la .probe
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .probe
+          git commit -m "Probe: live scores page snapshot (temporary)"
+          git push
