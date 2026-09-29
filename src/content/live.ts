@@ -8,7 +8,8 @@ import type { TeamId } from "@/content/fixtures";
  *
  * `feed` is the part of a Football Web Pages address after footballwebpages.co.uk/, or null for no live feed.
  * `follow` is a link for following the game elsewhere, shown under the feed (or on its own without one).
- * /live-test.html shows the candidate feeds so they can be checked in a browser.
+ * The first team's feed was checked in a browser on 29 Sep 2026: it showed the Retford game minute by minute
+ * (kick-off, each goal with its scorer, half time and full time).
  */
 export type LiveSource = { feed: string | null; follow: { label: string; url: string } | null };
 
