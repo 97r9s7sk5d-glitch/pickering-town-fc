@@ -3,7 +3,7 @@ import type { TeamId } from "@/content/fixtures";
 /**
  * Live scores during a game. When a next-match countdown reaches kick-off, the panel switches to "Live" and shows
  * the team's Football Web Pages feed (goals, half time and full time as they're reported; the same service as the
- * NCEL's live scores page, www.ncefl.org.uk/live/) until two hours after kick-off, when the next game takes over.
+ * NCEL's live scores page, www.ncefl.org.uk/live/) until 2½ hours after kick-off, when the next game takes over.
  * The final score then comes from the league (scripts/sync-league.mjs).
  *
  * `feed` is the part of a Football Web Pages address after footballwebpages.co.uk/, or null for no live feed.
