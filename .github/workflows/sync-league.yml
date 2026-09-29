@@ -1,5 +1,5 @@
 # Brings the first team's results, kick-off times and the NCEL Premier Division table up to date from the league's
-# website (scripts/sync-league.mjs). Runs a few times a day, timed for after Saturday and midweek games. When
+# website (scripts/sync-league.mjs). Runs a few times a day, and every 15 minutes after Saturday and midweek games. When
 # anything changed it checks the site still builds, commits the change to main and republishes the site.
 # It can also be run by hand from the Actions tab ("Run workflow").
 name: Sync results and table from the NCEL
@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: "10 6,12 * * *" # morning and midday
     - cron: "40 17,21 * * *" # after Saturday afternoon and midweek evening games
+    # Every 15 minutes while results usually come in (UTC): Saturday afternoons, and weekday evenings for midweek
+    # games, so a final score reaches the site soon after the league posts it.
+    - cron: "*/15 15-18 * * 6"
+    - cron: "*/15 20-22 * * 1-5"
   workflow_dispatch:
 
 permissions:

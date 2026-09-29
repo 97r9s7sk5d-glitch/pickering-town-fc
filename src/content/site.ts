@@ -24,7 +24,7 @@ export const contactForm = {
 };
 
 /** When the privacy policy and terms were last updated. */
-export const legalUpdated = "25 September 2026";
+export const legalUpdated = "29 September 2026";
 
 /** The website credit, a thin line at the top left of every page, above the header. Set to null to remove it. */
 export const siteCredit: { label: string; url: string } | null = {

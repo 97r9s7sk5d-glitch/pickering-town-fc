@@ -3,6 +3,8 @@ import { CalendarPlus, MapPin } from "lucide-react";
 import type { Match } from "@/content/fixtures";
 import { teamNames } from "@/content/fixtures";
 import { ground } from "@/content/club";
+import { liveScores } from "@/content/live";
+import { LiveFeed } from "@/components/LiveFeed";
 import {
   formatDay,
   formatLongDate,
@@ -221,26 +223,64 @@ export function NextMatchPanel({ match, compact = false, label }: { match: Match
           </p>
         )}
 
-        <div
-          className={`grid grid-cols-4 ${compact ? "mt-4 gap-1.5" : "mt-7 gap-2 sm:max-w-md"}`}
-          role="timer"
-          aria-label={`Countdown to kick-off${label ? `, ${label}` : ""}`}
-        >
-          {units.map(([unit, value]) => (
-            <div key={unit} className={`rounded-xl border border-line bg-ink/60 text-center ${compact ? "px-1 py-2" : "px-2 py-3"}`}>
-              <p className={`display tabular ${compact ? "text-2xl xl:text-3xl" : "text-4xl sm:text-5xl"}`}>
-                {value === undefined ? "–" : String(value).padStart(2, "0")}
-              </p>
-              <p className={`eyebrow mt-1 text-muted ${compact ? "!text-[9px]" : "!text-[10px]"}`}>{unit}</p>
+        {countdown?.done ? (
+          <LiveNow match={match} compact={compact} />
+        ) : (
+          <>
+            <div
+              className={`grid grid-cols-4 ${compact ? "mt-4 gap-1.5" : "mt-7 gap-2 sm:max-w-md"}`}
+              role="timer"
+              aria-label={`Countdown to kick-off${label ? `, ${label}` : ""}`}
+            >
+              {units.map(([unit, value]) => (
+                <div key={unit} className={`rounded-xl border border-line bg-ink/60 text-center ${compact ? "px-1 py-2" : "px-2 py-3"}`}>
+                  <p className={`display tabular ${compact ? "text-2xl xl:text-3xl" : "text-4xl sm:text-5xl"}`}>
+                    {value === undefined ? "–" : String(value).padStart(2, "0")}
+                  </p>
+                  <p className={`eyebrow mt-1 text-muted ${compact ? "!text-[9px]" : "!text-[10px]"}`}>{unit}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        {countdown?.done && <p className="mt-3 text-sm text-pike-bright">Kick-off time has arrived. Up the Pikes!</p>}
-
-        <div className={compact ? "mt-4 text-sm" : "mt-6"}>
-          <AddToCalendar match={match} />
-        </div>
+            <div className={compact ? "mt-4 text-sm" : "mt-6"}>
+              <AddToCalendar match={match} />
+            </div>
+          </>
+        )}
       </div>
+    </div>
+  );
+}
+
+/**
+ * What a next-match panel shows once kick-off arrives (until the game drops off two hours later): a "Live" marker,
+ * the team's live feed if it has one (content/live.ts), and a link to follow the game elsewhere.
+ */
+function LiveNow({ match, compact }: { match: Match; compact: boolean }) {
+  const source = liveScores[match.team];
+  return (
+    <div className={compact ? "mt-4" : "mt-7"}>
+      <p className="eyebrow inline-flex items-center gap-2 rounded-full bg-[oklch(0.62_0.2_25)] px-3 py-1 !text-[11px] text-white">
+        <span className="relative flex h-2 w-2" aria-hidden="true">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75 motion-reduce:animate-none" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
+        </span>
+        Live · Kicked off
+      </p>
+      {source.feed && (
+        <div className="mt-3">
+          <LiveFeed feed={source.feed} />
+        </div>
+      )}
+      {source.follow && (
+        <p className={`mt-3 text-muted ${compact ? "text-sm" : ""}`}>
+          {source.feed ? "Not updating? Follow " : "Follow the game on "}
+          <a href={source.follow.url} target="_blank" rel="noopener noreferrer" className="text-pike-bright underline hover:text-fg">
+            {source.follow.label}
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          .
+        </p>
+      )}
     </div>
   );
 }

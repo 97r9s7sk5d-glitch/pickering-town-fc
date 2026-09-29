@@ -20,6 +20,7 @@ export const privacySections: LegalSection[] = [
       "Contact form: when you send us a message we receive your name, email address, the topic you chose and your message. We use these only to reply to you and to deal with your enquiry.",
       "Analytics: if you accept analytics cookies, we use Google Analytics to count visits and see which pages are popular. It records things like the pages you view, roughly where you are (country or city), and your device and browser. It does not tell us who you are. If you reject analytics cookies, it does not run.",
       "Server logs: our hosting provider (GitHub Pages) keeps standard technical logs, such as IP addresses and the pages requested, for security and to keep the site running.",
+      "Live scores: while a game is being played, the next-match panels show a live scores feed from Football Web Pages (footballwebpages.co.uk), which loads from their servers. See their privacy policy for how they handle visits.",
     ],
   },
   {
