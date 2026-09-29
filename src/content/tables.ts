@@ -23,6 +23,8 @@ export type LeagueTableData = {
   /** When the rows were copied from the league's website. */
   updated: string;
   source: { name: string; url: string };
+  /** The league's logo (on a white tile, as it has black lettering), linked to `source`. */
+  logo?: { src: string; width: number; height: number; alt: string };
   /** The club's own row, matched by name and highlighted. */
   ownTeam: string;
   /** Coloured markers: top `promotion`, then play-offs down to `playoffs`, bottom `relegation`. 0 = none. */
@@ -35,6 +37,7 @@ export const firstTeamTable: LeagueTableData = {
   title: "NCEL Premier Division 2026–27",
   updated: "28 September 2026",
   source: { name: "Northern Counties East League", url: "https://www.ncefl.org.uk/tables/" },
+  logo: { src: "/images/ncel-logo.webp", width: 132, height: 160, alt: "Macron Northern Counties East Football League" },
   ownTeam: "Pickering Town",
   zones: { promotion: 1, playoffs: 5, relegation: 2 },
   rows: [

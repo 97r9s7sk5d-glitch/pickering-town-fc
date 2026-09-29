@@ -100,7 +100,11 @@ function HomePage() {
                     />
                   </div>
                   <div className="relative flex-1">
-                    {match ? <NextMatchPanel match={match} compact label={label} /> : <NoFixtures label={label} />}
+                    {match ? (
+                      <NextMatchPanel match={match} compact label={label} league={id === "first" ? firstTeamTable : undefined} />
+                    ) : (
+                      <NoFixtures label={label} />
+                    )}
                   </div>
                 </div>
               );
