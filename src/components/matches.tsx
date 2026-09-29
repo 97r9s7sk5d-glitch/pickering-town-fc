@@ -6,6 +6,8 @@ import { ground } from "@/content/club";
 import { liveScores } from "@/content/live";
 import { LiveFeed } from "@/components/LiveFeed";
 import { LeagueLogo } from "@/components/LeagueLogo";
+import { Scoreboard } from "@/components/Scoreboard";
+import { useLiveScore } from "@/lib/liveScore";
 import type { LeagueTableData } from "@/content/tables";
 import {
   formatDay,
@@ -271,11 +273,20 @@ export function NextMatchPanel({
 }
 
 /**
- * What a next-match panel shows once kick-off arrives (until the game drops off two hours later): a "Live" marker,
- * the team's live feed if it has one (content/live.ts), and a link to follow the game elsewhere.
+ * What a next-match panel shows once kick-off arrives (until the game drops off 2½ hours later): our own
+ * scoreboard when there's a live score for this game (lib/liveScore.ts), otherwise a "Live" marker, the team's
+ * Football Web Pages feed if it has one (content/live.ts) and a link to follow the game elsewhere.
  */
 function LiveNow({ match, compact }: { match: Match; compact: boolean }) {
   const source = liveScores[match.team];
+  const live = useLiveScore(match);
+  if (live) {
+    return (
+      <div className={compact ? "mt-4" : "mt-7"}>
+        <Scoreboard match={match} live={live} compact={compact} />
+      </div>
+    );
+  }
   return (
     <div className={compact ? "mt-4" : "mt-7"}>
       <p className="eyebrow inline-flex items-center gap-2 rounded-full bg-[oklch(0.62_0.2_25)] px-3 py-1 !text-[11px] text-white">

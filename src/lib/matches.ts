@@ -32,8 +32,11 @@ export function results(team?: TeamId): Match[] {
     .sort((a, b) => b.kickoff.localeCompare(a.kickoff));
 }
 
-/** How long after kick-off a game counts as over (90 minutes, half time and stoppages, with some to spare). */
-const MATCH_LENGTH_MS = 2 * 60 * 60 * 1000;
+/**
+ * How long after kick-off a game counts as over: 90 minutes, half time and stoppages, plus about half an hour so
+ * the full-time score stays on the live scoreboard before the next game takes over.
+ */
+const MATCH_LENGTH_MS = 2.5 * 60 * 60 * 1000;
 
 /** Whether the game has finished by `now`, whether or not its score has been added yet. */
 export function isOver(match: Match, now: number): boolean {

@@ -9,7 +9,7 @@ Live at **https://www.pickeringtownfc.com**, hosted free on **GitHub Pages**. Ev
 built and published by the GitHub Action in `.github/workflows/deploy-pages.yml` (see the repository's **Actions**
 tab). It can also be re-run by hand there with **Run workflow**. It also rebuilds once a day, so the prerendered
 "next match" moves on after each game; visitors' browsers move it on straight away from their own clock (a game counts
-as over two hours after kick-off). Add the score to `src/content/fixtures.ts` to put it in the results.
+as over 2½ hours after kick-off). Add the score to `src/content/fixtures.ts` to put it in the results.
 
 The domain is registered with GoDaddy. `@` has four A records to GitHub Pages (`185.199.108.153`, `185.199.109.153`,
 `185.199.110.153`, `185.199.111.153`) and `www` is a CNAME to `97r9s7sk5d-glitch.github.io`, with
