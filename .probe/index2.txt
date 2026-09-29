@@ -1,0 +1,8 @@
+fwp-team.html 403 https://www.footballwebpages.co.uk/pickering-town
+fwp-team-fr.html 403 https://www.footballwebpages.co.uk/pickering-town/fixtures-results
+fwp-team-vidi.html 403 https://www.footballwebpages.co.uk/pickering-town/vidiprinter
+fwp-embed-team-vidi.html 404 https://www.footballwebpages.co.uk/embed/pickering-town/vidiprinter?origin=https%3A%2F%2Fwww.pickeringtownfc.com&width=600
+fwp-embed-team-vidi-0926.html 404 https://www.footballwebpages.co.uk/embed/pickering-town/vidiprinter?date=2026-09-26&origin=https%3A%2F%2Fwww.pickeringtownfc.com&width=600
+fwp-embed-team-fr.html 404 https://www.footballwebpages.co.uk/embed/pickering-town/fixtures-results?origin=https%3A%2F%2Fwww.pickeringtownfc.com&width=600
+fwp-embed-ncel-vidi-0926.html 404 https://www.footballwebpages.co.uk/embed/northern-counties-east-league/vidiprinter?date=2026-09-26&origin=https%3A%2F%2Fwww.pickeringtownfc.com&width=600
+fwp-ncel-prem.html 403 https://www.footballwebpages.co.uk/northern-counties-east-league-premier-division/fixtures-results
