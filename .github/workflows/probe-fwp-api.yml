@@ -1,0 +1,60 @@
+# Temporary: checks the Football Web Pages API key works and saves sample responses, so the live score job can be
+# built against the real data. Removed afterwards. The key itself is never printed or saved.
+name: Probe Football Web Pages API
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-fwp-api.yml]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      KEY: ${{ secrets.FWP_RAPIDAPI_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p .probe
+          if [ -z "$KEY" ]; then echo "NO KEY" | tee .probe/api-index.txt; exit 0; fi
+          H=football-web-pages1.p.rapidapi.com
+          get() { curl -sS --max-time 30 -H "X-RapidAPI-Key: $KEY" -H "X-RapidAPI-Host: $H" -D ".probe/$1.headers" -o ".probe/$1.json" -w "$1 %{http_code}\n" "https://$H/$2" >> .probe/api-index.txt; }
+          get competitions "competitions.json"
+          cat .probe/api-index.txt
+          # Find the NCEL Premier Division and Pickering Town's ids from the responses, then fetch their data.
+          COMP=$(python3 -c "
+          import json,sys
+          d=json.load(open('.probe/competitions.json'))
+          def walk(o):
+              if isinstance(o,dict):
+                  n=str(o.get('name') or o.get('full-name') or '')
+                  if 'Northern Counties East' in n and 'Premier' in n: print(o.get('id')); sys.exit()
+                  for v in o.values(): walk(v)
+              elif isinstance(o,list):
+                  for v in o: walk(v)
+          walk(d)")
+          echo "comp=$COMP" >> .probe/api-index.txt
+          get teams "teams.json?comp=$COMP"
+          TEAM=$(python3 -c "
+          import json,sys
+          d=json.load(open('.probe/teams.json'))
+          def walk(o):
+              if isinstance(o,dict):
+                  if 'Pickering' in str(o.get('name','')): print(o.get('id')); sys.exit()
+                  for v in o.values(): walk(v)
+              elif isinstance(o,list):
+                  for v in o: walk(v)
+          walk(d)")
+          echo "team=$TEAM" >> .probe/api-index.txt
+          get vidi-0926 "vidiprinter.json?team=$TEAM&date=2026-09-26"
+          get vidi-latest "vidiprinter.json?team=$TEAM"
+          get fixtures "fixtures-results.json?team=$TEAM"
+          # Keep only the rate-limit headers (plan limits), not the full headers.
+          for f in .probe/*.headers; do grep -i "ratelimit" "$f" > "$f.txt" || true; rm "$f"; done
+          cat .probe/api-index.txt; ls -la .probe
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .probe
+          git commit -m "Probe: Football Web Pages API samples (temporary)" || echo nothing
+          git push
