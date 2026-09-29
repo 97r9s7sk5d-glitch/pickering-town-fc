@@ -8,5 +8,5 @@ export const radio = {
   frequency: "107.6 FM",
   text: "The community radio station for Scarborough and the surrounding area, with weekly interviews with the Chairman and the club's managers.",
   url: "https://radioscarborough.com",
-  latestInterview: "",
+  latestInterview: "https://fb.watch/v/5HrCOhK7k/",
 };
