@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LeagueTable, TableKey } from "@/components/LeagueTable";
 import { FormGuide } from "@/components/matches";
 import { Card, Container, PageHeader, SectionHeading } from "@/components/ui";
+import { LeagueLogo } from "@/components/LeagueLogo";
 import { FullTimeEmbed } from "@/components/FullTimeEmbed";
 import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
@@ -68,6 +69,16 @@ function TablePage() {
               )}
             </section>
             <aside aria-label={`${table.label} summary`} className="space-y-4 lg:pt-24">
+              {table.logo && (
+                <Card className="flex items-center gap-4 p-5">
+                  <LeagueLogo table={table} className="h-20" />
+                  <p className="text-sm leading-snug text-muted">
+                    Official league
+                    <br />
+                    <span className="text-fg">{table.source.name}</span>
+                  </p>
+                </Card>
+              )}
               <Card className="p-6">
                 <p className="eyebrow text-muted">{table.label} position</p>
                 <p className="display mt-2 text-6xl tabular">{own || "–"}</p>

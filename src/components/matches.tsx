@@ -5,6 +5,8 @@ import { teamNames } from "@/content/fixtures";
 import { ground } from "@/content/club";
 import { liveScores } from "@/content/live";
 import { LiveFeed } from "@/components/LiveFeed";
+import { LeagueLogo } from "@/components/LeagueLogo";
+import type { LeagueTableData } from "@/content/tables";
 import {
   formatDay,
   formatLongDate,
@@ -172,9 +174,20 @@ function useCountdown(target: Date) {
 
 /**
  * "Next match" panel with a live countdown to kick-off. `compact` is the slimmer version used side by side
- * in the home page hero (one per team); `label` names the team in that case.
+ * in the home page hero (one per team); `label` names the team in that case. `league` adds the team's league logo
+ * under the countdown.
  */
-export function NextMatchPanel({ match, compact = false, label }: { match: Match; compact?: boolean; label?: string }) {
+export function NextMatchPanel({
+  match,
+  compact = false,
+  label,
+  league,
+}: {
+  match: Match;
+  compact?: boolean;
+  label?: string;
+  league?: LeagueTableData;
+}) {
   const date = kickoffDate(match);
   const countdown = useCountdown(date);
   const { home, away } = homeAway(match);
@@ -245,6 +258,12 @@ export function NextMatchPanel({ match, compact = false, label }: { match: Match
               <AddToCalendar match={match} />
             </div>
           </>
+        )}
+        {league?.logo && (
+          <div className={`flex items-center gap-3 border-t border-line ${compact ? "mt-4 pt-4" : "mt-6 pt-5"}`}>
+            <LeagueLogo table={league} className={compact ? "h-12" : "h-14"} />
+            <p className="text-xs leading-snug text-muted">{league.title}</p>
+          </div>
         )}
       </div>
     </div>
