@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 
 export function Centered({ title, text, children }: { title: string; text: string; children: ReactNode }) {
@@ -16,6 +16,10 @@ export function Centered({ title, text, children }: { title: string; text: strin
 export const button = "eyebrow inline-flex items-center rounded-full bg-pike px-5 py-2.5 text-white hover:bg-pike-bright hover:text-ink";
 
 export function NotFound() {
+  // Also shown by the router for unknown addresses, which would otherwise keep the site's default title.
+  useEffect(() => {
+    document.title = "Page not found | Pickering Town FC";
+  });
   return (
     <Centered title="Offside!" text="That page doesn't exist or has moved. Let's get you back in play.">
       <Link to="/" className={button}>Home</Link>
