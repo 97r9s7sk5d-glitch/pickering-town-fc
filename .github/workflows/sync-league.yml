@@ -38,9 +38,10 @@ jobs:
       - run: node scripts/sync-league.mjs
       - id: diff
         run: git diff --quiet || echo "changed=true" >> "$GITHUB_OUTPUT"
-      # Only publish an update that still type-checks and builds.
+      # Only publish an update that still builds and type-checks. Build first: it generates src/routeTree.gen.ts,
+      # which isn't committed, and the type check needs it.
       - if: steps.diff.outputs.changed == 'true'
-        run: npm ci && npm run typecheck && npm run build
+        run: npm ci && npm run build && npm run typecheck
       - if: steps.diff.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
