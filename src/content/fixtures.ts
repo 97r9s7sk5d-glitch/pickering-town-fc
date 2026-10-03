@@ -68,7 +68,7 @@ export const matches: Match[] = [
   // FIRST TEAM fixtures, from the NCEL's Pickering Town page.
   { id: "f14", kickoff: "2026-09-26T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford FC", venue: "H", score: [2, 1], attendance: 208, scorers: ["Dominic Weston (38)", "Souleymane Coulibaly (42)"] },
   { id: "f15", kickoff: "2026-09-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Barton Town", venue: "A", score: [0, 4], attendance: 301 },
-  { id: "f16", kickoff: "2026-10-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth", venue: "H" },
+  { id: "f16", kickoff: "2026-10-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth", venue: "H", score: [2, 1], scorers: ["Souleymane Coulibaly (14)", "Joseph Bhaskaran (61)"] },
   { id: "f17", kickoff: "2026-10-06T19:45", team: "first", competition: "NCEL League Cup", opponent: "Dearne & District", venue: "H" },
   { id: "f18", kickoff: "2026-10-10T15:00", team: "first", competition: "FA Vase", opponent: "Holker Old Boys", venue: "A" },
   { id: "f19", kickoff: "2026-10-13T19:45", team: "first", competition: "NCEL Premier", opponent: "Dearne & District", venue: "H" },
