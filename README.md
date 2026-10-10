@@ -87,9 +87,19 @@ be read directly. Each one is marked `CONFIRM` in the code:
 Saturday and midweek games). It reads the club's page and the tables page on www.ncefl.org.uk and updates
 `src/content/fixtures.ts` (scores, attendances, Pikes scorers, kick-off times, moved and new games; friendlies are
 left out) and the first-team table in `src/content/tables.ts`. If anything changed it checks the site builds,
-commits to `main` and republishes. If the league's pages can't be read it changes nothing and the run shows as
-failed in the **Actions** tab. Run it by hand there with **Run workflow**, or locally with
+commits to `main` and republishes. If the league's site is down it tries three times, 30 seconds apart, then leaves
+it to the next run; if its pages answer but can't be read it changes nothing and the run shows as failed in the
+**Actions** tab. Run it by hand there with **Run workflow**, or locally with
 `node scripts/sync-league.mjs --dry-run` to see what it would change.
+
+### Site check: every hour
+
+`.github/workflows/site-check.yml` runs `scripts/site-check.mjs` every hour and after every deploy. It loads every
+page and linked file on www.pickeringtownfc.com, opens each page in Chrome at desktop and phone sizes (JavaScript
+errors, failed requests, broken images, sideways scrolling), checks first-team games have their results, and checks
+the latest results sync and deploy didn't fail. Problems open an issue labelled **site-check** (GitHub emails it),
+which closes itself once everything is clear. Run it locally against a build with
+`node scripts/site-check.mjs --base http://localhost:PORT` (set `CHROME_PATH` to a Chromium if Chrome isn't installed).
 
 ### Ladies and U18: by hand, or FA Full-Time code snippets
 

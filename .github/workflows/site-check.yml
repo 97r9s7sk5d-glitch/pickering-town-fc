@@ -12,9 +12,6 @@ on:
     workflows: ["Deploy to GitHub Pages"]
     types: [completed]
   workflow_dispatch:
-  push: # TEMPORARY: test run on the dev branch
-    branches: [claude/gallant-meitner-sqc5q9]
-    paths: [scripts/site-check.mjs, .github/workflows/site-check.yml]
 
 permissions:
   contents: read
