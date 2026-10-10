@@ -1,0 +1,73 @@
+# Checks the live site every hour and after every deploy (scripts/site-check.mjs): every page and linked file, each
+# page in a real browser at desktop and phone sizes, missing first-team results, and failed results syncs or deploys.
+# If it finds problems it opens an issue labelled "site-check" (GitHub emails the repository owner), comments on it
+# when the problems change, and closes it once everything is clear again. The report is also on each run's summary.
+# The run itself only fails if the check couldn't run, so a problem is emailed once (by the issue), not every hour.
+name: Site check
+
+on:
+  schedule:
+    - cron: "23 * * * *" # hourly
+  workflow_run:
+    workflows: ["Deploy to GitHub Pages"]
+    types: [completed]
+  workflow_dispatch:
+  push: # TEMPORARY: test run on the dev branch
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [scripts/site-check.mjs, .github/workflows/site-check.yml]
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: site-check
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # After a deploy, give GitHub Pages a minute to start serving the new files.
+      - if: github.event_name == 'workflow_run'
+        run: sleep 60
+      - id: check
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/site-check.mjs --report site-check.md
+      - name: Open, update or close the site-check issue
+        if: github.ref == 'refs/heads/main' && hashFiles('site-check.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OUTCOME: ${{ steps.check.outcome }}
+          SIGNATURE: ${{ steps.check.outputs.signature }}
+        run: |
+          gh label create site-check --color d93f0b --description "Problems found by the hourly site check" 2>/dev/null || true
+          open=$(gh issue list --label site-check --state open --json number --jq '.[0].number // empty')
+          if [ "$OUTCOME" = failure ]; then
+            if [ -z "$open" ]; then
+              gh issue create --title "Website problems found by the site check" --label site-check --body-file site-check.md
+            elif ! gh issue view "$open" --json body --jq .body | grep -q "site-check:$SIGNATURE"; then
+              # Different problems from last time: update the list and comment, so the change is emailed.
+              gh issue edit "$open" --body-file site-check.md
+              gh issue comment "$open" --body-file site-check.md
+            fi
+          elif [ -n "$open" ]; then
+            gh issue close "$open" --comment "All clear: the site check found no problems ($(date -u '+%d %b %H:%M') UTC)."
+          fi
+      - if: steps.check.outcome == 'failure'
+        run: |
+          if [ -f site-check.md ]; then
+            echo "::warning::The site check found problems; see the summary and the site-check issue."
+          else
+            echo "::error::The site check couldn't run; see the check step's log."
+            exit 1
+          fi
