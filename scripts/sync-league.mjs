@@ -43,10 +43,19 @@ function fail(message) {
   process.exit(1);
 }
 
+/** A page from the league's site. Throws if it can't be fetched, so the caller can try again. */
 async function page(url, file) {
   if (fromDir) return fs.readFileSync(`${fromDir}/${file}`, "utf8");
-  const res = await fetch(url, { headers: { "User-Agent": "PickeringTownFC-website/1.0 (+https://www.pickeringtownfc.com)" } });
-  if (!res.ok) fail(`${url} answered ${res.status}`);
+  let res;
+  try {
+    res = await fetch(url, {
+      headers: { "User-Agent": "PickeringTownFC-website/1.0 (+https://www.pickeringtownfc.com)" },
+      signal: AbortSignal.timeout(30_000),
+    });
+  } catch (err) {
+    throw Object.assign(new Error(`${url} couldn't be reached (${err.cause?.code ?? err.name})`), { unreachable: true });
+  }
+  if (!res.ok) throw new Error(`${url} answered ${res.status}`);
   return res.text();
 }
 
@@ -264,15 +273,44 @@ function updateTable(source, rows) {
 
 // ---------- Run ----------
 
-const [matchesHtml, tablesHtml] = await Promise.all([
-  page(`${SITE}/teams/${CLUB_SLUG}/matches/${season}/`, "matches.html"),
-  page(`${SITE}/tables/`, "tables.html"),
-]);
+const ATTEMPTS = 3;
+const RETRY_SECONDS = 30;
 
-const games = parseMatches(matchesHtml);
-if (games.length < 5) fail(`only ${games.length} games read from the club's NCEL page; the page may have changed`);
-const rows = parseTable(tablesHtml);
-if (!rows || rows.length < 10 || !rows.some((r) => r.team === OUR_NAME)) fail("the NCEL Premier Division table couldn't be read");
+/**
+ * Reads the club's games and the table. The league's site now and then times out, or briefly serves a page with no
+ * games on it, so each read is tried up to three times, 30 seconds apart. If the site still can't be reached, this
+ * run is skipped with a warning (the next scheduled run catches up); if it answers but can't be read, the run fails,
+ * as the page may have changed.
+ */
+async function readLeague() {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      const [matchesHtml, tablesHtml] = await Promise.all([
+        page(`${SITE}/teams/${CLUB_SLUG}/matches/${season}/`, "matches.html"),
+        page(`${SITE}/tables/`, "tables.html"),
+      ]);
+      const games = parseMatches(matchesHtml);
+      if (games.length < 5) throw new Error(`only ${games.length} games read from the club's NCEL page; the page may have changed`);
+      const rows = parseTable(tablesHtml);
+      if (!rows || rows.length < 10 || !rows.some((r) => r.team === OUR_NAME)) throw new Error("the NCEL Premier Division table couldn't be read");
+      return { games, rows };
+    } catch (err) {
+      if (fromDir) fail(err.message);
+      if (attempt < ATTEMPTS) {
+        console.log(`sync-league: ${err.message}; trying again in ${RETRY_SECONDS} seconds (attempt ${attempt} of ${ATTEMPTS}).`);
+        await new Promise((r) => setTimeout(r, RETRY_SECONDS * 1000));
+        continue;
+      }
+      if (err.unreachable) {
+        console.log(`::warning::sync-league: ${err.message}. Nothing was changed; the next run will try again.`);
+        process.exit(0);
+      }
+      fail(err.message);
+    }
+  }
+}
+
+const { games, rows } = await readLeague();
 
 const fixtures = updateFixtures(fs.readFileSync(FIXTURES, "utf8"), games);
 const table = updateTable(fs.readFileSync(TABLES, "utf8"), rows);
