@@ -70,7 +70,7 @@ export const matches: Match[] = [
   { id: "f15", kickoff: "2026-09-29T19:45", team: "first", competition: "NCEL Premier", opponent: "Barton Town", venue: "A", score: [0, 4], attendance: 301 },
   { id: "f16", kickoff: "2026-10-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Handsworth", venue: "H", score: [2, 1], attendance: 149, scorers: ["Souleymane Coulibaly (14)", "Joseph Bhaskaran (61)"] },
   { id: "f17", kickoff: "2026-10-06T19:45", team: "first", competition: "NCEL League Cup", opponent: "Dearne & District", venue: "H", score: [3, 1], attendance: 113, scorers: ["Connor Avison (9)", "Joseph Bhaskaran (14)", "Daniel Gibb (48)"] },
-  { id: "f18", kickoff: "2026-10-10T15:00", team: "first", competition: "FA Vase", opponent: "Holker Old Boys", venue: "A" },
+  { id: "f18", kickoff: "2026-10-10T15:00", team: "first", competition: "FA Vase", opponent: "Holker Old Boys", venue: "A", score: [1, 5], attendance: 115, scorers: ["Michael Coulson (34 pen)"] },
   { id: "f19", kickoff: "2026-10-13T19:45", team: "first", competition: "NCEL Premier", opponent: "Dearne & District", venue: "H" },
   { id: "f20", kickoff: "2026-10-17T15:00", team: "first", competition: "NCEL Premier", opponent: "Parkgate", venue: "A" },
   { id: "f21", kickoff: "2026-10-24T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley", venue: "H" },
