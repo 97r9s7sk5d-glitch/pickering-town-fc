@@ -6,6 +6,7 @@
  * - every page in the sitemap loads, and every page, image, video, PDF, script and stylesheet the pages link to on
  *   the site itself answers (other websites aren't checked);
  * - a missing page shows the "Page not found" page with a 404;
+ * - every page is open to search engines (no noindex, and its canonical address is itself), and the sitemap is valid;
  * - each page in a real browser, at desktop and phone sizes: no JavaScript errors (including React hydration
  *   errors), no failed requests to the site, no broken images, and nothing wider than a phone screen;
  * - first-team games that kicked off more than 30 hours ago have a result (it comes from the league, so a missing
@@ -86,7 +87,10 @@ async function withRecheck(items, limit, check) {
 // ---------- Pages, links and files ----------
 
 const sitemap = await get(`${BASE}/sitemap.xml`);
-const pages = [...sitemap.body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(SITE, BASE));
+const pages = [...(sitemap.body ?? "").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].replace(SITE, BASE));
+if (sitemap.status === 200 && !sitemap.body.includes('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"')) {
+  problems.push(problem("**/sitemap.xml** doesn't use the standard sitemap namespace, so Google Search Console will reject it"));
+}
 if (sitemap.status !== 200 || pages.length < 10) {
   problems.push(problem(`**/sitemap.xml** ${status(sitemap)} with ${pages.length} pages listed`));
 }
@@ -97,6 +101,10 @@ async function checkPage(url) {
   const res = await get(url);
   if (res.status !== 200) return [problem(`**${path(url)}** ${status(res)}`)];
   if (!/<title>[^<]+<\/title>/.test(res.body)) return [problem(`**${path(url)}** has no title, so it may not have built properly`)];
+  // Search engines: the page mustn't ask to be left out, and must name itself as the page to list.
+  if (/<meta name="robots" content="[^"]*noindex/.test(res.body)) return [problem(`**${path(url)}** tells search engines not to list it (noindex)`)];
+  const canonical = /<link rel="canonical" href="([^"]+)"/.exec(res.body)?.[1]?.replace(SITE, BASE);
+  if (canonical !== url) return [problem(`**${path(url)}** names ${canonical ? path(canonical) : "no page"} as its address for search engines (canonical)`)];
   for (const [, attr, value] of res.body.matchAll(/\s(href|src|poster|data-src|data-portrait-src|data-poster|srcset)="([^"]+)"/g)) {
     const refs = attr === "srcset" ? value.split(",").map((s) => s.trim().split(/\s+/)[0]) : [value];
     for (const ref of refs) {

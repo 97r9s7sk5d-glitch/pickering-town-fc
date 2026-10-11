@@ -1,7 +1,8 @@
 // Tidies the generated sitemap:
 // - pages are served as folders (/teams/) and GitHub Pages redirects /teams to /teams/, so list the final address;
 // - drop filtered views (?view=results) and files (programme PDFs), which the crawler finds but aren't pages;
-// - drop duplicates.
+// - drop duplicates;
+// - use the standard namespace (http://), which Google Search Console requires; the generator writes https://.
 import { readFileSync, writeFileSync } from "node:fs";
 
 const file = "dist/client/sitemap.xml";
@@ -17,5 +18,5 @@ const tidied = xml.replace(/<url>[\s\S]*?<\/url>\s*/g, (entry) => {
   seen.add(slashed);
   return entry.replace(`<loc>${loc}</loc>`, `<loc>${slashed}</loc>`);
 });
-writeFileSync(file, tidied);
+writeFileSync(file, tidied.replace("https://www.sitemaps.org/schemas/sitemap/0.9", "http://www.sitemaps.org/schemas/sitemap/0.9"));
 console.log(`sitemap: ${seen.size} pages`);

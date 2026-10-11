@@ -96,8 +96,9 @@ it to the next run; if its pages answer but can't be read it changes nothing and
 
 `.github/workflows/site-check.yml` runs `scripts/site-check.mjs` every hour and after every deploy. It loads every
 page and linked file on www.pickeringtownfc.com, opens each page in Chrome at desktop and phone sizes (JavaScript
-errors, failed requests, broken images, sideways scrolling), checks first-team games have their results, and checks
-the latest results sync and deploy didn't fail. Problems open an issue labelled **site-check** (GitHub emails it),
+errors, failed requests, broken images, sideways scrolling), checks every page is open to search engines and the
+sitemap is valid, checks first-team games have their results, and checks the latest results sync and deploy didn't
+fail. Problems open an issue labelled **site-check** (GitHub emails it),
 which closes itself once everything is clear. Run it locally against a build with
 `node scripts/site-check.mjs --base http://localhost:PORT` (set `CHROME_PATH` to a Chromium if Chrome isn't installed).
 

@@ -16,11 +16,22 @@ import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome,
 import { useNow } from "@/lib/now";
 import { seo } from "@/lib/seo";
 
+/** Tells Google the site's name (shown above results) and the club's other names. */
+const website = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: club.name,
+  alternateName: [club.fullName, club.nickname],
+  url: `${club.siteUrl}/`,
+};
+
 export const Route = createFileRoute("/")({
-  head: () =>
-    seo({
+  head: () => ({
+    ...seo({
       description: `${club.name}, ${club.nickname}: fixtures, results, the ${club.leagueShort} table, news and matchday information for ${ground.name}, ${club.town}. Est. ${club.founded}.`,
     }),
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(website) }],
+  }),
   component: HomePage,
 });
 
