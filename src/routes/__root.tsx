@@ -52,7 +52,9 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "64x64" },
+      // Google shows the site's icon beside it in search results; a larger one stays sharp.
+      { rel: "icon", href: "/icon-192.png", type: "image/png", sizes: "192x192" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData) }],
