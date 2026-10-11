@@ -14,6 +14,7 @@ import { club, contact, elsewhere, ground } from "@/content/club";
 import { useRevealOnScroll } from "@/hooks/use-reveal";
 import { Centered, NotFound, button } from "@/components/NotFound";
 import appCss from "../styles.css?url";
+import displayFont from "@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url";
 
 /** Tells search engines this is a football club, where it plays and where to find it online. */
 const structuredData = {
@@ -60,6 +61,9 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      // The headline font, fetched straight away: page titles set in the wider stand-in font wrap onto more lines,
+      // so the page would jump when it arrived.
+      { rel: "preload", href: displayFont, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       { rel: "icon", href: "/favicon.png", type: "image/png", sizes: "64x64" },
       // Google shows the site's icon beside it in search results; a larger one stays sharp.
       { rel: "icon", href: "/icon-192.png", type: "image/png", sizes: "192x192" },

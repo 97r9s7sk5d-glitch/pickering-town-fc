@@ -60,9 +60,10 @@ export function SiteHeader() {
     )}
     <header ref={headerRef} className="sticky top-0 z-40 border-b border-line bg-ink/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link to="/" className="flex items-center gap-3" aria-label={`${club.name} home`}>
+        <Link to="/" className="flex shrink-0 items-center gap-3" aria-label={`${club.name} home`}>
           <Crest className="h-12 w-auto shrink-0" />
-          <span className="leading-none">
+          {/* No wrapping: before the fonts load, the wider fallback font would wrap this and make the page jump. */}
+          <span className="whitespace-nowrap leading-none">
             <span className="display block text-xl sm:text-2xl">Pickering Town</span>
             <span className="eyebrow block !text-[11px] text-pike-bright">{club.nickname} · Est. {club.founded}</span>
           </span>
