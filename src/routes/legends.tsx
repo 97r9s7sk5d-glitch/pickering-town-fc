@@ -40,7 +40,7 @@ function LegendsPage() {
                 </>
               ) : (
                 <div className="absolute inset-0 grid place-items-center [background:repeating-linear-gradient(90deg,oklch(1_0_0/0.14)_0_36px,transparent_36px_72px)]">
-                  <Crest className="h-28 w-28" />
+                  <Crest className="h-28 w-28" sizes="112px" />
                 </div>
               )}
             </figure>
