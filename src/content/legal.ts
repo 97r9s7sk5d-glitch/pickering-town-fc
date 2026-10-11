@@ -24,6 +24,14 @@ export const privacySections: LegalSection[] = [
     ],
   },
   {
+    heading: "Players, officials, volunteers and sponsors",
+    paragraphs: [
+      "The site shows the names and photos of our players, managers, officials and volunteers, and the names of sponsors, including people who sponsor a player. We do this to tell supporters about the club and thank the people who make it happen, on the basis of our legitimate interests as a football club, or with consent where we've asked for it.",
+      "We only show photos or names of anyone under 18 with the agreement of their parent or guardian, in line with the FA's safeguarding guidance.",
+      "If you appear on the site and would like a photo, your name or any other detail changed or removed, contact us through the contact page and we'll deal with it promptly.",
+    ],
+  },
+  {
     heading: "Our legal basis",
     paragraphs: [
       "We handle contact form messages on the basis of our legitimate interest in answering enquiries. Analytics only runs with your consent, which you can withdraw at any time using “Cookie settings” at the bottom of every page.",
@@ -34,12 +42,14 @@ export const privacySections: LegalSection[] = [
     paragraphs: [
       "Essential: the site remembers in your browser whether you have seen the opening video this visit, and your cookie choice. These don't identify you and are needed for the site to work as intended.",
       "Analytics (optional): Google Analytics cookies (named _ga and _ga_…) are only set if you click “Accept analytics”. They last up to two years unless you clear them or change your choice.",
+      "Live scores: the Football Web Pages feed shown during games comes from their site and may set its own cookies. See footballwebpages.co.uk for details.",
     ],
   },
   {
     heading: "Who we share it with",
     paragraphs: [
       "Contact form messages come to the club by email. The site is hosted by GitHub Pages. Analytics data, if you consent, is processed by Google. They act on our behalf. We never sell your information, and we don't share it with anyone else unless the law requires it.",
+      "GitHub and Google may handle data in the United States. Where they do, it's protected by the safeguards UK data protection law requires, such as the UK–US data bridge or the UK's standard contract clauses.",
     ],
   },
   {

@@ -6,8 +6,7 @@
     "dev": "vite dev",
     "build": "vite build && node scripts/sitemap-trailing-slashes.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit",
-    "preview:file": "vite build --config preview/vite.config.ts"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",
@@ -27,7 +26,6 @@
     "playwright-core": "^1.56.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3",
-    "vite": "^8.3.0",
-    "vite-plugin-singlefile": "^2.3.3"
+    "vite": "^8.3.0"
   }
 }
