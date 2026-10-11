@@ -1,0 +1,43 @@
+# TEMPORARY: checks every link from the live site to other websites, and the live response headers. Removed afterwards.
+name: Probe links
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-links.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: |
+          cat > links.mjs <<'JS'
+          const SITE = "https://www.pickeringtownfc.com";
+          const xml = await (await fetch(`${SITE}/sitemap.xml`)).text();
+          const pages = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+          const ext = new Map();
+          for (const p of pages) {
+            const html = await (await fetch(p)).text();
+            for (const [, h] of html.matchAll(/href="(https?:\/\/[^"]+)"/g)) {
+              const u = h.replace(/&amp;/g, "&");
+              if (!u.startsWith(SITE) && !ext.has(u)) ext.set(u, p.replace(SITE, ""));
+            }
+          }
+          const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36";
+          for (const [u, from] of ext) {
+            let s;
+            try {
+              const r = await fetch(u, { redirect: "follow", headers: { "User-Agent": UA, Accept: "text/html,*/*" }, signal: AbortSignal.timeout(20000) });
+              s = `${r.status}${r.redirected ? ` -> ${r.url}` : ""}`;
+            } catch (e) { s = `ERR ${e.cause?.code ?? e.name}`; }
+            console.log(`${s}\t${u}\t(from ${from})`);
+          }
+          JS
+          node links.mjs
+      - run: |
+          for u in https://www.pickeringtownfc.com/ https://www.pickeringtownfc.com/sitemap.xml; do echo "===== $u"; curl -sS -o /dev/null -D - -H "Origin: https://evil.example" "$u" | grep -i -E '^(HTTP|access-control|strict-transport|content-security|x-frame|x-content-type|content-encoding|vary)'; done
+          curl -sS -o /dev/null -D - --compressed https://www.pickeringtownfc.com/assets/ 2>/dev/null | head -1
+          echo "===== source maps"; for f in $(curl -sS https://www.pickeringtownfc.com/ | grep -o '/assets/[^"]*\.js' | sort -u | head -5); do printf "%s map:" "$f"; curl -sS -o /dev/null -w "%{http_code}\n" "https://www.pickeringtownfc.com$f.map"; done
