@@ -1,0 +1,18 @@
+# TEMPORARY: one-off check of the domain's DNS records. Removed afterwards.
+name: Probe DNS
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-dns.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for q in "pickeringtownfc.com TXT" "_dmarc.pickeringtownfc.com TXT" "_github-pages-challenge-97r9s7sk5d-glitch.pickeringtownfc.com TXT" "pickeringtownfc.com A" "www.pickeringtownfc.com CNAME" "pickeringtownfc.com MX"; do
+            set -- $q; echo "===== $1 $2"; dig +short "$1" "$2" @8.8.8.8; dig +short "$1" "$2" @1.1.1.1 | sed 's/^/(cf) /'
+          done
+          echo "===== GoDaddy domain status"; whois pickeringtownfc.com 2>/dev/null | grep -i -E "status|expir|registrar:" | head -12 || true
+          echo "===== site"; curl -sS -o /dev/null -w "%{http_code}\n" https://www.pickeringtownfc.com/sitemap.xml
