@@ -1,0 +1,24 @@
+# TEMPORARY: Lighthouse on the live site. Removed afterwards.
+name: Probe speed
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-speed.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: |
+          npm i -g lighthouse@12 >/dev/null 2>&1
+          for path in / /fixtures/ /matchday/ /news/welcome-to-the-new-website/; do
+            for ff in mobile desktop; do
+              extra=""; [ $ff = desktop ] && extra="--preset=desktop"
+              lighthouse "https://www.pickeringtownfc.com$path" --quiet --chrome-flags="--headless=new --no-sandbox" --only-categories=performance,accessibility,best-practices,seo $extra --output=json --output-path=lh.json >/dev/null 2>&1 || true
+              node -e "const d=require('./lh.json');const c=d.categories,a=d.audits;console.log('$path $ff',Object.fromEntries(Object.entries(c).map(([k,v])=>[k,Math.round(v.score*100)])),'FCP',a['first-contentful-paint'].displayValue,'LCP',a['largest-contentful-paint'].displayValue,'CLS',a['cumulative-layout-shift'].displayValue)"
+            done
+          done
