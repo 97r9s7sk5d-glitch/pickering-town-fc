@@ -6,7 +6,8 @@
  * - every page in the sitemap loads, and every page, image, video, PDF, script and stylesheet the pages link to on
  *   the site itself answers (other websites aren't checked);
  * - a missing page shows the "Page not found" page with a 404;
- * - every page is open to search engines (no noindex, and its canonical address is itself), and the sitemap is valid;
+ * - every page is open to search engines (no noindex, its canonical address is itself, its structured data parses),
+ *   and the sitemap is valid;
  * - each page in a real browser, at desktop and phone sizes: no JavaScript errors (including React hydration
  *   errors), no failed requests to the site, no broken images, and nothing wider than a phone screen;
  * - first-team games that kicked off more than 30 hours ago have a result (it comes from the league, so a missing
@@ -103,6 +104,13 @@ async function checkPage(url) {
   if (!/<title>[^<]+<\/title>/.test(res.body)) return [problem(`**${path(url)}** has no title, so it may not have built properly`)];
   // Search engines: the page mustn't ask to be left out, and must name itself as the page to list.
   if (/<meta name="robots" content="[^"]*noindex/.test(res.body)) return [problem(`**${path(url)}** tells search engines not to list it (noindex)`)];
+  for (const [, data] of res.body.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try {
+      JSON.parse(data);
+    } catch {
+      return [problem(`**${path(url)}** has broken structured data (JSON-LD) for search engines`)];
+    }
+  }
   const canonical = /<link rel="canonical" href="([^"]+)"/.exec(res.body)?.[1]?.replace(SITE, BASE);
   if (canonical !== url) return [problem(`**${path(url)}** names ${canonical ? path(canonical) : "no page"} as its address for search engines (canonical)`)];
   for (const [, attr, value] of res.body.matchAll(/\s(href|src|poster|data-src|data-portrait-src|data-poster|srcset)="([^"]+)"/g)) {

@@ -5,6 +5,7 @@ import { Container } from "@/components/ui";
 import { articles } from "@/content/news";
 import { formatDate } from "@/lib/dates";
 import { seo } from "@/lib/seo";
+import { jsonLd, newsArticle } from "@/lib/structuredData";
 
 export const Route = createFileRoute("/news/$slug")({
   loader: ({ params }) => {
@@ -14,7 +15,10 @@ export const Route = createFileRoute("/news/$slug")({
   },
   head: ({ loaderData }) =>
     loaderData
-      ? seo({ title: loaderData.title, path: `/news/${loaderData.slug}`, description: loaderData.summary })
+      ? {
+          ...seo({ title: loaderData.title, path: `/news/${loaderData.slug}`, description: loaderData.summary }),
+          scripts: [jsonLd(newsArticle(loaderData))],
+        }
       : {},
   component: ArticlePage,
 });
