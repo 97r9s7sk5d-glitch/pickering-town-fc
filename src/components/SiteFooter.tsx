@@ -63,6 +63,9 @@ export function SiteFooter() {
               <Link to="/terms" className="hover:text-fg">Terms of use</Link>
             </li>
             <li>
+              <Link to="/sitemap" className="hover:text-fg">Site map</Link>
+            </li>
+            <li>
               <CookieSettingsButton className="hover:text-fg" />
             </li>
           </ul>

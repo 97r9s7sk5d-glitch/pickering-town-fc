@@ -65,7 +65,7 @@ function HomePage() {
               {club.nickname} · {club.leagueShort} · Est. {club.founded}
             </p>
             <h1 className="display animate-rise mt-4 text-[clamp(4rem,12vw,8rem)]">
-              Pickering
+              Pickering{" "}
               <br />
               <span className="bg-gradient-to-r from-pike-bright to-pike bg-clip-text text-transparent">Town FC</span>
             </h1>

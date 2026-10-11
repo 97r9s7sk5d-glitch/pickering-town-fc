@@ -45,6 +45,15 @@ export const contact = {
   ],
 };
 
+/**
+ * Other pages about the club, which tell search engines this site is the club's (structured data only; not shown).
+ * Add the club's FA Full-Time page here too once there is one.
+ */
+export const elsewhere = [
+  "https://en.wikipedia.org/wiki/Pickering_Town_F.C.",
+  "https://www.ncefl.org.uk/teams/pickeringtown/",
+];
+
 export type Official = { role: string; name: string };
 
 /** CONFIRM: taken from the club's current website and public sources in September 2026. */

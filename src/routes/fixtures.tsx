@@ -7,8 +7,9 @@ import { club } from "@/content/club";
 import { fullTime } from "@/content/fulltime";
 import { inProgressTeams, teamNames, type Match, type TeamId } from "@/content/fixtures";
 import { fixtures, formatMonth, kickoffDate, resultsList } from "@/lib/matches";
-import { useNow } from "@/lib/now";
+import { buildTime, useNow } from "@/lib/now";
 import { seo } from "@/lib/seo";
+import { homeGameEvents, jsonLd } from "@/lib/structuredData";
 
 type View = "fixtures" | "results";
 type TeamFilter = "all" | TeamId;
@@ -19,12 +20,15 @@ export const Route = createFileRoute("/fixtures")({
     view: search.view === "results" ? "results" : undefined,
     team: typeof search.team === "string" && search.team in teamNames ? (search.team as TeamId) : undefined,
   }),
-  head: () =>
-    seo({
+  head: () => ({
+    ...seo({
       title: "Fixtures & results",
       path: "/fixtures",
       description: `Upcoming fixtures and latest results for ${club.name} first team, ladies and U18s, with kick-off times and add-to-calendar links.`,
     }),
+    // Upcoming home games as events, so Google can list them (e.g. for "football in Pickering this weekend").
+    scripts: [jsonLd(homeGameEvents(buildTime))],
+  }),
   component: FixturesPage,
 });
 

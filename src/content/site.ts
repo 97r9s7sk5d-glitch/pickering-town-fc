@@ -31,3 +31,22 @@ export const siteCredit: { label: string; url: string } | null = {
   label: "The Chairman",
   url: "https://thechairman.org.uk",
 };
+
+/**
+ * The Site map page (/sitemap): every page, for people and search engines. The main menu's pages and the news
+ * articles are listed automatically; these are the other pages, and a few useful views.
+ */
+export const sitemapExtras = {
+  intro: "Every page on the website in one place.",
+  views: [
+    { label: "Latest results", href: "/fixtures?view=results" },
+    { label: "Ladies fixtures", href: "/fixtures?team=ladies" },
+    { label: "Ladies results", href: "/fixtures?view=results&team=ladies" },
+  ],
+  more: [
+    { label: "Donate", href: "/donate" },
+    { label: "Contact", href: "/contact" },
+    { label: "Privacy & cookies", href: "/privacy" },
+    { label: "Terms of use", href: "/terms" },
+  ],
+};

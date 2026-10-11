@@ -48,3 +48,20 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # Tells Bing (and the other IndexNow search engines) which pages exist straight after a change, so they recrawl
+      # now rather than whenever they next call; DuckDuckGo, Yahoo and Ecosia use Bing's results. Google doesn't use
+      # IndexNow (it reads the sitemap). The key is public by design: it's also the file /<key>.txt on the site, which
+      # proves the site is ours. Skipped for the daily rebuild, when nothing has changed.
+      - name: Tell Bing the pages changed (IndexNow)
+        if: github.event_name != 'schedule'
+        continue-on-error: true
+        env:
+          KEY: 5f5d602567ddd10608104943b5f6d1f0
+          SITE: https://www.pickeringtownfc.com
+        run: |
+          sleep 30
+          urls=$(curl -sS --max-time 30 "$SITE/sitemap.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -s -c .)
+          jq -n -c --arg key "$KEY" --arg site "$SITE" --argjson urls "$urls" \
+            '{host: ($site | sub("https://"; "")), key: $key, keyLocation: "\($site)/\($key).txt", urlList: $urls}' > indexnow.json
+          curl -sS --max-time 30 -o /dev/null -w "IndexNow answered %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
+            -H "Content-Type: application/json; charset=utf-8" --data @indexnow.json

@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieBanner } from "@/components/CookieBanner";
-import { club, contact, ground } from "@/content/club";
+import { club, contact, elsewhere, ground } from "@/content/club";
 import { useRevealOnScroll } from "@/hooks/use-reveal";
 import { Centered, NotFound, button } from "@/components/NotFound";
 import appCss from "../styles.css?url";
@@ -19,8 +19,9 @@ import appCss from "../styles.css?url";
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "SportsTeam",
+  "@id": `${club.siteUrl}/#club`,
   name: club.name,
-  alternateName: club.nickname,
+  alternateName: [club.fullName, club.nickname],
   sport: "Association football",
   foundingDate: String(club.founded),
   url: club.siteUrl,
@@ -39,7 +40,7 @@ const structuredData = {
     },
   },
   ...(contact.email ? { email: contact.email } : {}),
-  sameAs: contact.social.map((s) => s.url),
+  sameAs: [...contact.social.map((s) => s.url), ...elsewhere],
 };
 
 export const Route = createRootRoute({

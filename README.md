@@ -102,6 +102,16 @@ fail. Problems open an issue labelled **site-check** (GitHub emails it),
 which closes itself once everything is clear. Run it locally against a build with
 `node scripts/site-check.mjs --base http://localhost:PORT` (set `CHROME_PATH` to a Chromium if Chrome isn't installed).
 
+### Search engines
+
+- `sitemap.xml` (for search engines) is made at build time and listed in `robots.txt`; it's submitted in Google
+  Search Console. `/sitemap` is the same list as a page for people, linked from the footer.
+- Structured data (`src/lib/structuredData.ts`, `src/routes/__root.tsx`) tells Google the site is the club's (with
+  its Wikipedia and NCEL pages, `elsewhere` in `src/content/club.ts`), lists upcoming first-team home games as
+  events, and marks up news articles.
+- After each change is deployed, `.github/workflows/deploy-pages.yml` tells Bing and the other IndexNow search
+  engines through IndexNow; the key is the `public/<key>.txt` file.
+
 ### Ladies and U18: by hand, or FA Full-Time code snippets
 
 The ladies' league (and any U18 league) is on FA Full-Time, which blocks automated reading, so their scores and
