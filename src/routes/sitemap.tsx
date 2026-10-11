@@ -8,7 +8,7 @@ import { formatDate } from "@/lib/dates";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/sitemap")({
-  head: () => seo({ title: "Site map", path: "/sitemap", description: `Every page on the ${club.name} website.` }),
+  head: () => seo({ title: "Site map", path: "/sitemap", description: `Every page on the ${club.name} website: fixtures, results, tables, teams, matchday, news and more.` }),
   component: SitemapPage,
 });
 

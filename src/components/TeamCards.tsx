@@ -81,7 +81,7 @@ function DemoTeamPhoto({ label }: { label: string }) {
       aria-label={`${label} team photo coming soon`}
       className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[repeating-linear-gradient(90deg,#1f6b33_0_48px,#257a3b_48px_96px)]"
     >
-      <Crest className="h-20 w-20" />
+      <Crest className="h-20 w-20" sizes="80px" />
       <p className="eyebrow rounded-full bg-ink/60 px-3 py-1 !text-[10px] text-white">Team photo coming soon</p>
     </div>
   );

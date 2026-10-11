@@ -15,7 +15,7 @@ const initials = (name: string) =>
 function Crest({ ours, name, compact }: { ours: boolean; name: string; compact: boolean }) {
   const size = compact ? "h-12 w-12" : "h-16 w-16";
   return ours ? (
-    <img src="/badge.webp" alt="" className={`${size} object-contain drop-shadow`} width={64} height={64} />
+    <img src="/badge-160.webp" alt="" className={`${size} object-contain drop-shadow`} width={64} height={64} />
   ) : (
     <span
       aria-hidden="true"
