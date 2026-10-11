@@ -1,0 +1,23 @@
+# TEMPORARY: what the club's older web addresses serve, and what Google may still know from them. Removed afterwards.
+name: Probe old sites
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-old-sites.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in https://www.pickeringtownfc.co.uk/ http://pickeringtownfc.co.uk/ https://www.pickeringtownfc.teamexpert.co.uk/ https://www.pickeringtownfc.teamexpert.co.uk/clubinfo/1012; do
+            echo "===== $u"; curl -sS -L --max-time 20 -o /tmp/p.html -w "final %{url_effective} %{http_code}\n" -A "Mozilla/5.0" "$u" || true
+            grep -o -i '<title>[^<]*' /tmp/p.html | head -1; grep -o -i -E 'pickeringtownfc\.com|copyright[^<]{0,80}|powered by[^<]{0,60}|pitchero|clubbuzz|wix|wordpress' /tmp/p.html | sort | uniq -c | head -8
+          done
+          echo "===== DNS co.uk"; dig +short A pickeringtownfc.co.uk; dig +short A www.pickeringtownfc.co.uk; dig +short CNAME www.pickeringtownfc.co.uk; dig +short NS pickeringtownfc.co.uk
+          echo "===== WHOIS co.uk"; whois pickeringtownfc.co.uk 2>/dev/null | sed -n '/Registrar:/,/Name servers:/p' | head -20 || true
+          echo "===== WHOIS com"; whois pickeringtownfc.com 2>/dev/null | grep -i -E "creation|expir|registrar:|status" | head -8 || true
+          for d in pickeringtownfc.com pickeringtownfc.co.uk; do
+            echo "===== Wayback $d"; curl -sS --max-time 60 "http://web.archive.org/cdx/search/cdx?url=$d/*&output=txt&fl=timestamp,original,statuscode&collapse=urlkey&limit=200" | awk '{print substr($1,1,6), $2, $3}' | head -120 || true
+          done
