@@ -8,5 +8,3 @@ dist
 !.env.example
 src/routeTree.gen.ts
 test-results
-dist-preview
-preview/routeTree.gen.ts
