@@ -9,9 +9,10 @@ on:
     - cron: "10 6,12 * * *" # morning and midday
     - cron: "40 17,21 * * *" # after Saturday afternoon and midweek evening games
     # Every 15 minutes while results usually come in (UTC): Saturday afternoons, and weekday evenings for midweek
-    # games, so a final score reaches the site soon after the league posts it.
-    - cron: "*/15 15-18 * * 6"
-    - cron: "*/15 20-22 * * 1-5"
+    # games, so a final score reaches the site soon after the league posts it. Off the quarter hours: GitHub delays
+    # or drops scheduled runs when it's busy, which is worst at the start of each hour.
+    - cron: "4,19,34,49 15-18 * * 6"
+    - cron: "4,19,34,49 20-22 * * 1-5"
   workflow_dispatch:
 
 permissions:
