@@ -8,6 +8,8 @@ on:
     branches: [main]
   schedule:
     - cron: "17 4 * * *" # daily, early morning
+    # A second daily rebuild, in case GitHub drops the first (it skips scheduled runs when it's busy).
+    - cron: "47 11 * * *"
   workflow_dispatch:
 
 permissions:
