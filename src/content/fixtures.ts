@@ -72,7 +72,7 @@ export const matches: Match[] = [
   { id: "f17", kickoff: "2026-10-06T19:45", team: "first", competition: "NCEL League Cup", opponent: "Dearne & District", venue: "H", score: [3, 1], attendance: 113, scorers: ["Connor Avison (9)", "Joseph Bhaskaran (14)", "Daniel Gibb (48)"] },
   { id: "f18", kickoff: "2026-10-10T15:00", team: "first", competition: "FA Vase", opponent: "Holker Old Boys", venue: "A", score: [1, 5], attendance: 115, scorers: ["Michael Coulson (34 pen)"] },
   { id: "f19", kickoff: "2026-10-13T19:45", team: "first", competition: "NCEL Premier", opponent: "Dearne & District", venue: "H", score: [1, 1], attendance: 181, scorers: ["Riley Cooper (45)"] },
-  { id: "f20", kickoff: "2026-10-17T15:00", team: "first", competition: "NCEL Premier", opponent: "Parkgate", venue: "A" },
+  { id: "f20", kickoff: "2026-10-17T15:00", team: "first", competition: "NCEL Premier", opponent: "Parkgate", venue: "A", score: [1, 1], attendance: 119, scorers: ["Joseph Pratley (24)"] },
   { id: "f21", kickoff: "2026-10-24T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley", venue: "H" },
   { id: "f22", kickoff: "2026-10-31T15:00", team: "first", competition: "NCEL Premier", opponent: "Frickley Athletic", venue: "A" },
   { id: "f23", kickoff: "2026-11-07T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "H" },
