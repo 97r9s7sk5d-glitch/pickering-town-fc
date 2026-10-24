@@ -16,6 +16,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write # to start the site check
 
 # One publish at a time; a newer one waits rather than cancelling one that's halfway through.
 concurrency:
@@ -67,3 +68,15 @@ jobs:
             '{host: ($site | sub("https://"; "")), key: $key, keyLocation: "\($site)/\($key).txt", urlList: $urls}' > indexnow.json
           curl -sS --max-time 30 -o /dev/null -w "IndexNow answered %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
             -H "Content-Type: application/json; charset=utf-8" --data @indexnow.json
+
+  # Checks the live site after every publish, and reports this run if it failed (.github/workflows/site-check.yml).
+  # Started from here because GitHub doesn't tell other workflows when a deploy finishes if a workflow started the
+  # deploy, which is how the results sync publishes.
+  check:
+    needs: [build, deploy]
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run site-check.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME" -f after_deploy=true

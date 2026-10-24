@@ -8,10 +8,13 @@ name: Site check
 on:
   schedule:
     - cron: "23 * * * *" # hourly
-  workflow_run:
-    workflows: ["Deploy to GitHub Pages"]
-    types: [completed]
+  # Also started by the deploy workflow straight after each publish (with after_deploy), and by hand from the Actions tab.
   workflow_dispatch:
+    inputs:
+      after_deploy:
+        description: Give GitHub Pages a minute to serve the new files first
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -33,7 +36,7 @@ jobs:
           cache: npm
       - run: npm ci
       # After a deploy, give GitHub Pages a minute to start serving the new files.
-      - if: github.event_name == 'workflow_run'
+      - if: inputs.after_deploy
         run: sleep 60
       - id: check
         continue-on-error: true
