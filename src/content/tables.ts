@@ -35,7 +35,7 @@ export type LeagueTableData = {
 export const firstTeamTable: LeagueTableData = {
   label: "First Team",
   title: "NCEL Premier Division 2026–27",
-  updated: "24 October 2026",
+  updated: "27 October 2026",
   source: { name: "Northern Counties East League", url: "https://www.ncefl.org.uk/tables/" },
   logo: { src: "/images/ncel-logo.webp", width: 132, height: 160, alt: "Macron Northern Counties East Football League" },
   ownTeam: "Pickering Town",
@@ -47,9 +47,9 @@ export const firstTeamTable: LeagueTableData = {
     { team: "Retford FC", played: 15, won: 8, drawn: 4, lost: 3, goalsFor: 29, goalsAgainst: 22, goalDifference: 7, points: 28 },
     { team: "Retford United", played: 16, won: 7, drawn: 5, lost: 4, goalsFor: 27, goalsAgainst: 19, goalDifference: 8, points: 26 },
     { team: "Handsworth", played: 15, won: 7, drawn: 5, lost: 3, goalsFor: 28, goalsAgainst: 26, goalDifference: 2, points: 26 },
+    { team: "Knaresborough Town", played: 16, won: 7, drawn: 4, lost: 5, goalsFor: 32, goalsAgainst: 28, goalDifference: 4, points: 25 },
     { team: "Campion", played: 16, won: 7, drawn: 3, lost: 6, goalsFor: 28, goalsAgainst: 25, goalDifference: 3, points: 24 },
     { team: "Horbury Town", played: 15, won: 6, drawn: 4, lost: 5, goalsFor: 22, goalsAgainst: 16, goalDifference: 6, points: 22 },
-    { team: "Knaresborough Town", played: 15, won: 6, drawn: 4, lost: 5, goalsFor: 29, goalsAgainst: 26, goalDifference: 3, points: 22 },
     { team: "Rossington Main", played: 15, won: 5, drawn: 6, lost: 4, goalsFor: 23, goalsAgainst: 19, goalDifference: 4, points: 21 },
     { team: "Pickering Town", played: 16, won: 6, drawn: 3, lost: 7, goalsFor: 24, goalsAgainst: 30, goalDifference: -6, points: 21 },
     { team: "Worsbrough Bridge Athletic", played: 14, won: 6, drawn: 2, lost: 6, goalsFor: 26, goalsAgainst: 22, goalDifference: 4, points: 20 },
@@ -59,7 +59,7 @@ export const firstTeamTable: LeagueTableData = {
     { team: "Albion Sports", played: 17, won: 5, drawn: 3, lost: 9, goalsFor: 26, goalsAgainst: 30, goalDifference: -4, points: 18 },
     { team: "Frickley Athletic", played: 15, won: 4, drawn: 3, lost: 8, goalsFor: 25, goalsAgainst: 25, goalDifference: 0, points: 15 },
     { team: "Tadcaster Albion", played: 15, won: 3, drawn: 6, lost: 6, goalsFor: 15, goalsAgainst: 28, goalDifference: -13, points: 15 },
-    { team: "Parkgate", played: 16, won: 4, drawn: 3, lost: 9, goalsFor: 16, goalsAgainst: 36, goalDifference: -20, points: 15 },
+    { team: "Parkgate", played: 17, won: 4, drawn: 3, lost: 10, goalsFor: 18, goalsAgainst: 39, goalDifference: -21, points: 15 },
     { team: "Keighley Town", played: 16, won: 0, drawn: 2, lost: 14, goalsFor: 9, goalsAgainst: 65, goalDifference: -56, points: 2 },
   ],
 };
