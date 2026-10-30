@@ -1,21 +1,25 @@
-# Temporary: inspect the live site's certificate and DNS from a GitHub runner. Remove after use.
+# Temporary: check the live site's certificate the way Windows (and Edge) does. Remove after use.
 name: Probe certificate
 on:
   push:
     branches: [claude/gallant-meitner-sqc5q9]
     paths: [.github/workflows/probe-cert.yml]
 jobs:
-  probe:
-    runs-on: ubuntu-latest
+  windows:
+    runs-on: windows-latest
     steps:
-      - run: |
-          for h in www.pickeringtownfc.com pickeringtownfc.com; do
-            echo "=== DNS $h"
-            for t in A AAAA CNAME CAA; do echo "-- $t"; dig +short $t $h @1.1.1.1; done
-            echo "=== Certificate $h"
-            echo | openssl s_client -connect $h:443 -servername $h -showcerts 2>/dev/null | grep -E 's:|i:|Verify return code' || true
-            echo | openssl s_client -connect $h:443 -servername $h 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName || true
-            echo "=== curl $h"
-            curl -sSI --max-time 20 https://$h | head -5
-          done
-          echo "=== CAA at the parent"; dig +short CAA pickeringtownfc.com @8.8.8.8
+      - shell: pwsh
+        run: |
+          foreach ($h in "www.pickeringtownfc.com", "pickeringtownfc.com") {
+            "=== $h"
+            try { $r = Invoke-WebRequest "https://$h/" -UseBasicParsing -MaximumRedirection 0 -SkipHttpErrorCheck; "HTTP $($r.StatusCode)" } catch { "FAILED: $($_.Exception.Message)" }
+            $tcp = [Net.Sockets.TcpClient]::new($h, 443)
+            $ssl = [Net.Security.SslStream]::new($tcp.GetStream(), $false, { param($s, $c, $ch, $e) "Windows policy errors: $e" | Out-Host; $true })
+            $ssl.AuthenticateAsClient($h)
+            $cert = [Security.Cryptography.X509Certificates.X509Certificate2]::new($ssl.RemoteCertificate)
+            $chain = [Security.Cryptography.X509Certificates.X509Chain]::new()
+            "Chain builds: $($chain.Build($cert))"
+            $chain.ChainElements | ForEach-Object { "  $($_.Certificate.Subject)  (issuer: $($_.Certificate.Issuer))" }
+            $chain.ChainStatus | ForEach-Object { "  status: $($_.Status) $($_.StatusInformation)" }
+            $tcp.Close()
+          }
