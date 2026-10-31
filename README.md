@@ -92,6 +92,10 @@ it to the next run; if its pages answer but can't be read it changes nothing and
 **Actions** tab. Run it by hand there with **Run workflow**, or locally with
 `node scripts/sync-league.mjs --dry-run` to see what it would change.
 
+GitHub delays or drops scheduled runs when it's busy, often for hours on a Saturday afternoon, so on a first-team
+matchday `.github/workflows/matchday-results.yml` (`scripts/matchday-results.mjs`) waits until about full time and
+then starts the results sync every 10 minutes until the score is in (giving up 5 hours after kick-off).
+
 ### Site check: every hour
 
 `.github/workflows/site-check.yml` runs `scripts/site-check.mjs` every hour and after every deploy. It loads every
