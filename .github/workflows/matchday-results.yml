@@ -1,0 +1,35 @@
+# Gets a first-team score onto the site soon after the game (scripts/matchday-results.mjs): on a matchday it waits
+# until about full time, then starts the results sync every 10 minutes until the score is in. It waits inside the
+# run because GitHub delays or drops scheduled runs when it's busy, often for hours on a Saturday afternoon.
+# Starts three times each morning in case GitHub skips one; the extra runs wait their turn and then find nothing
+# to do. It can also be run by hand from the Actions tab ("Run workflow").
+name: Matchday results
+
+on:
+  schedule:
+    - cron: "23 5,8,11 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write # to start the results sync, and a fresh run of this one
+
+concurrency:
+  group: matchday-results
+  cancel-in-progress: false
+
+jobs:
+  wait:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    env:
+      TZ: Europe/London
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: node scripts/matchday-results.mjs
