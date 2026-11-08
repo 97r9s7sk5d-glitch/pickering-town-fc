@@ -273,14 +273,13 @@ function updateTable(source, rows) {
 
 // ---------- Run ----------
 
-const ATTEMPTS = 3;
-const RETRY_SECONDS = 30;
+const RETRY_WAITS = [30, 120, 300]; // seconds to wait before each new try
 
 /**
- * Reads the club's games and the table. The league's site now and then times out, or briefly serves a page with no
- * games on it, so each read is tried up to three times, 30 seconds apart. If the site still can't be reached, this
- * run is skipped with a warning (the next scheduled run catches up); if it answers but can't be read, the run fails,
- * as the page may have changed.
+ * Reads the club's games and the table. The league's site now and then times out, or serves a page with no games
+ * on it for a minute or two, so a failed read is tried again after 30 seconds, 2 minutes and 5 minutes. If the site
+ * still can't be reached, this run is skipped with a warning (the next scheduled run catches up); if it answers but
+ * still can't be read, the run fails, as the page may have changed.
  */
 async function readLeague() {
   for (let attempt = 1; ; attempt++) {
@@ -296,9 +295,10 @@ async function readLeague() {
       return { games, rows };
     } catch (err) {
       if (fromDir) fail(err.message);
-      if (attempt < ATTEMPTS) {
-        console.log(`sync-league: ${err.message}; trying again in ${RETRY_SECONDS} seconds (attempt ${attempt} of ${ATTEMPTS}).`);
-        await new Promise((r) => setTimeout(r, RETRY_SECONDS * 1000));
+      const wait = RETRY_WAITS[attempt - 1];
+      if (wait) {
+        console.log(`sync-league: ${err.message}; trying again in ${wait} seconds (attempt ${attempt} of ${RETRY_WAITS.length + 1}).`);
+        await new Promise((r) => setTimeout(r, wait * 1000));
         continue;
       }
       if (err.unreachable) {
