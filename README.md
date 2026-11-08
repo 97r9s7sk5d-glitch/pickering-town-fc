@@ -87,9 +87,9 @@ be read directly. Each one is marked `CONFIRM` in the code:
 Saturday and midweek games). It reads the club's page and the tables page on www.ncefl.org.uk and updates
 `src/content/fixtures.ts` (scores, attendances, Pikes scorers, kick-off times, moved and new games; friendlies are
 left out) and the first-team table in `src/content/tables.ts`. If anything changed it checks the site builds,
-commits to `main` and republishes. If the league's site is down it tries three times, 30 seconds apart, then leaves
-it to the next run; if its pages answer but can't be read it changes nothing and the run shows as failed in the
-**Actions** tab. Run it by hand there with **Run workflow**, or locally with
+commits to `main` and republishes. If the league's site is down, or briefly shows no games, it tries again after 30
+seconds, 2 minutes and 5 minutes. If the site is still down it leaves it to the next run; if its pages answer but
+still can't be read it changes nothing and the run shows as failed in the **Actions** tab. Run it by hand there with **Run workflow**, or locally with
 `node scripts/sync-league.mjs --dry-run` to see what it would change.
 
 GitHub delays or drops scheduled runs when it's busy, often for hours on a Saturday afternoon, so on a first-team
