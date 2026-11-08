@@ -14,6 +14,10 @@ on:
     - cron: "4,19,34,49 15-18 * * 6"
     - cron: "4,19,34,49 20-22 * * 1-5"
   workflow_dispatch:
+    inputs:
+      try:
+        description: Which try this is (set by the workflow when the league's pages couldn't be read)
+        default: "1"
 
 permissions:
   contents: write
@@ -36,7 +40,20 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: node scripts/sync-league.mjs
+      # Exit code 2: the league's pages answered but couldn't be read. Now and then one GitHub machine is sent pages
+      # with no games while every other machine gets the real ones, so the first two times it hands over to a fresh
+      # run (on another machine); the third time the run fails, as the pages may really have changed.
+      - run: |
+          node scripts/sync-league.mjs && exit 0 || code=$?
+          if [ "$code" = 2 ] && [ "$TRY" -lt 3 ]; then
+            echo "::warning::The league's pages couldn't be read from this machine; trying again in a fresh run."
+            gh workflow run sync-league.yml --ref main -f try=$((TRY + 1))
+            exit 0
+          fi
+          exit "$code"
+        env:
+          TRY: ${{ inputs.try || 1 }}
+          GH_TOKEN: ${{ github.token }}
       - id: diff
         run: git diff --quiet || echo "changed=true" >> "$GITHUB_OUTPUT"
       # Only publish an update that still builds and type-checks. Build first: it generates src/routeTree.gen.ts,

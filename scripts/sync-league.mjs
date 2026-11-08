@@ -273,13 +273,17 @@ function updateTable(source, rows) {
 
 // ---------- Run ----------
 
-const RETRY_WAITS = [30, 120, 300]; // seconds to wait before each new try
+const RETRY_WAITS = [30, 60]; // seconds to wait before each new try
+
+/** The start of a page's text, to show what the league's site sent when it couldn't be read. */
+const glimpse = (html) => `${html.length} bytes: "${text(html).slice(0, 160)}"`;
 
 /**
- * Reads the club's games and the table. The league's site now and then times out, or serves a page with no games
- * on it for a minute or two, so a failed read is tried again after 30 seconds, 2 minutes and 5 minutes. If the site
- * still can't be reached, this run is skipped with a warning (the next scheduled run catches up); if it answers but
- * still can't be read, the run fails, as the page may have changed.
+ * Reads the club's games and the table. The league's site now and then times out, so a failed read is tried again
+ * after 30 seconds and a minute. If the site still can't be reached, this run is skipped with a warning (the next
+ * scheduled run catches up). If it answers but still can't be read, this exits with code 2: now and then one GitHub
+ * machine is sent pages with no games while every other machine gets the real ones, so the workflow tries again in a
+ * fresh run, and fails only if that keeps happening, as the page may then really have changed.
  */
 async function readLeague() {
   for (let attempt = 1; ; attempt++) {
@@ -289,9 +293,9 @@ async function readLeague() {
         page(`${SITE}/tables/`, "tables.html"),
       ]);
       const games = parseMatches(matchesHtml);
-      if (games.length < 5) throw new Error(`only ${games.length} games read from the club's NCEL page; the page may have changed`);
+      if (games.length < 5) throw new Error(`only ${games.length} games read from the club's NCEL page (${glimpse(matchesHtml)})`);
       const rows = parseTable(tablesHtml);
-      if (!rows || rows.length < 10 || !rows.some((r) => r.team === OUR_NAME)) throw new Error("the NCEL Premier Division table couldn't be read");
+      if (!rows || rows.length < 10 || !rows.some((r) => r.team === OUR_NAME)) throw new Error(`the NCEL Premier Division table couldn't be read (${glimpse(tablesHtml)})`);
       return { games, rows };
     } catch (err) {
       if (fromDir) fail(err.message);
@@ -305,7 +309,8 @@ async function readLeague() {
         console.log(`::warning::sync-league: ${err.message}. Nothing was changed; the next run will try again.`);
         process.exit(0);
       }
-      fail(err.message);
+      console.error(`sync-league: ${err.message}. Nothing was changed.`);
+      process.exit(2);
     }
   }
 }
