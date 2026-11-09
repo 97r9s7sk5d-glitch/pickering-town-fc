@@ -1,0 +1,76 @@
+# Temporary: test the live-score panel at kick-off and with the Football Web Pages script blocked. Remove after use.
+name: Probe live scores
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-live.yml]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # The next first-team game (f24) at home, kicking off 75 seconds after the build finishes.
+      - run: |
+          node -e '
+            const fs = require("fs"); const f = "src/content/fixtures.ts";
+            const d = new Date(Date.now() + 4 * 60000), p = (n) => String(n).padStart(2, "0");
+            const ko = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+            fs.writeFileSync(f, fs.readFileSync(f, "utf8").replace(/id: "f24", kickoff: "[^"]+"(.*?)venue: "A"/, `id: "f24", kickoff: "${ko}"$1venue: "H"`));
+            fs.writeFileSync("kickoff.txt", ko); console.log("kick-off", ko);'
+          npm run build
+      - run: |
+          (cd dist/client && python3 -m http.server 4321 >/dev/null 2>&1 &)
+          sleep 2
+          cat > probe-run.mjs <<'JS'
+          import { chromium } from "playwright-core";
+          import fs from "node:fs";
+          const [h, m] = fs.readFileSync("kickoff.txt", "utf8").slice(11).split(":").map(Number);
+          const ko = new Date(); ko.setHours(h, m, 0, 0);
+          const browser = await chromium.launch({ channel: "chrome" });
+          async function report(page, label) {
+            console.log(`\n===== ${label}`);
+            console.log("live marker visible:", await page.locator("text=Live · Kicked off").first().isVisible().catch(() => false));
+            for (const el of await page.locator(".fwp-embed").all()) console.log("fwp-embed:", JSON.stringify(await el.boundingBox()), (await el.evaluate((e) => e.outerHTML)).slice(0, 900));
+            for (const f of page.frames().slice(1)) {
+              const text = await f.locator("body").innerText({ timeout: 5000 }).catch(() => "(unreadable)");
+              console.log(`frame ${f.url().slice(0, 90)}: ${text.replace(/\s+/g, " ").slice(0, 160)}`);
+            }
+          }
+          // 1. Page opened before kick-off, left open through it.
+          {
+            const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+            const log = [];
+            page.on("console", (m) => m.type() === "error" && log.push(`console error: ${m.text().slice(0, 200)}`));
+            page.on("pageerror", (e) => log.push(`pageerror: ${e.message.slice(0, 200)}`));
+            await page.goto("http://localhost:4321/matchday/", { waitUntil: "load" });
+            await report(page, `open before kick-off (${Math.round((ko - Date.now()) / 1000)}s to go)`);
+            await page.waitForTimeout(Math.max(0, ko - Date.now()) + 20000);
+            await report(page, "same page, 20s after kick-off");
+            for (const l of log) console.log(" ", l);
+            await page.close();
+          }
+          // 2. Opened during the game, with the Football Web Pages script blocked (as a content blocker would).
+          {
+            const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+            await page.route("**/embed.js", (r) => r.abort());
+            await page.goto("http://localhost:4321/matchday/", { waitUntil: "load" });
+            await page.waitForTimeout(15000);
+            await report(page, "opened during the game, embed.js blocked");
+            await page.close();
+          }
+          // 3. Their script, to see what it builds.
+          {
+            const page = await browser.newPage();
+            const res = await page.goto("https://www.footballwebpages.co.uk/embed.js");
+            console.log(`\n===== embed.js (${res.status()})\n` + (await res.text()).slice(0, 4000));
+          }
+          await browser.close();
+          JS
+          node probe-run.mjs
