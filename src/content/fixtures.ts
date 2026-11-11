@@ -76,7 +76,7 @@ export const matches: Match[] = [
   { id: "f21", kickoff: "2026-10-24T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley", venue: "H", score: [0, 3], attendance: 112 },
   { id: "f22", kickoff: "2026-10-31T15:00", team: "first", competition: "NCEL Premier", opponent: "Frickley Athletic", venue: "A", score: [0, 2], attendance: 260 },
   { id: "f23", kickoff: "2026-11-07T15:00", team: "first", competition: "NCEL Premier", opponent: "Bottesford Town", venue: "H", score: [0, 1], attendance: 114 },
-  { id: "f24", kickoff: "2026-11-11T19:45", team: "first", competition: "NCEL Premier", opponent: "Campion", venue: "A", score: [2, 5] },
+  { id: "f24", kickoff: "2026-11-11T19:45", team: "first", competition: "NCEL Premier", opponent: "Campion", venue: "A", score: [2, 5], attendance: 152, scorers: ["Michael Coulson (19)", "Riley Cooper (42)"] },
   { id: "f25", kickoff: "2026-11-14T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford United", venue: "H" },
   { id: "f26", kickoff: "2026-11-17T19:45", team: "first", competition: "NCEL Premier", opponent: "Knaresborough Town", venue: "A" },
   { id: "f27", kickoff: "2026-11-21T15:00", team: "first", competition: "NCEL Premier", opponent: "Worsbrough Bridge Athletic", venue: "A" },
