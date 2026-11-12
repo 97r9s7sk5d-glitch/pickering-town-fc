@@ -1,0 +1,32 @@
+# Temporary: fetch The Chairman's website to find its CT logo. Remove after use.
+name: Probe logo
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-logo.yml]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: |
+          mkdir -p probe-logo
+          curl -sSL -m 30 -A "Mozilla/5.0" -o probe-logo/home.html -w "home %{http_code} %{url_effective}\n" https://thechairman.org.uk/ || true
+          grep -oiE '<title>[^<]*' probe-logo/home.html || true
+          # Every image, icon and logo the page refers to.
+          grep -oiE '(src|href|content)="[^"]+\.(png|svg|jpe?g|webp|ico|gif)[^"]*"' probe-logo/home.html | sed -E 's/^[a-z]+="//; s/"$//' | sort -u > probe-logo/refs.txt || true
+          cat probe-logo/refs.txt
+          n=0
+          while read -r u; do
+            case "$u" in http*) url="$u";; //*) url="https:$u";; /*) url="https://thechairman.org.uk$u";; *) url="https://thechairman.org.uk/$u";; esac
+            n=$((n+1)); ext="${u##*.}"; ext="${ext%%\?*}"
+            curl -sSL -m 30 -A "Mozilla/5.0" -o "probe-logo/img-$n.$ext" -w "img-$n %{http_code} %{size_download} $url\n" "$url" || true
+          done < probe-logo/refs.txt
+          for f in favicon.ico apple-touch-icon.png; do curl -sSL -m 20 -o "probe-logo/$f" -w "$f %{http_code} %{size_download}\n" "https://thechairman.org.uk/$f" || true; done
+          ls -la probe-logo
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add probe-logo && git commit -qm "Temporary: The Chairman logo probe" && git push -q origin HEAD:${GITHUB_REF_NAME} || echo "nothing pushed"
