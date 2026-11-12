@@ -50,9 +50,9 @@ export function SiteHeader() {
             href={siteCredit.url}
             target="_blank"
             rel="noopener"
-            className="inline-block rounded-b-lg bg-black px-3 py-1 opacity-85 transition-opacity hover:opacity-100"
+            className="inline-block rounded-b-xl border border-t-0 border-[#c0c0c0]/60 bg-black px-3.5 py-1.5 shadow-lg shadow-black/50 transition-colors hover:border-[#e5e7ea]"
           >
-            <img src={siteCredit.logo} alt={`Website designed by ${siteCredit.label}`} width={19} height={20} className="block h-5 w-auto" />
+            <img src={siteCredit.logo} alt={`Website designed by ${siteCredit.label}`} width={27} height={28} className="block h-6 w-auto sm:h-7" />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
