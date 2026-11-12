@@ -45,14 +45,14 @@ export function SiteHeader() {
     {siteCredit && (
       <aside aria-label="Website credit">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          {/* A small black tab in the top left, silver on black: The Chairman's colours rather than the club's. */}
+          {/* A small black tab in the top left with The Chairman's silver CT logo: their colours rather than the club's. */}
           <a
             href={siteCredit.url}
             target="_blank"
             rel="noopener"
-            className="inline-block rounded-b-lg bg-black px-3 py-1 text-[11px] leading-5 text-[#c0c0c0] transition-colors hover:text-white"
+            className="inline-block rounded-b-lg bg-black px-3 py-1 opacity-85 transition-opacity hover:opacity-100"
           >
-            Website designed by <span className="font-semibold">{siteCredit.label}</span>
+            <img src={siteCredit.logo} alt={`Website designed by ${siteCredit.label}`} width={19} height={20} className="block h-5 w-auto" />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>

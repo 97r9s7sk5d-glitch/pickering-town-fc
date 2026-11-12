@@ -26,9 +26,13 @@ export const contactForm = {
 /** When the privacy policy and terms were last updated. */
 export const legalUpdated = "11 October 2026";
 
-/** The website credit, a thin line at the top left of every page, above the header. Set to null to remove it. */
-export const siteCredit: { label: string; url: string } | null = {
+/**
+ * The website credit: The Chairman's CT logo in a small tab at the top left of every page, above the header. `label`
+ * is what screen readers and search engines get in place of the logo. Set to null to remove it.
+ */
+export const siteCredit: { label: string; logo: string; url: string } | null = {
   label: "The Chairman",
+  logo: "/images/the-chairman-ct.svg",
   url: "https://thechairman.org.uk",
 };
 
