@@ -20,11 +20,17 @@ export function SiteFooter() {
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
             {club.league}. Home games at {ground.name}, {club.town}.
           </p>
-          {/* The website credit's CT logo (the words are in the tab above the header), linking to The Chairman. */}
+          {/* The website credit: The Chairman's CT logo with "Designed by" beneath it, in a silver-bordered box. */}
           {siteCredit && (
-            <a href={siteCredit.url} target="_blank" rel="noopener" className="mt-8 inline-block opacity-80 transition-opacity hover:opacity-100">
-              <img src={siteCredit.logo} alt={`Website designed by ${siteCredit.label}`} width={27} height={28} loading="lazy" className="block h-12 w-auto" />
-              <span className="sr-only"> (opens in a new tab)</span>
+            <a
+              href={siteCredit.url}
+              target="_blank"
+              rel="noopener"
+              aria-label={`Website designed by ${siteCredit.label} (opens in a new tab)`}
+              className="group mt-8 inline-flex flex-col items-center gap-2 rounded-xl border border-[#c0c0c0]/50 px-5 pb-3 pt-4 transition-colors hover:border-[#e5e7ea]"
+            >
+              <img src={siteCredit.logo} alt="" width={27} height={28} loading="lazy" className="block h-12 w-auto opacity-90 transition-opacity group-hover:opacity-100" />
+              <span className="eyebrow !text-[10px] text-[#c0c0c0] transition-colors group-hover:text-[#e5e7ea]">{siteCredit.footerText}</span>
             </a>
           )}
         </div>
