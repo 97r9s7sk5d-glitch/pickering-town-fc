@@ -27,7 +27,7 @@ export const contactForm = {
 export const legalUpdated = "11 October 2026";
 
 /**
- * The website credit: "Design by" and The Chairman's CT logo in a tab at the top right of every page, above the
+ * The website credit: "Design by" and The Chairman's CT logo in a tab at the top left of every page, above the
  * header. `label` is what screen readers and search engines get in place of the logo ("Design by The Chairman").
  * Set to null to remove it.
  */

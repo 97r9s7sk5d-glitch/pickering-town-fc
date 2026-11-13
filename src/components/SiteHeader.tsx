@@ -44,8 +44,8 @@ export function SiteHeader() {
     <>
     {siteCredit && (
       <aside aria-label="Website credit">
-        <div className="mx-auto flex max-w-7xl justify-end px-4 sm:px-6">
-          {/* A black tab in the top right with The Chairman's silver CT logo: their colours rather than the club's. */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          {/* A black tab in the top left with The Chairman's silver CT logo: their colours rather than the club's. */}
           <a
             href={siteCredit.url}
             target="_blank"
