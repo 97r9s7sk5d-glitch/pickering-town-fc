@@ -44,15 +44,18 @@ export function SiteHeader() {
     <>
     {siteCredit && (
       <aside aria-label="Website credit">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          {/* A small black tab in the top left with The Chairman's silver CT logo: their colours rather than the club's. */}
+        <div className="mx-auto flex max-w-7xl justify-end px-4 sm:px-6">
+          {/* A black tab in the top right with The Chairman's silver CT logo: their colours rather than the club's. */}
           <a
             href={siteCredit.url}
             target="_blank"
             rel="noopener"
-            className="inline-block rounded-b-xl border border-t-0 border-[#c0c0c0]/60 bg-black px-3.5 py-1.5 shadow-lg shadow-black/50 transition-colors hover:border-[#e5e7ea]"
+            className="group inline-flex items-center gap-2.5 rounded-b-xl border border-t-0 border-[#c0c0c0]/60 bg-black px-4 py-2 shadow-lg shadow-black/50 transition-colors hover:border-[#e5e7ea]"
           >
-            <img src={siteCredit.logo} alt={`Website designed by ${siteCredit.label}`} width={27} height={28} className="block h-6 w-auto sm:h-7" />
+            <span className="eyebrow !text-[11px] text-[#c0c0c0] transition-colors group-hover:text-[#e5e7ea] sm:!text-xs">
+              {siteCredit.prefix}
+            </span>
+            <img src={siteCredit.logo} alt={siteCredit.label} width={27} height={28} className="block h-8 w-auto sm:h-10" />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
