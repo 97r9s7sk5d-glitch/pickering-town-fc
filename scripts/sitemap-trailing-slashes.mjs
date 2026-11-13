@@ -1,5 +1,5 @@
 // Tidies the generated sitemap:
-// - pages are served as folders (/teams/) and GitHub Pages redirects /teams to /teams/, so list the final address;
+// - pages are served as folders (/teams/) and Vercel redirects /teams to /teams/ (vercel.json), so list the final address;
 // - drop filtered views (?view=results) and files (programme PDFs), which the crawler finds but aren't pages;
 // - drop duplicates;
 // - use the standard namespace (http://), which Google Search Console requires; the generator writes https://.
