@@ -5,16 +5,18 @@ It's built with TanStack Start, React 19 and Tailwind CSS v4. Every page is
 prerendered to plain HTML at build time, so it's fast, search-engine friendly and can be hosted free on any static
 host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
 
-Live at **https://www.pickeringtownfc.com**, hosted free on **GitHub Pages**. Every change merged into `main` is
-built and published by the GitHub Action in `.github/workflows/deploy-pages.yml` (see the repository's **Actions**
-tab). It can also be re-run by hand there with **Run workflow**. It also rebuilds once a day, so the prerendered
-"next match" moves on after each game; visitors' browsers move it on straight away from their own clock (a game counts
-as over 2½ hours after kick-off). Add the score to `src/content/fixtures.ts` to put it in the results.
+Live at **https://www.pickeringtownfc.com**, hosted on **Vercel** (project `pickering-town-fc` in The Chairman's
+team). Vercel builds and publishes every change merged into `main` by itself, using the settings in `vercel.json`
+(page addresses end in a slash, UK time for the build, security and caching headers), and builds a private preview
+of every other branch. `.github/workflows/rebuild.yml` also rebuilds it twice a day through a Vercel deploy hook (the
+`VERCEL_DEPLOY_HOOK` secret), so the prerendered "next match" moves on after each game; visitors' browsers move it on
+straight away from their own clock (a game counts as over 2½ hours after kick-off). Add the score to
+`src/content/fixtures.ts` to put it in the results.
 
-The domain is registered with GoDaddy. `@` has four A records to GitHub Pages (`185.199.108.153`, `185.199.109.153`,
-`185.199.110.153`, `185.199.111.153`) and `www` is a CNAME to `97r9s7sk5d-glitch.github.io`, with
-`www.pickeringtownfc.com` as the custom domain in the repository's **Settings → Pages**. The site was on Netlify
-until its free plan ran out of credits; `netlify.toml` is kept only for reference.
+The domain is registered with GoDaddy. `@` has two A records to Vercel (`216.150.1.1` and `216.150.16.1`) and `www`
+is a CNAME to `b3fe06b3ef0ec1ba.vercel-dns-016.com`; both names are on the Vercel project, with the bare domain
+redirecting to `www`. The site was on Netlify until its free plan ran out of credits (`netlify.toml` is kept only for
+reference), then on GitHub Pages until November 2026.
 
 ## Pages
 
@@ -87,7 +89,7 @@ be read directly. Each one is marked `CONFIRM` in the code:
 Saturday and midweek games). It reads the club's page and the tables page on www.ncefl.org.uk and updates
 `src/content/fixtures.ts` (scores, attendances, Pikes scorers, kick-off times, moved and new games; friendlies are
 left out) and the first-team table in `src/content/tables.ts`. If anything changed it checks the site builds,
-commits to `main` and republishes. If the league's site is down it tries again after 30 seconds and a minute, then
+commits to `main`, which Vercel publishes. If the league's site is down it tries again after 30 seconds and a minute, then
 leaves it to the next run. If its pages answer but can't be read (now and then one GitHub machine is sent pages with
 no games), it changes nothing and tries again in a fresh run, up to twice; if that keeps happening the run shows as
 failed in the **Actions** tab, as the pages may have changed. Run it by hand there with **Run workflow**, or locally with
@@ -99,11 +101,11 @@ then starts the results sync every 10 minutes until the score is in (giving up 5
 
 ### Site check: every hour
 
-`.github/workflows/site-check.yml` runs `scripts/site-check.mjs` every hour and after every deploy. It loads every
+`.github/workflows/site-check.yml` runs `scripts/site-check.mjs` every hour and after every Vercel deploy of `main`. It loads every
 page and linked file on www.pickeringtownfc.com, opens each page in Chrome at desktop and phone sizes (JavaScript
 errors, failed requests, broken images, sideways scrolling), checks every page is open to search engines and the
-sitemap is valid, checks first-team games have their results, and checks the latest results sync and deploy didn't
-fail. Problems open an issue labelled **site-check** (GitHub emails it),
+sitemap is valid, checks first-team games have their results, and checks the latest results sync, daily rebuild
+and Vercel deploy didn't fail. Problems open an issue labelled **site-check** (GitHub emails it),
 which closes itself once everything is clear. Run it locally against a build with
 `node scripts/site-check.mjs --base http://localhost:PORT` (set `CHROME_PATH` to a Chromium if Chrome isn't installed).
 
@@ -114,7 +116,7 @@ which closes itself once everything is clear. Run it locally against a build wit
 - Structured data (`src/lib/structuredData.ts`, `src/routes/__root.tsx`) tells Google the site is the club's (with
   its Wikipedia and NCEL pages, `elsewhere` in `src/content/club.ts`), lists upcoming first-team home games as
   events, and marks up news articles.
-- After each change is deployed, `.github/workflows/deploy-pages.yml` tells Bing and the other IndexNow search
+- After each change is deployed, `.github/workflows/site-check.yml` tells Bing and the other IndexNow search
   engines through IndexNow; the key is the `public/<key>.txt` file.
 
 ### Ladies and U18: by hand, or FA Full-Time code snippets
@@ -144,8 +146,8 @@ npm run build      # static site in dist/client
 npm run preview
 ```
 
-The site is published by `.github/workflows/deploy-pages.yml` (see the top of this file). It's a plain static site in
-`dist/client`, so any static host would also work.
+The site is published by Vercel (see the top of this file). It's a plain static site in `dist/client`, so any static
+host would also work.
 
 ## Contact form and analytics
 

@@ -1,6 +1,6 @@
 # Brings the first team's results, kick-off times and the NCEL Premier Division table up to date from the league's
 # website (scripts/sync-league.mjs). Runs a few times a day, and every 15 minutes after Saturday and midweek games. When
-# anything changed it checks the site still builds, commits the change to main and republishes the site.
+# anything changed it checks the site still builds and commits the change to main, which Vercel then publishes.
 # It can also be run by hand from the Actions tab ("Run workflow").
 name: Sync results and table from the NCEL
 
@@ -68,8 +68,3 @@ jobs:
           git commit -m "Results and table from the NCEL ($(date '+%-d %b %Y'))"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && exit 0; sleep 5; done
           exit 1
-      # Pushes made by this job don't start other workflows, so ask for the site to be republished.
-      - if: steps.diff.outputs.changed == 'true'
-        run: gh workflow run deploy-pages.yml --ref main
-        env:
-          GH_TOKEN: ${{ github.token }}
