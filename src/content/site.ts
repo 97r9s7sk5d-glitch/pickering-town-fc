@@ -27,12 +27,11 @@ export const contactForm = {
 export const legalUpdated = "11 October 2026";
 
 /**
- * The website credit: "Design by" and The Chairman's CT logo in a tab at the top left of every page, above the
- * header. `label` is what screen readers and search engines get in place of the logo ("Design by The Chairman").
- * Set to null to remove it.
+ * The website credit: "Website designed by The Chairman", a thin line at the top left of every page above the
+ * header, and The Chairman's CT logo (`logo`) at the end of the footer's bottom line. Both link to `url`. Set to null
+ * to remove both.
  */
-export const siteCredit: { prefix: string; label: string; logo: string; url: string } | null = {
-  prefix: "Design by",
+export const siteCredit: { label: string; logo: string; url: string } | null = {
   label: "The Chairman",
   logo: "/images/the-chairman-ct.svg",
   url: "https://thechairman.org.uk",

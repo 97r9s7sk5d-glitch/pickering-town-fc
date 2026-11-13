@@ -3,6 +3,7 @@ import { Crest } from "@/components/Crest";
 import { navItems } from "@/components/SiteHeader";
 import { CookieSettingsButton } from "@/components/CookieBanner";
 import { club, contact, ground } from "@/content/club";
+import { siteCredit } from "@/content/site";
 
 export function SiteFooter() {
   return (
@@ -55,20 +56,29 @@ export function SiteFooter() {
           <p>
             © {new Date().getFullYear()} {club.fullName}. Up the Pikes.
           </p>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            <li>
-              <Link to="/privacy" className="hover:text-fg">Privacy & cookies</Link>
-            </li>
-            <li>
-              <Link to="/terms" className="hover:text-fg">Terms of use</Link>
-            </li>
-            <li>
-              <Link to="/sitemap" className="hover:text-fg">Site map</Link>
-            </li>
-            <li>
-              <CookieSettingsButton className="hover:text-fg" />
-            </li>
-          </ul>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+              <li>
+                <Link to="/privacy" className="hover:text-fg">Privacy & cookies</Link>
+              </li>
+              <li>
+                <Link to="/terms" className="hover:text-fg">Terms of use</Link>
+              </li>
+              <li>
+                <Link to="/sitemap" className="hover:text-fg">Site map</Link>
+              </li>
+              <li>
+                <CookieSettingsButton className="hover:text-fg" />
+              </li>
+            </ul>
+            {/* The website credit's CT logo (the words are in the tab above the header), linking to The Chairman. */}
+            {siteCredit && (
+              <a href={siteCredit.url} target="_blank" rel="noopener" className="opacity-80 transition-opacity hover:opacity-100">
+                <img src={siteCredit.logo} alt={`Website designed by ${siteCredit.label}`} width={27} height={28} loading="lazy" className="block h-8 w-auto" />
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </footer>
