@@ -2,7 +2,6 @@
 
 Static club website for Pickering Town FC. TanStack Start + React 19 + Tailwind v4, prerendered at build time
 (`vite.config.ts`: `prerender.crawlLinks`, and query-string URLs are filtered out so they don't overwrite pages).
-Hosted on Vercel (`vercel.json`), which publishes every push to `main`.
 
 - Content is data-only in `src/content/*.ts`. Pages in `src/routes/` read from it. Keep copy out of components.
 - Design tokens live in `src/styles.css` (`--pike*` blues on a navy `--ink` base). Utilities: `display`, `eyebrow`,
