@@ -45,17 +45,19 @@ export function SiteHeader() {
     {siteCredit && (
       <aside aria-label="Website credit">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          {/* A black tab in the top left with The Chairman's silver CT logo: their colours rather than the club's. */}
+          {/* A black tab in the top left with The Chairman's silver CT logo: their colours rather than the club's. It's as
+              wide as the club badge and name below it (189px, and 214px from the sm breakpoint), so it fills the
+              space above them. */}
           <a
             href={siteCredit.url}
             target="_blank"
             rel="noopener"
-            className="group inline-flex items-center gap-2.5 rounded-b-xl border border-t-0 border-[#c0c0c0]/60 bg-black px-4 py-2 shadow-lg shadow-black/50 transition-colors hover:border-[#e5e7ea]"
+            className="group flex w-[189px] items-center justify-center gap-3 rounded-b-xl border border-t-0 border-[#c0c0c0]/60 bg-black px-3 py-2 shadow-lg shadow-black/50 transition-colors hover:border-[#e5e7ea] sm:w-[214px]"
           >
-            <span className="eyebrow !text-[11px] text-[#c0c0c0] transition-colors group-hover:text-[#e5e7ea] sm:!text-xs">
+            <span className="eyebrow !text-xs text-[#c0c0c0] transition-colors group-hover:text-[#e5e7ea] sm:!text-[13px]">
               {siteCredit.prefix}
             </span>
-            <img src={siteCredit.logo} alt={siteCredit.label} width={27} height={28} className="block h-8 w-auto sm:h-10" />
+            <img src={siteCredit.logo} alt={siteCredit.label} width={27} height={28} className="block h-9 w-auto sm:h-10" />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
