@@ -24,7 +24,7 @@ export const contactForm = {
 };
 
 /** When the privacy policy and terms were last updated. */
-export const legalUpdated = "11 October 2026";
+export const legalUpdated = "13 November 2026";
 
 /**
  * The website credit: The Chairman's CT logo in a small tab at the top left of every page, above the header. `label`
