@@ -1,0 +1,40 @@
+# Temporary: checks the Vercel copy of the site before the domain moves. Removed before the next PR.
+name: Probe Vercel
+
+on:
+  push:
+    branches: [claude/gallant-meitner-sqc5q9]
+    paths: [.github/workflows/probe-vercel.yml]
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      B: https://pickering-town-fc.vercel.app
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Addresses, redirects and headers
+        run: |
+          for p in / /teams /teams/ /fixtures /fixtures/ /news/ /sitemap.xml /robots.txt /404.html /no-such-page /no-such-page/ \
+                   /programmes/2026-11-14-retford-united.pdf /5f5d602567ddd10608104943b5f6d1f0.txt; do
+            curl -sS -o /dev/null -w "$p -> %{http_code} %{redirect_url}\n" "$B$p"
+          done
+          echo "--- /teams/ headers"; curl -sSI "$B/teams/"
+          js=$(curl -sS "$B/" | grep -o '/assets/index-[^"]*\.js' | head -1)
+          echo "--- $js headers"; curl -sSI "$B$js" | grep -i -E "^(http|cache-control|content-type)"
+          echo "--- /images/the-chairman-ct.svg headers"; curl -sSI "$B/images/the-chairman-ct.svg" | grep -i -E "^(http|cache-control|content-type)"
+          echo "--- programme PDF headers"; curl -sSI "$B/programmes/2026-11-14-retford-united.pdf" | grep -i -E "^(http|cache-control|content-type)"
+      - name: Full site check against Vercel
+        run: |
+          node scripts/site-check.mjs --base "$B" --report report.md && code=0 || code=$?
+          cat report.md
+          exit "$code"
