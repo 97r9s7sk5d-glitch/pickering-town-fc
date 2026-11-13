@@ -50,8 +50,9 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0d37ab" },
-      // Browser security settings that GitHub Pages can't send as headers: no plugins, no <base> hijacking, forms
-      // can only go to the site, email or the contact form service, and anything requested over http goes over https.
+      // Browser security settings, kept in the page so they work whatever the host (the other security headers are
+      // in vercel.json): no plugins, no <base> hijacking, forms can only go to the site, email or the contact form
+      // service, and anything requested over http goes over https.
       // Scripts and frames aren't restricted here, so the live scores feed and analytics keep working.
       {
         httpEquiv: "Content-Security-Policy",
