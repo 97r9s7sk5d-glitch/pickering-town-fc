@@ -28,8 +28,8 @@ export const legalUpdated = "11 October 2026";
 
 /**
  * The website credit: "Website designed by The Chairman", a thin line at the top left of every page above the
- * header, and The Chairman's CT logo (`logo`) at the end of the footer's bottom line. Both link to `url`. Set to null
- * to remove both.
+ * header, and The Chairman's CT logo (`logo`) in the footer, under the club's details. Both link to `url`. Set to
+ * null to remove both.
  */
 export const siteCredit: { label: string; logo: string; url: string } | null = {
   label: "The Chairman",
