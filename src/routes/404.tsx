@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-// Vercel serves this page (404.html) at whatever address was asked for, but it was prerendered for /404, so
+// GitHub Pages serves this page (404.html) at whatever address was asked for, but it was prerendered for /404, so
 // hydrating it at another address would fail. Before hydration, point the address at /404 so the app renders the
 // same page; straight after, put the visitor's address back in the address bar.
 const atThisAddress = `(function(){var p=location.pathname;if(p!=="/404"&&p!=="/404/"&&p!=="/404.html"){window.__ptfcMissedUrl=p+location.search+location.hash;history.replaceState(history.state,"","/404")}})()`;
