@@ -12,7 +12,7 @@
  *   errors), no failed requests to the site, no broken images, and nothing wider than a phone screen;
  * - first-team games that kicked off more than 30 hours ago have a result (it comes from the league, so a missing
  *   one means the results sync isn't working or the league hasn't posted it);
- * - the latest results sync and deploy on GitHub didn't fail.
+ * - the latest results sync and daily rebuild on GitHub, and the latest deploy on Vercel, didn't fail.
  * Anything that fails is checked again 30 seconds later, and only problems that are still there are reported.
  *
  * Writes a Markdown report (--report FILE) and exits 1 if there are problems. Ladies and U18 results, which are
@@ -155,17 +155,23 @@ for (const line of fixtures.split("\n")) {
   else notes.push(`${team === "ladies" ? "Ladies" : "U18"}: no result yet for ${game}. These are added by hand in src/content/fixtures.ts.`);
 }
 
-// ---------- GitHub: latest results sync and deploy ----------
+// ---------- GitHub and Vercel: latest results sync, daily rebuild and deploy ----------
 
 if (process.env.GITHUB_TOKEN && process.env.GITHUB_REPOSITORY) {
-  for (const [file, name] of [["sync-league.yml", "results sync"], ["deploy-pages.yml", "deploy"]]) {
-    const res = await fetch(
-      `https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/actions/workflows/${file}/runs?branch=main&status=completed&per_page=1`,
-      { headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json" } },
-    ).catch(() => null);
-    const run = res?.ok ? (await res.json()).workflow_runs?.[0] : null;
-    if (run && !["success", "cancelled", "skipped"].includes(run.conclusion)) problems.push(problem(`**GitHub**: the latest ${name} ${run.conclusion} (${run.created_at.slice(0, 16).replace("T", " ")} UTC): ${run.html_url}`));
+  const github = (path) =>
+    fetch(`https://api.github.com/repos/${process.env.GITHUB_REPOSITORY}/${path}`, {
+      headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json" },
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .catch(() => null);
+  const when = (iso) => `${iso.slice(0, 16).replace("T", " ")} UTC`;
+  for (const [file, name] of [["sync-league.yml", "results sync"], ["rebuild.yml", "daily rebuild"]]) {
+    const run = (await github(`actions/workflows/${file}/runs?branch=main&status=completed&per_page=1`))?.workflow_runs?.[0];
+    if (run && !["success", "cancelled", "skipped"].includes(run.conclusion)) problems.push(problem(`**GitHub**: the latest ${name} ${run.conclusion} (${when(run.created_at)}): ${run.html_url}`));
   }
+  // Vercel publishes every change to main and reports how it went on the commit, as its "Vercel" status.
+  const deploy = (await github("commits/main/status"))?.statuses?.find((s) => s.context === "Vercel");
+  if (deploy && ["failure", "error"].includes(deploy.state)) problems.push(problem(`**Vercel**: publishing the latest change to main failed (${when(deploy.updated_at)}): ${deploy.target_url}`));
 }
 
 // ---------- In a real browser ----------
