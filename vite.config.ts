@@ -18,7 +18,7 @@ export default defineConfig({
         enabled: true,
         crawlLinks: true,
         failOnError: true,
-        // Hosts' build machines report many CPUs but share them, so rendering a page per CPU at once could time
+        // Netlify's build machines report many CPUs but share them, so rendering a page per CPU at once could time
         // out and fail the whole build now and then. Render four at a time and retry a failed page before giving up.
         concurrency: 4,
         retryCount: 3,
