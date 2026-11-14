@@ -37,6 +37,29 @@ jobs:
         env:
           # Kick-off times in the content are UK time.
           TZ: Europe/London
+      # Publish the script and style files of the last few days' builds alongside this build's. Every build names them
+      # afresh, and GitHub's cache and visitors' browsers can keep a page from an earlier build for up to 10 minutes
+      # (or an open tab for longer). Without its files that page shows but doesn't work, as the site check found on
+      # 14 Nov 2026 just after two publishes in a row. The files are carried from build to build in a cache.
+      - uses: actions/cache/restore@v4
+        with:
+          path: recent-assets
+          key: pages-assets-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: pages-assets-
+      - name: Add the files of recent builds
+        run: |
+          mkdir -p recent-assets
+          find recent-assets -type f -mtime +3 -delete
+          cp dist/client/assets/* recent-assets/
+          before=$(ls dist/client/assets | wc -l)
+          for f in recent-assets/*; do
+            [ -e "dist/client/assets/${f##*/}" ] || cp -p "$f" dist/client/assets/
+          done
+          echo "Added $(( $(ls dist/client/assets | wc -l) - before )) files from builds in the last few days"
+      - uses: actions/cache/save@v4
+        with:
+          path: recent-assets
+          key: pages-assets-${{ github.run_id }}-${{ github.run_attempt }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
