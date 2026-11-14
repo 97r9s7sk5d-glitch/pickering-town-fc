@@ -2,7 +2,7 @@
 /**
  * Brings the first team's results and the NCEL Premier Division table up to date from the league's website
  * (www.ncefl.org.uk), by editing src/content/fixtures.ts and src/content/tables.ts. Run by
- * .github/workflows/sync-league.yml a few times a day; any change is committed and the site republished.
+ * .github/workflows/sync-league.yml a few times a day; any change is committed to main, which Vercel publishes.
  *
  * From the club's NCEL page (every first-team game, all competitions, friendlies left out):
  *   - played games get their score, attendance, Pikes scorers and home/away;
