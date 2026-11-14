@@ -8,24 +8,24 @@ name: Site check
 on:
   schedule:
     - cron: "23 * * * *" # hourly
-  # After each publish: Vercel marks the commit "Vercel: success" when a deploy of main is live. Its other updates
-  # (deploys starting, previews of other branches) start a run whose job is skipped.
-  status:
-  # And by hand from the Actions tab.
+  # Also started by the deploy workflow straight after each publish (with after_deploy), and by hand from the Actions tab.
   workflow_dispatch:
+    inputs:
+      after_deploy:
+        description: Give GitHub Pages a minute to serve the new files first
+        type: boolean
+        default: false
 
 permissions:
   contents: read
   actions: read
-  statuses: read
   issues: write
+
+concurrency:
+  group: site-check
 
 jobs:
   check:
-    if: ${{ github.event_name != 'status' || (github.event.context == 'Vercel' && github.event.state == 'success' && contains(github.event.branches.*.name, 'main')) }}
-    # Here rather than for the whole workflow, so the skipped runs don't hold up or replace a waiting check.
-    concurrency:
-      group: site-check
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -35,9 +35,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # After a deploy, give Vercel a few seconds to point the domain at it.
-      - if: github.event_name == 'status'
-        run: sleep 20
+      # After a deploy, give GitHub Pages a minute to start serving the new files.
+      - if: inputs.after_deploy
+        run: sleep 60
       - id: check
         continue-on-error: true
         env:
@@ -63,25 +63,6 @@ jobs:
           elif [ -n "$open" ]; then
             gh issue close "$open" --comment "All clear: the site check found no problems ($(date -u '+%d %b %H:%M') UTC)."
           fi
-      # Tells Bing (and the other IndexNow search engines) which pages exist straight after a change, so they recrawl
-      # now rather than whenever they next call; DuckDuckGo, Yahoo and Ecosia use Bing's results. Google doesn't use
-      # IndexNow (it reads the sitemap). The key is public by design: it's also the file /<key>.txt on the site, which
-      # proves the site is ours. Skipped for the daily rebuild (a deploy of a commit more than 3 hours old), when nothing
-      # has changed.
-      - name: Tell Bing the pages changed (IndexNow)
-        if: github.event_name == 'status'
-        continue-on-error: true
-        env:
-          KEY: 5f5d602567ddd10608104943b5f6d1f0
-          SITE: https://www.pickeringtownfc.com
-          COMMITTED: ${{ github.event.commit.commit.committer.date }}
-        run: |
-          if [ $(( $(date +%s) - $(date -d "$COMMITTED" +%s) )) -gt 10800 ]; then echo "Nothing new to tell Bing."; exit 0; fi
-          urls=$(curl -sS --max-time 30 "$SITE/sitemap.xml" | grep -o '<loc>[^<]*' | sed 's/<loc>//' | jq -R . | jq -s -c .)
-          jq -n -c --arg key "$KEY" --arg site "$SITE" --argjson urls "$urls" \
-            '{host: ($site | sub("https://"; "")), key: $key, keyLocation: "\($site)/\($key).txt", urlList: $urls}' > indexnow.json
-          curl -sS --max-time 30 -o /dev/null -w "IndexNow answered %{http_code}\n" -X POST https://api.indexnow.org/indexnow \
-            -H "Content-Type: application/json; charset=utf-8" --data @indexnow.json
       - if: steps.check.outcome == 'failure'
         run: |
           if [ -f site-check.md ]; then
