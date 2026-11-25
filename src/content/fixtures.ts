@@ -99,6 +99,7 @@ export const matches: Match[] = [
   { id: "f44", kickoff: "2027-04-03T15:00", team: "first", competition: "NCEL Premier", opponent: "Frickley Athletic", venue: "H" },
   { id: "f45", kickoff: "2027-01-12T19:45", team: "first", competition: "NCEL League Cup", opponent: "Frickley Athletic", venue: "A" },
   { id: "f46", kickoff: "2027-03-27T15:00", team: "first", competition: "NCEL Premier", opponent: "Thackley", venue: "A" },
+  { id: "f47", kickoff: "2027-01-19T19:45", team: "first", competition: "North Riding Senior Cup", opponent: "Guisborough Town", venue: "H" },
 
   // LADIES, from FA Full-Time (North Riding Women's League Premier Division). CONFIRM: the dates of
   // the two September results, which were cut off in the screenshot (taken as Sunday 13 and 20 Sep).
