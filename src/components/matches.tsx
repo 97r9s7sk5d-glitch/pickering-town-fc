@@ -17,6 +17,7 @@ import {
   icsFor,
   kickoffDate,
   outcome,
+  penaltiesNote,
   scoreline,
   venueLabel,
   type Outcome,
@@ -130,9 +131,9 @@ export function MatchRow({ match }: { match: Match }) {
           )}
           <span className={`min-w-0 break-words ${nameClass(away)}`}>{away}</span>
         </p>
-        {(match.scorers || match.attendance) && (
+        {(match.penalties || match.scorers || match.attendance) && (
           <p className="mt-1 text-xs text-muted sm:text-center">
-            {[match.scorers && `Pikes scorers: ${match.scorers.join(", ")}`, match.attendance && `Att ${match.attendance}`]
+            {[penaltiesNote(match), match.scorers && `Pikes scorers: ${match.scorers.join(", ")}`, match.attendance && `Att ${match.attendance}`]
               .filter(Boolean)
               .join(" · ")}
           </p>

@@ -163,7 +163,8 @@ function parseTable(html) {
 
 // ---------- Writing the content files ----------
 
-const KEYS = ["id", "kickoff", "team", "competition", "opponent", "venue", "score", "attendance", "postponed", "scorers"];
+// `penalties` (a cup shoot-out) isn't on the league's site; it's added by hand and kept when a line is rewritten.
+const KEYS = ["id", "kickoff", "team", "competition", "opponent", "venue", "score", "penalties", "attendance", "postponed", "scorers"];
 const lit = (v) => (Array.isArray(v) ? `[${v.map(lit).join(", ")}]` : typeof v === "string" ? JSON.stringify(v) : String(v));
 const serialise = (m) =>
   `{ ${KEYS.filter((k) => m[k] !== undefined && !(Array.isArray(m[k]) && m[k].length === 0) && m[k] !== false)
