@@ -42,6 +42,11 @@ export type Match = {
   venue?: "H" | "A";
   /** [Pickering goals, opponent goals]. Leave out until the match is played. */
   score?: [number, number];
+  /**
+   * A cup tie level after the match and settled by a penalty shoot-out: [Pickering, opponent]. The result then counts
+   * as a win or a loss, and "Won 3–0 on penalties" shows with the score.
+   */
+  penalties?: [number, number];
   attendance?: number;
   /** Called off: listed with the results as "P–P" and left out of fixtures, form and the table. */
   postponed?: boolean;
@@ -80,7 +85,7 @@ export const matches: Match[] = [
   { id: "f25", kickoff: "2026-11-14T15:00", team: "first", competition: "NCEL Premier", opponent: "Retford United", venue: "H", score: [2, 2], attendance: 151, scorers: ["Connor Avison (17)", "Souleymane Coulibaly (34)"] },
   { id: "f26", kickoff: "2026-11-17T19:45", team: "first", competition: "NCEL Premier", opponent: "Knaresborough Town", venue: "A", postponed: true },
   { id: "f27", kickoff: "2027-03-03T19:45", team: "first", competition: "NCEL Premier", opponent: "Worsbrough Bridge Athletic", venue: "A", postponed: true },
-  { id: "f28", kickoff: "2026-11-24T19:30", team: "first", competition: "North Riding Senior Cup", opponent: "Redcar Athletic", venue: "A" },
+  { id: "f28", kickoff: "2026-11-24T19:30", team: "first", competition: "North Riding Senior Cup", opponent: "Redcar Athletic", venue: "A", score: [2, 2], penalties: [3, 0] },
   { id: "f29", kickoff: "2026-11-28T15:00", team: "first", competition: "NCEL Premier", opponent: "Rossington Main", venue: "H" },
   { id: "f30", kickoff: "2026-12-04T20:00", team: "first", competition: "NCEL Premier", opponent: "Golcar United", venue: "A" },
   { id: "f31", kickoff: "2026-12-12T15:00", team: "first", competition: "NCEL Premier", opponent: "Albion Sports", venue: "H" },

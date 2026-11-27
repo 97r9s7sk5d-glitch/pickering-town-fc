@@ -11,7 +11,15 @@ export function kickoffDate(match: Match): Date {
 export function outcome(match: Match): Outcome | null {
   if (!match.score) return null;
   const [us, them] = match.score;
+  if (us === them && match.penalties) return match.penalties[0] > match.penalties[1] ? "W" : "L";
   return us > them ? "W" : us === them ? "D" : "L";
+}
+
+/** For a cup tie settled by a shoot-out: "Won 3–0 on penalties" (the winner's score first). */
+export function penaltiesNote(match: Match): string | undefined {
+  if (!match.penalties) return undefined;
+  const [us, them] = match.penalties;
+  return `${us > them ? "Won" : "Lost"} ${Math.max(us, them)}–${Math.min(us, them)} on penalties`;
 }
 
 export function isPlayed(match: Match): boolean {

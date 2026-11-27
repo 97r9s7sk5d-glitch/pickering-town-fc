@@ -12,7 +12,7 @@ import { honours, records } from "@/content/history";
 import { articles } from "@/content/news";
 import { firstTeamHeroPlayer, groundPhoto, ladiesHeroPlayer } from "@/content/squad";
 import { firstTeamTable } from "@/content/tables";
-import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome, scoreline } from "@/lib/matches";
+import { form, formatDay, homeAway, kickoffDate, lastResult, nextMatch, outcome, penaltiesNote, scoreline } from "@/lib/matches";
 import { useNow } from "@/lib/now";
 import { seo } from "@/lib/seo";
 
@@ -140,7 +140,7 @@ function HomePage() {
                   {homeAway(last).home} {scoreline(last)!.home}–{scoreline(last)!.away} {homeAway(last).away}
                 </p>
                 <p className="mt-1 text-sm text-muted">
-                  {formatDay(kickoffDate(last))} · {last.competition}
+                  {[formatDay(kickoffDate(last)), last.competition, penaltiesNote(last)].filter(Boolean).join(" · ")}
                 </p>
               </div>
             </div>
