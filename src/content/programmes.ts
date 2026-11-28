@@ -8,6 +8,7 @@
 export type Programme = { matchId: string; file: string; cover?: string };
 
 export const programmes: Programme[] = [
+  { matchId: "f29", file: "/programmes/2026-11-28-rossington-main.pdf", cover: "/programmes/2026-11-28-rossington-main-cover.webp" },
   { matchId: "f25", file: "/programmes/2026-11-14-retford-united.pdf", cover: "/programmes/2026-11-14-retford-united-cover.webp" },
   { matchId: "f23", file: "/programmes/2026-11-07-bottesford-town.pdf", cover: "/programmes/2026-11-07-bottesford-town-cover.webp" },
   { matchId: "f21", file: "/programmes/2026-10-24-thackley.pdf", cover: "/programmes/2026-10-24-thackley-cover.webp" },
